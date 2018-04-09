@@ -25,19 +25,19 @@ end
 end
 
 service 'nginx' do
-  action [:enable, :start]
+  # action [:enable, :start]
   supports status: true, restart: true, reload: true
 end
 
 package 'php-fpm' do
-   flush_cache [:before]
+   # flush_cache [:before]
    action [:install, :upgrade]
    options "--enablerepo=remi-php72"
    notifies :reload, 'service[nginx]'
  end
 
 package 'php-mysqlnd' do
-  flush_cache [:before]
+  # flush_cache [:before]
   action [:install, :upgrade]
   options "--enablerepo=remi-php72"
   notifies :reload, 'service[nginx]'
@@ -46,6 +46,15 @@ end
 service 'mariadb' do
   action [:enable, :start]
   supports :status => true, :restart => true, :reload => true
+end
+
+# 設定を反映
+template '/etc/my.cnf.d/server.cnf' do
+  source 'server.cnf.erb'
+  owner 'root'
+  group 'root'
+  mode 0644
+  notifies :restart, 'service[mariadb]'
 end
 
 # mysql_secure_install とほぼ同じ事を実施
@@ -65,13 +74,4 @@ execute "mysql_secure_install emulate" do
     mysql -u root -p#{node['mariadb']['root_pass']} -e "FLUSH PRIVILEGES;"
   EOC
   only_if "mysql -u root -e 'show databases;'"
-end
-
-# 設定を反映
-template '/etc/my.cnf.d/server.cnf' do
-  source 'server.cnf.erb'
-  owner 'root'
-  group 'root'
-  mode 0644
-  notifies :restart, 'service[mariadb]'
 end
