@@ -1,8 +1,5 @@
 @extends('layouts.shopapp')
-<style>
-   .pagination { font-size:10pt; }
-   .pagination li { display:inline-block }
-</style>
+
 @section('title', 'Product')
 
 @section('menubar')

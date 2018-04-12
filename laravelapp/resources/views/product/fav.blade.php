@@ -1,8 +1,5 @@
 @extends('layouts.shopapp')
-<style>
-   .pagination { font-size:10pt; }
-   .pagination li { display:inline-block }
-</style>
+
 @section('title', 'Product')
 
 @section('menubar')
@@ -37,11 +34,11 @@
 </table>
 </br>
 </br>
-<p><a href="/shop/fav/drop">お気に入りの中身を空にする</a></p>
-
+<p><a href="/shop/list?sort=id">商品一覧へ</a></p>
 @endsection
 
 @section('footer')
-<a href="/shop/list?sort=id">商品一覧へ</a>
+<p><a href="/shop/fav/drop">お気に入りの中身を空にする</a></p>
+<p><a href="/shop/list?sort=id">商品一覧へ</a></p>
 TEST SHOP BOARD
 @endsection

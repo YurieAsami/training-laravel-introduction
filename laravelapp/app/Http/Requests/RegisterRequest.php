@@ -8,7 +8,7 @@ class RegisterRequest extends FormRequest
 {
   public function authorize()
   {
-     if ($this->path() ==  'shop/register')
+     if ($this->path() ==  'shop/register' OR 'shop/edit')
      {
          return true;
      } else {

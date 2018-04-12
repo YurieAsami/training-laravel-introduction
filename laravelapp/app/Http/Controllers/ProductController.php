@@ -39,7 +39,7 @@ class ProductController extends Controller
     else{
       $msg="カートに以下の商品が入っています";
     }
-    $products=$request->session('products')->get();
+    $products=$request->session('products')->get('cart');
     return view('product.cart',['products'=>$products,'msg'=>$msg]);
   }
 //カート内の商品の削除
@@ -60,15 +60,18 @@ class ProductController extends Controller
     //削除し終わった配列をセッションに登録
     $request->session('products')->put('cart',$products);
     $products=$request->session('products')->get('cart');
-    return view('product.cart',['msg'=>$request->input('name').'を削除しました','products'=>$products]);
+    $param=['msg'=>$request->input('name').'を削除しました','products'=>$products];
+    return view('product.cart',$param);
   }
 //お気に入り登録
   public function fav(Request $request)
   {
-    if(NULL!==$request->id){
     $customer_id=$request->session('user')->get('id');
-    $pro=Favorite::where('product_id',$request->id)->first();
-    $cus=Favorite::where('customer_id',$customer_id)->first();
+
+    if(NULL!==$request->id){
+      $pro=Favorite::where('product_id',$request->id)->first();
+      $cus=Favorite::where('customer_id',$customer_id)->first();
+   //同じユーザーが同じ商品を登録できないようにif分岐
       if($pro==NULL OR $cus==NULL){
       $product=Product::where('id',$request->id)->first();
       $favorite = new Favorite;
@@ -84,7 +87,8 @@ class ProductController extends Controller
       $msg="以下の商品をお気に入り登録しています";
     }
     $products = Favorite::with('product')->get();
-    return view('product.fav',['msg'=>$msg,'products'=>$products,'customer_id'=>$customer_id]);
+    $param=['msg'=>$msg,'products'=>$products,'customer_id'=>$customer_id];
+    return view('product.fav',$param);
   }
 //お気に入り項目削除
   public function favdrop(Request $request)
@@ -97,7 +101,8 @@ class ProductController extends Controller
     }
     $products = Favorite::with('product')->get();
     $msg="以下の商品をお気に入り登録しています";
-    return view('product.fav',['msg'=>$msg,'products'=>$products,'customer_id'=>$customer_id]);
+    $param=['msg'=>$msg,'products'=>$products,'customer_id'=>$customer_id];
+    return view('product.fav',$param);
   }
 //購入確認画面
   public function subpurchase(Request $request)
@@ -126,7 +131,8 @@ class ProductController extends Controller
     $purchase_detail = Purchase_detail::where('purchase_id',$purchase_id)->where('created_at',$item->created_at)->get();
     $name=$request->session('user')->get('name');
     $address=Customer::find($id)->address;
-    return view('product.purchase',['product'=>$purchase_detail,'item'=>$item,'name'=>$name,'address'=>$address]);
+    $param=['product'=>$purchase_detail,'name'=>$name,'address'=>$address];
+    return view('product.purchase',$param);
   }
 //購入完了後の偏移
   public function exit(Request $request)

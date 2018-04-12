@@ -9,12 +9,14 @@ use App\Http\Requests\RegisterRequest;
 
 class CustomerController extends Controller
 {
-  public function index(Request $request){
+  public function index(Request $request)
+  {
     $items = Customer::all();
     return view('shop.login',['items'=>$items]);
   }
 
-  public function login(){
+  public function login()
+  {
     return view ('shop.login');
   }
 
@@ -27,6 +29,7 @@ class CustomerController extends Controller
   {
     $request->session('user')->forget('name');
     $request->session('user')->forget('id');
+    $request->session('product')->forget('cart');
     $msg = 'ログアウトしました。';
     return view('shop.login',['msg'=>$msg]);
   }

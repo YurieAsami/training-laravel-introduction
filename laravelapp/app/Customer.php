@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-//use Validator;
 use App\Purchase;
 use App\favorite;
 
@@ -17,10 +16,7 @@ class Customer extends Model
 
     protected $guarded = array('id');
 
-    public function favorite(){
-      return $this->hasOne('app\Favorite');
-    }
     public function purchase(){
-      return $this->hasOne('app\Purchase');
+      return $this->hasMany('app\Purchase');
     }
 }

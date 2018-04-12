@@ -15,7 +15,5 @@ class Product extends Model
   public function favorite(){
     return $this->hasMany('app\Favorite');
   }
-  public function Purchase_detail(){
-    return $this->hasMany('app\Purchase_detail');
-  }
+
 }
