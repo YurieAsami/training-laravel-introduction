@@ -34,6 +34,6 @@
 @endsection
 
 @section('footer')
-<a href="/shop/list?sort=id">商品一覧へ</a>
+<p><a href="/shop/list?sort=id">商品一覧へ</a></p>
 TEST SHOP BOARD
 @endsection

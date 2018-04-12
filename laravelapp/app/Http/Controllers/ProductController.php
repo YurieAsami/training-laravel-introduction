@@ -11,6 +11,7 @@ use App\Purchase_detail;
 
 class ProductController extends Controller
 {
+  //商品一覧の表示
   public function index(Request $request)
   {
     $sort =$request->sort;
@@ -19,13 +20,13 @@ class ProductController extends Controller
     $param = ['items'=>$items,'sort'=>$sort,'nam'=>$nam];
     return view('product.index',$param);
   }
-
+  //商品詳細のページ
   public function pro(Request $request)
   {
     $item = Product::where('id',$request->id)->first();
     return view('product.pro',['item'=>$item]);
   }
-
+  //ショッピングカート内の表示
   public function cartlist(Request $request)
   {
     if(NULL!==$request->id){
@@ -41,21 +42,27 @@ class ProductController extends Controller
     $products=$request->session('products')->get('cart');
     return view('product.cart',['products'=>$products,'msg'=>$msg]);
   }
-
+//カート内の商品の削除
   public function drop(Request $request)
   {
     $request->session('products')->forget('cart');
     $products=NULL;
     return view('product.cart',['products'=>$products]);
   }
-
+//個々のカート内の商品の削除
   public function prodrop(Request $request)
   {
-    $products=NULL;
-    $request->session('products')
-    ->forget('cart',[$request->input('id'),$request->input('name'),$request->input('price'),$request->input('count')]);
+    $product=$request->session('products')->get('cart');
+    //配列にキーを振りなおすことで削除された$num番目の商品のキーを＄numにする
+    $products=array_merge($product);
+    $number=($request->input('number'));
+    $products=array_except($products,[$number]);
+    //削除し終わった配列をセッションに登録
+    $request->session('products')->put('cart',$products);
+    $products=$request->session('products')->get('cart');
     return view('product.cart',['msg'=>$request->input('name').'を削除しました','products'=>$products]);
   }
+//お気に入り登録
   public function fav(Request $request)
   {
     if(NULL!==$request->id){
@@ -79,7 +86,7 @@ class ProductController extends Controller
     $products = Favorite::with('product')->get();
     return view('product.fav',['msg'=>$msg,'products'=>$products,'customer_id'=>$customer_id]);
   }
-
+//お気に入り項目削除
   public function favdrop(Request $request)
   {
     $customer_id=$request->session('user')->get('id');
@@ -92,30 +99,36 @@ class ProductController extends Controller
     $msg="以下の商品をお気に入り登録しています";
     return view('product.fav',['msg'=>$msg,'products'=>$products,'customer_id'=>$customer_id]);
   }
+//購入確認画面
   public function subpurchase(Request $request)
   {
     $products=$request->session('products')->get('cart');
     return view('product.purchase',['products'=>$products]);
   }
+//購入確定  purchasesに情報を登録、カートから商品一つ一つをdetailsに登録
   public function purchase(Request $request)
   {
-    $pro=$request->session('products')->get('cart');
     $id=$request->session('user')->get('id');
     $purchase= new Purchase;
     $purchase->customer_id=$id;
     $purchase->save();
-    $item = Purchase::where('customer_id',$id)->first();
+    //今回購入したデータのみ抽出
+    $item = Purchase::orderBy('id', 'desc')->where('customer_id',$id)->first();
 
     $purchase_detail = new Purchase_detail;
-    $purid=$item->id;
-    foreach($pro as $product){
-      $data=['purchase_id'=>$purid,'product_id'=>$product[0],'count'=>$product[3]];
+    $products=$request->session('products')->get('cart');
+    $purchase_id=$item->id;
+    foreach($products as $product){
+      $data=['purchase_id'=>$purchase_id,'product_id'=>$product[0],'count'=>$product[3]];
       $purchase_detail->insert($data);
     }
-    $purchase_detail = Purchase_detail::where('purchase_id',$purid)->where('created_at',$item->created_at)->get();
-
-    return view('product.purchase',['purchase_detail'=>$purchase_detail,'item'=>$item]);
+    //購入完了として商品を画面に表示する（＝セッションカートの中身）
+    $purchase_detail = Purchase_detail::where('purchase_id',$purchase_id)->where('created_at',$item->created_at)->get();
+    $name=$request->session('user')->get('name');
+    $address=Customer::find($id)->address;
+    return view('product.purchase',['product'=>$purchase_detail,'item'=>$item,'name'=>$name,'address'=>$address]);
   }
+//購入完了後の偏移
   public function exit(Request $request)
   {
     $request->session('products')->forget('cart');
@@ -125,5 +138,4 @@ class ProductController extends Controller
     $param = ['items'=>$items,'sort'=>$sort,'nam'=>$nam];
     return view('product.index',$param);
   }
-
 }

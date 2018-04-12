@@ -1,13 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Customer;
-use Illuminate\Validation\Validator;
 use Illuminate\Support\MessageBag;
 //use Validator;
-//use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\RegisterRequest;
 
 class CustomerController extends Controller
 {
@@ -24,6 +22,7 @@ class CustomerController extends Controller
   {
     return view('shop.login',['data'=>$request->data]);
    }
+
   public function logout(Request $request)
   {
     $request->session('user')->forget('name');
@@ -32,38 +31,43 @@ class CustomerController extends Controller
     return view('shop.login',['msg'=>$msg]);
   }
 
-   public function register(Request $request){
-     return view('shop.register');
-   }
+  public function register(Request $request)
+  {
+     return view('shop.register',['msg'=>'入力してください']);
+  }
 
-   public function create(Request $request)
-   {
-     $this->validate($request,Customer::$rules);
-     $customer = new Customer;
-     $form = $request->all();
-     unset($form['_token']);
-     $customer->fill($form)->save();
-     session('user')->put('name',$customer->name);
-     session('user')->put('id',$customer->id);
-     return redirect('/shop/register');
-   }
+  public function create(RegisterRequest $request)
+  {
+    if(count(Customer::where('login',$request->login)->get())==0){
+      $customer = new Customer;
+      $form = $request->all();
+      unset($form['_token']);
+      $customer->fill($form)->save();
+      $request->session('user')->put('name',$request->name);
+      $request->session('user')->put('id',$request->id);
+      $msg = '登録しました';
+      return view('shop.login',['msg'=>$msg,'list'=>'1']);
+    }else{
+       return view('shop.register');
+    }
+    return redirect('/shop/register');
+  }
 
-
-   public function edit(Request $request)
-   {
+  public function edit(Request $request)
+  {
     $customer = Customer::find($request->session('user')->get('id'));
     return view('shop.edit', ['form' => $customer]);
-   }
+  }
 
-   public function update(Request $request)
-   {
-    $this->validate($request, Customer::$rules);
+  public function update(RegisterRequest $request)
+  {
     $customer = Customer::find($request->id);
     $form = $request->all();
     unset($form['_token']);
     $customer->fill($form)->save();
-    session('user')->put('name',$customer->name);
-    session('user')->put('id',$customer->id);
+    $request->session('user')->put('name',$customer->name);
+    $request->session('user')->put('id',$customer->id);
     return redirect('/shop/edit');
-   }
- }
+  }
+}
+?>

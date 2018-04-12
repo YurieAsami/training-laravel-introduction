@@ -15,6 +15,11 @@
 <p>{{$data['msg']}}</p>
 <a href= {{$data['link1']}}>{{$data['link2']}}</a>
 @endforeach
+@elseif(isset($msg))
+  <p>{{$msg}}</p>
+  @if($list=1)
+    <a href="/shop/list?sort=id">商品一覧へ</a>
+  @endif
 @endif
 
    <table>

@@ -20,21 +20,24 @@
 <th>価格</th><th>個数</th><th>小計</th></tr>
 @php
 $total=0;
+$number =-1;
 @endphp
 @foreach ($products as $product)
-    <tr>
-        <td>{{$product[0]}}</td>
+    <tr><td>{{$product[0]}}</td>
         <td>{{$product[1]}}</td>
-        <td>{{$product[2]}}</td>
-        <td>{{$product[3]}}</td>
+        <td>({{$product[2]}}円)</td>
+        <td>：{{$product[3]}}点</td>
         <td>
-        @php print $product[2]*$product[3] ;
+        @php
+        $number+=1;
+        print $product[2]*$product[3]."円";
         $total += ($product[2]*$product[3]);
         @endphp
       </td>
       <td>
          <form action="/shop/cart/add" method="post">
            {{ csrf_field() }}
+        <div><input name="number" type="hidden" value="{{$number}}"></div>
         <div><input name="id" type="hidden" value="{{$product[0]}}"></div>
         <div><input name="name" type="hidden" value="{{$product[1]}}"></div>
         <div><input name="price" type="hidden" value="{{$product[2]}}"></div>
@@ -43,7 +46,7 @@ $total=0;
       </td>
     </tr>
 @endforeach
-<tr><th>合計：{{$total}}円</th></tr>
+<tr><th>合計：</th><th>{{$total}}円</th></tr>
 </table>
 </br>
 <a href="/shop/list?sort=id">買い物を続ける</a>
@@ -57,6 +60,6 @@ $total=0;
 
 @section('footer')
   <p><a href="/shop/cart/drop">カートの中身を空にする</a></p>
-<a href="/shop/list?sort=id">商品一覧へ</a>
+<p><a href="/shop/list?sort=id">商品一覧へ</a></p>
 TEST SHOP BOARD
 @endsection

@@ -31,6 +31,7 @@
         </td>
       </tr>
     @endforeach
+  </br>
   <tr><th>合計：{{$total}}円</th></tr>
   </table>
   </br>
@@ -44,11 +45,16 @@
     @php
     $total=0;
     @endphp
+  <p>{{$name}}様</p>
+  <iframe srcdoc="<p>住所：{{$address}}</p>">
+</iframe>
+  <br>
+  <br>
   <p>以下の購入を確定しました</p>
 </br>
   <table>
   <tr><th>商品名</th><th>数量</th><th>小計</th></tr>
-    @foreach ($purchase_detail as $data)
+    @foreach ($product as $data)
       <tr>
           <td>{{$data->product->name}}</td>
           <td>{{$data->count}}</td>
@@ -61,6 +67,7 @@
       </tr>
     @endforeach
   </table>
+  </br>
   <tr><td>合計：{{$total}}円</td></tr>
   </br>
   </br>
@@ -71,6 +78,8 @@
   @endif
 @endsection
 @section('footer')
-<a href="/shop/list?sort=id">商品一覧へ</a>
+  @if(!isset($item))
+<p><a href="/shop/list?sort=id">商品一覧へ</a></p>
+  @endif
 TEST SHOP BOARD
 @endsection

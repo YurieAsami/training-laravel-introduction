@@ -19,10 +19,10 @@ class LoginMiddleware
           $link1 ='list?sort=id';
           $link2 ='商品一覧へ';
           $request->session('user')->put('name',$name);
-          $request->session('user')->put('id',$logname['id']);
+          $request->session('user')->put('id',$logname->id);
       } else {
           $msg = 'ログインに失敗しました。';
-          $name = '※ログインしていません';
+          $name = '※ログイン名かパスワードが一致しません';
           $link1 = 'register';
           $link2 = '登録';
       }

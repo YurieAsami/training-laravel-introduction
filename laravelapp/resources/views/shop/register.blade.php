@@ -9,7 +9,7 @@
 <div>
     <ul>
         @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
+            <tr><th>ERROR:</th><th>{{ $error }}</th></tr></br>
         @endforeach
     </ul>
 </div>
@@ -18,12 +18,15 @@
 <p>登録完了</p>
 <a href="/shop/list?sort=id">商品一覧へ</a>
 @else
-<p>入力してください</p>
-
+@if(isset($msg))
+<p>{{$msg}}</p>
+@else
+  <p>このログイン名はすでに使われています</p>
+@endif
 <table>
 <form action="/shop/register" method="post">
     {{ csrf_field() }}
-    <tr><th>お名前: </th><td><input type="text" name="name"
+    <tr><th>名前: </th><td><input type="text" name="name"
         value="{{old('name')}}"></td></tr>
     <tr><th>住所: </th><td><input type="text" name="address"
         value="{{old('address')}}"></td></tr>
@@ -38,5 +41,7 @@
 @endif
 @endsection
 @section('footer')
+  <a href="/shop/login">ログインページへ</a>
+
 TEST SHOP BOARD
 @endsection

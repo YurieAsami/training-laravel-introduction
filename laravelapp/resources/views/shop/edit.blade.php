@@ -19,7 +19,7 @@
    @endif
 
 <p>入力してください</p>
-
+<p>※ログイン名は変更できません</p>
    <table>
    <form action="/shop/edit" method="post">
    {{ csrf_field() }}
@@ -29,8 +29,7 @@
     value="{{$form->name}}"></td></tr>
    <tr><th>住所: </th><td><input type="text" name="address"
     value="{{$form->address}}"></td></tr>
-   <tr><th>ログイン名: </th><td><input type="text" name="login"
-    value="{{$form->login}}"></td></tr>
+   <tr><th>ログイン名: </th><td>{{$form->login}}</td></tr>
     <tr><th>パスワード: </th><td><input type="text" name="password"
     value="{{$form->password}}"></td></tr>
     <tr><th></th><td><input type="submit"
