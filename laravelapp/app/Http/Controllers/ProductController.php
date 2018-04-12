@@ -69,14 +69,12 @@ class ProductController extends Controller
     $customer_id=$request->session('user')->get('id');
 
     if(NULL!==$request->id){
-      $pro=Favorite::where('product_id',$request->id)->first();
-      $cus=Favorite::where('customer_id',$customer_id)->first();
-   //同じユーザーが同じ商品を登録できないようにif分岐
-      if($pro==NULL OR $cus==NULL){
-      $product=Product::where('id',$request->id)->first();
+      $pro=Favorite::where('product_id',$request->id)->where('customer_id',$customer_id)->get();
+   //同じユーザーが同じ商品を重複して登録できないようにif分岐
+      if(count($pro)==0){
       $favorite = new Favorite;
       $favorite->customer_id=$customer_id;
-      $favorite->product_id=$product->id;
+      $favorite->product_id=$request->id;
       $favorite->save();
       $msg="お気に入りに登録しました";
       }else{
