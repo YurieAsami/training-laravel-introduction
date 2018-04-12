@@ -19,10 +19,12 @@ class RegisterRequest extends FormRequest
   public function rules()
   {
     return [
-   'name' =>'required|regex:/[ァ-ヶぁ-ん-龠]$/',
+   'name' =>'required|regex:/[ァ-ヶぁ-ん一-龠ー]$/|regex:/[^①-🔢Ⅰ-ⅹΑ-ωА-я─-╂＃-＼＋-∬￥-Å→-⇔〇-〒№-㍻㍉-㌻]$/|string',
    'address'=>'required',
    'login'=>'alpha_num|between:6,12|regex:/[a-zA-Z0-9-]$/',
    'password'=>'alpha_num|between:6,12|regex:/[a-zA-Z0-9-]$/',];
+
+
   }
 
   public function messages()
@@ -30,6 +32,7 @@ class RegisterRequest extends FormRequest
     return [
      'name.required'=>'名前は必ず入力してください',
      'name.regex'=>'名前に英数字は使えません',
+     'name.string'=>'名前に英数字は使えません。',
 
      'address.required'=>'住所は必ず入力してください',
 
@@ -44,4 +47,5 @@ class RegisterRequest extends FormRequest
      'password.regex'=>'パスワードは半角英数字で入力してください',
    ];
   }
+
 }
