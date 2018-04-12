@@ -21,7 +21,7 @@ class CustomerController extends Controller
   public function logincheck(Request $request)
   {
     return view('shop.login',['data'=>$request->data]);
-   }
+  }
 
   public function logout(Request $request)
   {
@@ -35,7 +35,7 @@ class CustomerController extends Controller
   {
      return view('shop.register',['msg'=>'入力してください']);
   }
-
+//会員登録（バリデーション失敗→redirect）
   public function create(RegisterRequest $request)
   {
     if(count(Customer::where('login',$request->login)->get())==0){
@@ -48,7 +48,7 @@ class CustomerController extends Controller
       $msg = '登録しました';
       return view('shop.login',['msg'=>$msg,'list'=>'1']);
     }else{
-       return view('shop.register');
+      return view('shop.register');
     }
     return redirect('/shop/register');
   }

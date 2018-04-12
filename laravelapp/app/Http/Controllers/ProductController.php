@@ -15,9 +15,9 @@ class ProductController extends Controller
   public function index(Request $request)
   {
     $sort =$request->sort;
-    $nam =$request->session('user')->get('name');
+    $name =$request->session('user')->get('name');
     $items = Product::orderBy($sort,'asc')->Paginate(5);
-    $param = ['items'=>$items,'sort'=>$sort,'nam'=>$nam];
+    $param = ['items'=>$items,'sort'=>$sort,'nam'=>$name];
     return view('product.index',$param);
   }
   //商品詳細のページ
@@ -39,7 +39,7 @@ class ProductController extends Controller
     else{
       $msg="カートに以下の商品が入っています";
     }
-    $products=$request->session('products')->get('cart');
+    $products=$request->session('products')->get();
     return view('product.cart',['products'=>$products,'msg'=>$msg]);
   }
 //カート内の商品の削除
@@ -53,7 +53,7 @@ class ProductController extends Controller
   public function prodrop(Request $request)
   {
     $product=$request->session('products')->get('cart');
-    //配列にキーを振りなおすことで削除された$num番目の商品のキーを＄numにする
+    //配列にキーを振りなおすことで削除された$num番目の商品のキーを＄numに合わせる
     $products=array_merge($product);
     $number=($request->input('number'));
     $products=array_except($products,[$number]);

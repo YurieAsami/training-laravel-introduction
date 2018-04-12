@@ -19,7 +19,7 @@ class RegisterRequest extends FormRequest
   public function rules()
   {
     return [
-   'name' =>'required|regex:/[ァ-ヶぁ-ん一-龠ー]$/|regex:/[^①-🔢Ⅰ-ⅹΑ-ωА-я─-╂＃-＼＋-∬￥-Å→-⇔〇-〒№-㍻㍉-㌻]$/|string',
+   'name' =>'required|regex:/[ァ-ヶぁ-ん一-龠ー]+[^①-🔢Ⅰ-ⅹΑ-ωА-я─-╂＃-＼＋-∬￥-Å→-⇔〇-〒№-㍻㍉-㌻]$/|string',
    'address'=>'required',
    'login'=>'alpha_num|between:6,12|regex:/[a-zA-Z0-9-]$/',
    'password'=>'alpha_num|between:6,12|regex:/[a-zA-Z0-9-]$/',];

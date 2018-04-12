@@ -14,6 +14,7 @@
 @if (isset($msg))
   <p>{{$msg}}</p>
 @endif
+
 @if (NUll!==$products)
 <table>
 <tr><th>商品番号</th><th>商品名</th>
@@ -53,13 +54,15 @@ $number =-1;
 </br>
 </br>
 <p><a href="/shop/sub/purchase">購入する</a></p>
+
 @else
 <p>カートに商品がありません。</p>
 @endif
+
 @endsection
 
 @section('footer')
-  <p><a href="/shop/cart/drop">カートの中身を空にする</a></p>
+<p><a href="/shop/cart/drop">カートの中身を空にする</a></p>
 <p><a href="/shop/list?sort=id">商品一覧へ</a></p>
 TEST SHOP BOARD
 @endsection
