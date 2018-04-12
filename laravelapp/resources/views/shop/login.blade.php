@@ -17,7 +17,7 @@
 @endforeach
 @elseif(isset($msg))
   <p>{{$msg}}</p>
-  @if($list=1)
+  @if(isset($list))
     <a href="/shop/list?sort=id">商品一覧へ</a>
   @endif
 @endif
