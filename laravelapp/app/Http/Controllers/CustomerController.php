@@ -70,4 +70,3 @@ class CustomerController extends Controller
     return redirect('/shop/edit');
   }
 }
-?>
