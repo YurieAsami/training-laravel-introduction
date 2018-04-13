@@ -22,24 +22,22 @@
   @endif
 @endif
 </br>
-   <table>
-   <form action="/shop/list" method="post">
-      {{ csrf_field() }}
-      <tr><th>ログイン名: </th><td><input type="text"
-            name="login"></td></tr>
-      <tr><th>パスワード: </th><td><input type="password"
-            name="password"></td></tr>
-      <tr><th></th><td><input type="submit"
-            value="ログイン"></td></tr>
-   </form>
-   </table>
+<table>
+  <form action="/shop/list" method="post">
+  {{ csrf_field() }}
+  <tr><th>ログイン名: </th><td>
+  <input type="text" name="login"></td></tr>
+ <tr><th>パスワード: </th><td>
+  <input type="password" name="password"></td></tr>
+  <tr><th></th><td><input type="submit" value="ログイン"></td></tr>
+  </form>
+</table>
 </br>
 </br<
 <p><a href="/shop/register">会員登録へ</a></p>
 @endsection
 
 @section('footer')
-
 <p><a href="/shop/edit">会員情報変更</a></p>
 TEST BOARD
 @endsection

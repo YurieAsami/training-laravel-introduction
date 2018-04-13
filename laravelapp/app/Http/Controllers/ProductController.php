@@ -110,7 +110,7 @@ class ProductController extends Controller
   public function subpurchase(Request $request)
   {
     $products=$request->session('products')->get('cart');
-    return view('product.purchase',['products'=>$products]);
+    return view('product.subpur',['products'=>$products]);
   }
 //購入確定  purchasesに情報を登録、カートから商品一つ一つをdetailsに登録
   public function purchase(Request $request)
