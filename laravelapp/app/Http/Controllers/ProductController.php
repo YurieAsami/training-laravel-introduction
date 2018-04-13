@@ -71,18 +71,17 @@ class ProductController extends Controller
   public function fav(Request $request)
   {
     $customer_id=$request->session('user')->get('id');
-
     if(NULL!==$request->id){
       $pro=Favorite::where('product_id',$request->id)->where('customer_id',$customer_id)->get();
    //同じユーザーが同じ商品を重複して登録できないようにif分岐
       if(count($pro)==0){
-      $favorite = new Favorite;
-      $favorite->customer_id=$customer_id;
-      $favorite->product_id=$request->id;
-      $favorite->save();
-      $msg="お気に入りに登録しました";
+        $favorite = new Favorite;
+        $favorite->customer_id=$customer_id;
+        $favorite->product_id=$request->id;
+        $favorite->save();
+        $msg="お気に入りに登録しました";
       }else{
-      $msg="以下の商品をお気に入り登録しています";
+        $msg="以下の商品をお気に入り登録しています";
       }
     }
     else{
@@ -112,7 +111,7 @@ class ProductController extends Controller
     $products=$request->session('products')->get('cart');
     return view('product.subpur',['products'=>$products]);
   }
-//購入確定  purchasesに情報を登録、カートから商品一つ一つをdetailsに登録
+//購入確定  purchasesに情報を登録、
   public function purchase(Request $request)
   {
     $id=$request->session('user')->get('id');
@@ -121,15 +120,14 @@ class ProductController extends Controller
     $purchase->save();
     //今回購入したデータのみ抽出
     $item = Purchase::orderBy('id', 'desc')->where('customer_id',$id)->first();
-
+    //カートから商品一つ一つをdetailに登録
     $purchase_detail = new Purchase_detail;
     $products=$request->session('products')->get('cart');
-    $purchase_id=$item->id;
     foreach($products as $product){
-      $data=['purchase_id'=>$purchase_id,'product_id'=>$product[0],'count'=>$product[3]];
+      $data=['purchase_id'=>$item->id,'product_id'=>$product[0],'count'=>$product[3]];
       $purchase_detail->insert($data);
     }
-    //購入完了として商品を画面に表示する（＝セッションカートの中身）
+    //購入確定画面として再度商品を表示する（purchase_detail＝セッションカートの中身）
     $purchase_detail = Purchase_detail::where('purchase_id',$purchase_id)->where('created_at',$item->created_at)->get();
     $name=$request->session('user')->get('name');
     $address=Customer::find($id)->address;

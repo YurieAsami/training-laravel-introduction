@@ -18,11 +18,13 @@
 <p>登録完了</p>
 <a href="/shop/list?sort=id">商品一覧へ</a>
 @else
+@endif
 @if(isset($msg))
 <p>{{$msg}}</p>
 @else
-  <p>このログイン名はすでに使われています</p>
+<p>このログイン名はすでに使われています</p>
 @endif
+
 <table>
 <form action="/shop/register" method="post">
     {{ csrf_field() }}

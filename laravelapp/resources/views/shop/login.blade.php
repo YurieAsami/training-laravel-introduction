@@ -22,6 +22,7 @@
   @endif
 @endif
 </br>
+</br>
 <table>
   <form action="/shop/list" method="post">
   {{ csrf_field() }}
