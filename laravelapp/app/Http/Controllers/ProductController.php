@@ -16,7 +16,11 @@ class ProductController extends Controller
   {
     $sort =$request->sort;
     $name =$request->session('user')->get('name');
-    $items = Product::orderBy($sort,'asc')->Paginate(5);
+    if($sort=='priceup'){
+      $items = Product::orderBy('price','desc')->Paginate(8);
+    }else{
+      $items = Product::orderBy($sort,'asc')->Paginate(8);
+    }
     $param = ['items'=>$items,'sort'=>$sort,'nam'=>$name];
     return view('product.index',$param);
   }
@@ -141,5 +145,13 @@ class ProductController extends Controller
     $items = Product::orderBy($sort,'asc')->Paginate(5);
     $param = ['items'=>$items,'sort'=>$sort,'nam'=>$nam];
     return view('product.index',$param);
+  }
+  public function history(Request $request)
+  {
+    $name =$request->session('user')->get('name');
+    $id =$request->session('user')->get('id');
+    $items =Purchase_detail::with('product')->get();
+    $itemm =Purchase::where('customer_id',$id)->Paginate(3);
+    return view('product.purchase_detail',['items'=>$items,'itemm'=>$itemm,'name'=>$name]);
   }
 }

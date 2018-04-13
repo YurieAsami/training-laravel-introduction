@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\Purchase;
 use App\Product;
 
 class Purchase_detail extends Model

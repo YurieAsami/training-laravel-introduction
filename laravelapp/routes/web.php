@@ -36,3 +36,5 @@ Route::get('shop/purchase','ProductController@purchase');
 Route::get('shop/sub/purchase','ProductController@subpurchase');
 
 Route::get('shop/exit', 'ProductController@exit');
+
+Route::get('shop/history','ProductController@history');

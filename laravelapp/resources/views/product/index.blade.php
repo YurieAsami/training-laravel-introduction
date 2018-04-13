@@ -13,7 +13,7 @@
 <p>{{$nam}}様</p>
   <li><a href="/shop/fav">お気に入り</a></li>
   <li><a href="/shop/cart">カート</a></li>
-</br>
+  <li><a href="/shop/history">購入履歴</a></li>
 <div align="center">
   @if(isset($msg))
     {{$msg}}
@@ -23,16 +23,16 @@
 </div>
 </br>
 <div align="center">
-  <table width="300">
+  <table width="380">
     <tr>
     <th><a href="/shop/list?sort=id">番号</a></th>
     <th><a href="/shop/list?sort=name">商品名</a></th>
-    <th><a href="/shop/list?sort=price">金額</a></th>
+    <th>金額<a href="/shop/list?sort=priceup">▲</a><a href="/shop/list?sort=price">▼</a></th>
     </tr>
   @foreach ($items as $item)
     <tr>
     <td style="font-size : 20px">{{$item->id}}</td>
-    <td style="font-size : 23px">
+    <td style="font-size : 21px">
       <a href="/shop/pro?id={{$item->id}}">{{$item->name}}</a></td>
     <td style="font-size : 21px;">{{$item->price}}</td>
     </tr>
