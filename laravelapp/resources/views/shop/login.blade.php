@@ -17,14 +17,12 @@
   @endforeach
 @elseif(isset($msg))
   <p>{{$msg}}</p>
-  @if(isset($list))
-    <a href="/shop/list?sort=id">商品一覧へ</a>
-  @endif
 @endif
 </br>
+
 </br>
 <table>
-  <form action="/shop/list" method="post">
+  <form action="/shop/list?sort=id" method="post">
   {{ csrf_field() }}
   <tr><th>ログイン名: </th><td>
   <input type="text" name="login"></td></tr>

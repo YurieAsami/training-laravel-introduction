@@ -8,8 +8,8 @@
 @if (count($errors) > 0)
 <div>
     <ul>
-        @foreach ($errors->all() as $error)
-            <tr><th>ERROR:</th><th>{{ $error }}</th></tr></br>
+        @foreach ($errors->get('name') as $error)
+            <tr><th></th><th>{{ $error }}</th></tr></br>
         @endforeach
     </ul>
 </div>

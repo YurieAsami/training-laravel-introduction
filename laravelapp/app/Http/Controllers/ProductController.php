@@ -21,7 +21,7 @@ class ProductController extends Controller
     }else{
       $items = Product::orderBy($sort,'asc')->Paginate(8);
     }
-    $param = ['items'=>$items,'sort'=>$sort,'nam'=>$name];
+    $param = ['items'=>$items,'sort'=>$sort,'name'=>$name];
     return view('product.index',$param);
   }
   //商品詳細のページ

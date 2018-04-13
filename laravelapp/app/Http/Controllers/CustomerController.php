@@ -4,27 +4,42 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Customer;
 use Illuminate\Support\MessageBag;
-//use Validator;
+use App\Product;
 use App\Http\Requests\RegisterRequest;
 
 class CustomerController extends Controller
 {
-  public function index(Request $request)
+  public function login(Request $request)
   {
-    $items = Customer::all();
-    return view('shop.login',['items'=>$items]);
-  }
-
-  public function login()
-  {
+    $request->session('user')->forget('name');
+    $request->session('user')->forget('id');
+    $request->session('product')->forget('cart');
     return view ('shop.login');
   }
-
   public function logincheck(Request $request)
   {
-    return view('shop.login',['data'=>$request->data]);
+    $logname = Customer::where('login',$request->login)->first();
+    if ($logname->password==$request->password) {
+      $msg ='ログインしました。';
+      $name = $logname->name;
+      $request->session('user')->put('name',$name);
+      $request->session('user')->put('id',$logname->id);
+      $sort =$request->sort;
+      $items = Product::orderBy($sort,'asc')->Paginate(8);
+      return view('product.index',['sort'=>$sort,'msg'=>$msg,'name'=>$name,'items'=>$items]);
+    }
+      $msg = 'ログインに失敗しました。';
+      $name = '※ログイン名かパスワードが一致しません';
+      $link1 = 'register';
+      $link2 = '登録';
+      $data = ['msg'=>$msg,'name'=>$name,'link1'=>$link1,'link2'=>$link2];
+    return view('shop.login',$data);
   }
 
+  public function logoutcheck(Request $request)
+  {
+    return view('shop.logoutcheck');
+  }
   public function logout(Request $request)
   {
     $request->session('user')->forget('name');

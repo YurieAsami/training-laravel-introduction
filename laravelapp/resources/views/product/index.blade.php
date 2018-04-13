@@ -10,7 +10,7 @@
 @endsection
 
 @section('content')
-<p>{{$nam}}様</p>
+<p>{{$name}}様</p>
   <li><a href="/shop/fav">お気に入り</a></li>
   <li><a href="/shop/cart">カート</a></li>
   <li><a href="/shop/history">購入履歴</a></li>
@@ -44,6 +44,6 @@
 
 @section('footer')
 <p><a href="/shop/edit">会員情報変更</a></p>
-<p><a href="/shop/logout">ログアウト</a></p>
+<p><a href="/shop/logoutcheck">ログアウト</a></p>
 <p>※ログアウトするとカートの内容は消えてしまいます</p>
 @endsection
