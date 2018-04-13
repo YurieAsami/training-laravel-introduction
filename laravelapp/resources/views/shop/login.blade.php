@@ -10,18 +10,18 @@
 @section('content')
 
 @if(isset($data))
-@foreach($data as $data)
-<p>{{$data['name']}}</p>
-<p>{{$data['msg']}}</p>
-<a href= {{$data['link1']}}>{{$data['link2']}}</a>
-@endforeach
+  @foreach($data as $data)
+  <p>{{$data['name']}}</p>
+  <p>{{$data['msg']}}</p>
+  <a href= {{$data['link1']}}>{{$data['link2']}}</a>
+  @endforeach
 @elseif(isset($msg))
   <p>{{$msg}}</p>
   @if(isset($list))
     <a href="/shop/list?sort=id">商品一覧へ</a>
   @endif
 @endif
-@if(!$link1='list?sort=id')
+</br>
    <table>
    <form action="/shop/list" method="post">
       {{ csrf_field() }}
@@ -36,7 +36,6 @@
 </br>
 </br<
 <p><a href="/shop/register">会員登録へ</a></p>
-@endif
 @endsection
 
 @section('footer')

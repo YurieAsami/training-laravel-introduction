@@ -9,6 +9,16 @@ class LoginMiddleware
 {
     public function handle($request, Closure $next)
     {
+      $users = $request->session()->has('users');
+      if(!$users=NULL){
+        $msg = '以下のボタンよりホームへ';
+        $name = '※すでにログインしています';
+        $link1 = 'list?sort=id';
+        $link2 = '商品一覧';
+        $data = [['msg'=>$msg,'name'=>$name,'link1'=>$link1,'link2'=>$link2],];
+         $request->merge(['data'=>$data]);
+         return $next($request);
+      }
       $login = $request->login;
       $password = $request->password;
       $logname = Customer::where('login',$login)->first();
