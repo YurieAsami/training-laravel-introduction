@@ -12,19 +12,22 @@ class LoginMiddleware
       $login = $request->login;
       $password = $request->password;
       $logname = Customer::where('login',$login)->first();
-      $pass = Customer::where('password',$password)->first();
-      if ($logname['password']=$pass['password']) {
+      $pass = Customer::where('password',$password)->get();
+      foreach($pass as $password){
+        if ($logname['password']=$password['password']) {
           $msg ='ログインしました。';
           $name = $logname['name'];
           $link1 ='list?sort=id';
           $link2 ='商品一覧へ';
           $request->session('user')->put('name',$name);
           $request->session('user')->put('id',$logname->id);
-      } else {
+          break;
+        } else {
           $msg = 'ログインに失敗しました。';
           $name = '※ログイン名かパスワードが一致しません';
           $link1 = 'register';
           $link2 = '登録';
+        }
       }
        $data = [['msg'=>$msg,'name'=>$name,'link1'=>$link1,'link2'=>$link2],];
         $request->merge(['data'=>$data]);

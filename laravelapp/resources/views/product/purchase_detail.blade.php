@@ -38,7 +38,6 @@
       @endif
     @endforeach
   @endforeach
-
 </div>
 </table>
 {{$itemm->links()}}

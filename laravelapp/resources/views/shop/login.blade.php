@@ -21,7 +21,7 @@
     <a href="/shop/list?sort=id">商品一覧へ</a>
   @endif
 @endif
-
+@if(!$link1='list?sort=id')
    <table>
    <form action="/shop/list" method="post">
       {{ csrf_field() }}
@@ -36,6 +36,7 @@
 </br>
 </br<
 <p><a href="/shop/register">会員登録へ</a></p>
+@endif
 @endsection
 
 @section('footer')

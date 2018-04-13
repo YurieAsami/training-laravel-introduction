@@ -41,7 +41,7 @@
 @endif
 @endsection
 @section('footer')
-  <a href="/shop/login">ログインページへ</a>
+<p><a href="/shop/login">ログインページへ</a></p>
 
 TEST SHOP BOARD
 @endsection
