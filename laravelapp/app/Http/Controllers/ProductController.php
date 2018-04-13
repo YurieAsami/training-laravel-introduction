@@ -128,7 +128,7 @@ class ProductController extends Controller
       $purchase_detail->insert($data);
     }
     //購入確定画面として再度商品を表示する（purchase_detail＝セッションカートの中身）
-    $purchase_detail = Purchase_detail::where('purchase_id',$purchase_id)->where('created_at',$item->created_at)->get();
+    $purchase_detail =Purchase_detail::where('purchase_id',$item->id)->where('created_at',$item->created_at)->get();
     $name=$request->session('user')->get('name');
     $address=Customer::find($id)->address;
     $param=['product'=>$purchase_detail,'name'=>$name,'address'=>$address];

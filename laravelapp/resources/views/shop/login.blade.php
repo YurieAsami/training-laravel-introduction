@@ -39,6 +39,6 @@
 @endsection
 
 @section('footer')
-<p><a href="/shop/edit">会員情報変更</a></p>
+
 TEST BOARD
 @endsection

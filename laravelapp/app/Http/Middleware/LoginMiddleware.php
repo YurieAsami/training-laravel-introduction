@@ -11,7 +11,7 @@ class LoginMiddleware
   {
     $user = $request->session('user')->get('name');
     if(!$user==NULL){
-      $msg = '以下のボタンよりホームへ';
+      $msg = '以下のボタンより商品一覧へ';
       $name = '※すでにログインしています';
       $link1 = 'list?sort=id';
       $link2 = '商品一覧';
