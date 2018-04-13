@@ -41,5 +41,5 @@
 @section('footer')
 
 <p><a href="/shop/edit">会員情報変更</a></p>
-copyright 2017 tuyano.
+TEST BOARD
 @endsection
