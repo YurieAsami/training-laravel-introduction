@@ -40,7 +40,7 @@
         value="登録"></td></tr>
 </form>
 </table>
-@endif
+
 @endsection
 @section('footer')
 <p><a href="/shop/login">ログインページへ</a></p>
