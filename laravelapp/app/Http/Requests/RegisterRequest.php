@@ -17,7 +17,7 @@ class RegisterRequest extends FormRequest
   public function rules()
   {
     return [
-     'name' =>'required|regex:/[ァ-ヶぁ-ん一-龠ー]+[^①-🔢Ⅰ-ⅹΑ-ωА-я─-╂＃-＼＋-∬￥-Å→-⇔〇-〒№-㍻㍉-㌻]$/|string',
+     'name' =>'required|registeralpa|register|string',
      'address'=>'required',
      'login'=>'alpha_num|between:6,12|regex:/[a-zA-Z0-9-]$/',
      'password'=>'alpha_num|between:6,12|regex:/[a-zA-Z0-9-]$/',
@@ -28,8 +28,9 @@ class RegisterRequest extends FormRequest
   {
     return [
       'name.required'=>'名前は必ず入力してください',
-      'name.regex'=>'名前に英数字は使えません',
-      'name.string'=>'名前に英数字は使えません。',
+      'name.register'=>'名前に記号・数字・絵文字は使えません',
+      'name.registeralpa'=>'名前にアルファベットは使えません。',
+      'name.string'=>'名前に記号は使えません',
 
       'address.required'=>'住所は必ず入力してください',
 

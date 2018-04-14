@@ -39,6 +39,6 @@
 
 @section('footer')
 <p><a href="/shop/fav/drop">お気に入りの中身を空にする</a></p>
-<p><a href="/shop/list?sort=id">商品一覧へ</a></p>
+
 TEST SHOP BOARD
 @endsection

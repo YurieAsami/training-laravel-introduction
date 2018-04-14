@@ -8,11 +8,8 @@
 
 @section('content')
 
-@if (isset($msg))
-  <p>{{$msg}}</p>
-@endif
-
 @if (NUll!==$products)
+<p>{{$msg}}</p>
 <table>
 <tr><th>商品番号</th><th>商品名</th>
 <th>価格</th><th>個数</th><th>小計</th></tr>

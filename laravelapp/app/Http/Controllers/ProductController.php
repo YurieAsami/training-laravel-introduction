@@ -21,7 +21,7 @@ class ProductController extends Controller
     }else{
       $items = Product::orderBy($sort,'asc')->Paginate(8);
     }
-    $param = ['items'=>$items,'sort'=>$sort,'nam'=>$name];
+    $param = ['items'=>$items,'sort'=>$sort,'name'=>$name];
     return view('product.index',$param);
   }
   //商品詳細のページ
@@ -128,7 +128,7 @@ class ProductController extends Controller
       $purchase_detail->insert($data);
     }
     //購入確定画面として再度商品を表示する（purchase_detail＝セッションカートの中身）
-    $purchase_detail =Purchase_detail::where('purchase_id',$item->id)->where('created_at',$item->created_at)->get();
+    $purchase_detail =Purchase_detail::where('purchase_id',$item->id)->where('updated_at',$item->updated_at)->get();
     $name=$request->session('user')->get('name');
     $address=Customer::find($id)->address;
     $param=['product'=>$purchase_detail,'name'=>$name,'address'=>$address];
@@ -139,9 +139,9 @@ class ProductController extends Controller
   {
     $request->session('products')->forget('cart');
     $sort =$request->sort;
-    $nam =$request->session('user')->get('name');
-    $items = Product::orderBy($sort,'asc')->Paginate(5);
-    $param = ['items'=>$items,'sort'=>$sort,'nam'=>$nam];
+    $name =$request->session('user')->get('name');
+    $items = Product::orderBy($sort,'asc')->Paginate(8);
+    $param = ['items'=>$items,'sort'=>$sort,'name'=>$name];
     return view('product.index',$param);
   }
   public function history(Request $request)

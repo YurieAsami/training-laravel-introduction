@@ -7,6 +7,11 @@ class RegisterValidator extends Validator
 {
    public function validateRegister($attribute, $value, $parameters)
    {
-     return preg_match('/[ぁ-んーァ-ヶー一-龠]/u',$value);
+     return preg_match('/[ぁ-んーァ-ヶ一-龠]/u',$value);
+   }
+
+   public function validateRegisteralpa($attribute, $value, $parameters)
+   {
+     return preg_match('/[^a-zA-Zａ-ｚＡ-Ｚ!-?！-？]/u',$value);
    }
 }

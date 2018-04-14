@@ -6,8 +6,8 @@
 
 @section('content')
 
-@if (null !==(session()->get('id')))
-  <p>登録完了</p>
+@if (null!==(session()->get('id')))
+  <p>{{$msg}}</p>
   <a href="/shop/list?sort=id">商品一覧へ</a>
 @elseif ((count($errors)>0) OR isset($msg))
 <p>{{$msg}}</p>
