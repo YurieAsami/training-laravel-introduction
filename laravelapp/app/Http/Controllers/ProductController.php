@@ -21,7 +21,7 @@ class ProductController extends Controller
     }else{
       $items = Product::orderBy($sort,'asc')->Paginate(8);
     }
-    $param = ['items'=>$items,'sort'=>$sort,'name'=>$name];
+    $param = ['items'=>$items,'sort'=>$sort,'nam'=>$name];
     return view('product.index',$param);
   }
   //商品詳細のページ
@@ -139,9 +139,9 @@ class ProductController extends Controller
   {
     $request->session('products')->forget('cart');
     $sort =$request->sort;
-    $name =$request->session('user')->get('name');
+    $nam =$request->session('user')->get('name');
     $items = Product::orderBy($sort,'asc')->Paginate(5);
-    $param = ['items'=>$items,'sort'=>$sort,'name'=>$name];
+    $param = ['items'=>$items,'sort'=>$sort,'nam'=>$nam];
     return view('product.index',$param);
   }
   public function history(Request $request)

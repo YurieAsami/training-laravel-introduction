@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Validator;
 
 class RegisterRequest extends FormRequest
 {
@@ -18,7 +17,7 @@ class RegisterRequest extends FormRequest
   public function rules()
   {
     return [
-     'name' =>'required|string|register',
+     'name' =>'required|regex:/[ァ-ヶぁ-ん一-龠ー]+[^①-🔢Ⅰ-ⅹΑ-ωА-я─-╂＃-＼＋-∬￥-Å→-⇔〇-〒№-㍻㍉-㌻]$/|string',
      'address'=>'required',
      'login'=>'alpha_num|between:6,12|regex:/[a-zA-Z0-9-]$/',
      'password'=>'alpha_num|between:6,12|regex:/[a-zA-Z0-9-]$/',
@@ -29,8 +28,8 @@ class RegisterRequest extends FormRequest
   {
     return [
       'name.required'=>'名前は必ず入力してください',
-      'name.string'=>'名前に文字以外を入力することはできません',
-      'name.register'=>'名前に絵文字、記号は使用できません',
+      'name.regex'=>'名前に英数字は使えません',
+      'name.string'=>'名前に英数字は使えません。',
 
       'address.required'=>'住所は必ず入力してください',
 
