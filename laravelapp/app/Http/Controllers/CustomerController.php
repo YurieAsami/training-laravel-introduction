@@ -6,6 +6,7 @@ use App\Customer;
 use Illuminate\Support\MessageBag;
 use App\Product;
 use App\Http\Requests\RegisterRequest;
+use Validator;
 
 class CustomerController extends Controller
 {
@@ -51,7 +52,7 @@ class CustomerController extends Controller
 
   public function register(Request $request)
   {
-     return view('shop.register',['msg'=>'入力してください']);
+     return view('shop.register',['msg'=>'入力してください','color'=>'color:black']);
   }
 //会員登録（バリデーション失敗→redirect）
   public function create(RegisterRequest $request)
@@ -64,9 +65,10 @@ class CustomerController extends Controller
       $request->session('user')->put('name',$request->name);
       $request->session('user')->put('id',$request->id);
       $msg = '登録しました';
-      return view('shop.login',['msg'=>$msg,'list'=>'1']);
+      return view('shop.login',['msg'=>$msg]);
     }else{
-      return view('shop.register');
+      $msg='すでにこのログイン名は使用されています';
+      return view('shop.register',['msg'=>$msg]);
     }
     return redirect('/shop/register');
   }

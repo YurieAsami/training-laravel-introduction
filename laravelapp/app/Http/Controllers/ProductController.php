@@ -139,9 +139,9 @@ class ProductController extends Controller
   {
     $request->session('products')->forget('cart');
     $sort =$request->sort;
-    $nam =$request->session('user')->get('name');
+    $name =$request->session('user')->get('name');
     $items = Product::orderBy($sort,'asc')->Paginate(5);
-    $param = ['items'=>$items,'sort'=>$sort,'nam'=>$nam];
+    $param = ['items'=>$items,'sort'=>$sort,'name'=>$name];
     return view('product.index',$param);
   }
   public function history(Request $request)

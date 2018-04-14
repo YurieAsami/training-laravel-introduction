@@ -7,7 +7,10 @@
 # you're doing.
 Vagrant.configure("2") do |config|
   config.ssh.insert_key = false
-
+  config.vm.provider "virtualbox" do |vb|
+      vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+      vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+  end
   # vagrant-vbguest
   if Vagrant.has_plugin?("vagrant-vbguest") then
     config.vbguest.auto_update = true # Guest Additionsの自動アップデート
