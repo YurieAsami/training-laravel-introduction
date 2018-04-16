@@ -19,6 +19,7 @@ class CustomerController extends Controller
   {
     $request->session('user')->forget('name');
     $request->session('user')->forget('id');
+    $request->session('user')->forget('login');
     $request->session('product')->forget('cart');
     return view ('shop.login');
   }
@@ -30,7 +31,8 @@ class CustomerController extends Controller
        $msg ='ログインしました。';
        $name = $logname->name;
        $request->session('user')->put('name',$name);
-       $request->session('user')->put('id',$request->login);
+       $request->session('user')->put('login',$request->login);
+       $request->session('user')->put('id',$logname->id);
        $sort =$request->sort;
        $items = Product::orderBy($sort,'asc')->Paginate(8);
        return view('product.index',['sort'=>$sort,'msg'=>$msg,'name'=>$name,'items'=>$items]);
@@ -54,8 +56,10 @@ class CustomerController extends Controller
     $form = $request->all();
     unset($form['_token']);
     $customer->fill($form)->save();
-    $request->session('user')->put('name',$request->name);
-    $request->session('user')->put('id',$request->login);
+    $cus = Customer::where('login',$input->login)->first();
+    $request->session('user')->put('name',$cus->name);
+    $request->session('user')->put('login',$input->login);
+    $request->session('user')->put('id',$cus->id);
     $msg = '登録しました';
     $name=$request->session('user')->get('name');
     $items = Product::orderBy('id','asc')->Paginate(8);
@@ -64,19 +68,22 @@ class CustomerController extends Controller
 
   public function edit(Request $request)
   {
-    $form = Customer::where('login',$request->session('user')->get('id'))->first();
+    $form = Customer::find($request->session('user')->get('id'));
     return view('shop.edit', ['form' => $form]);
   }
 
   public function update(RegisterRequest $request)
   {
     $customer = Customer::find($request->id);
-    $form = $request->all();
-    unset($form['_token']);
-    $customer->fill($form)->save();
-    $request->session('user')->put('name',$customer->name);
-    $request->session('user')->put('id',$customer->id);
-    return redirect('/shop/edit');
+    $forms = $request->all();
+    unset($forms['_token']);
+    $customer->fill($forms)->save();
+    $request->session('user')->put('name',$request->name);
+    $request->session('user')->put('login',$request->login);
+    $request->session('user')->put('id',$request->id);
+    $msg = '登録しました';
+    $form = Customer::find($request->session('user')->get('id'));
+    return view('shop.edit',['msg'=>$msg,'form'=>$form]);
   }
   public function logoutcheck(Request $request)
   {
@@ -86,6 +93,7 @@ class CustomerController extends Controller
   {
     $request->session('user')->forget('name');
     $request->session('user')->forget('id');
+    $request->session('user')->forget('login');
     $request->session('product')->forget('cart');
     $msg = 'ログアウトしました。';
     return view('shop.login',['msg'=>$msg]);

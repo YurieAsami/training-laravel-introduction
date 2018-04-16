@@ -28,9 +28,10 @@ class ProductController extends Controller
   }
   public function seach(Request $request)
   {
-    $items=Product::orderBy('id','asc')->where('name','LIKE','%'.$request->input.'%')->Paginate(8);
+    $seachs=Product::orderBy('id','asc')->where('name','LIKE','%'.$request->input.'%')->get();
+    $items = Product::orderBy('id','asc')->Paginate(8);
     $name =$request->session('user')->get('name');
-    $param = ['items'=>$items,'sort'=>'id','name'=>$name];
+    $param = ['seachs'=>$seachs,'sort'=>'id','name'=>$name,'items'=>$items];
     return view('product.index',$param);
   }
 
@@ -97,7 +98,7 @@ class ProductController extends Controller
     else{
       $msg="以下の商品をお気に入り登録しています";
     }
-    $products = Favorite::with('product')->get();
+    $products = Favorite::where('customer_id',$customer_id)->with('product')->get();
     $param=['msg'=>$msg,'products'=>$products,'customer_id'=>$customer_id];
     return view('product.fav',$param);
   }
@@ -110,7 +111,7 @@ class ProductController extends Controller
     }else{
       $delete=Favorite::where('customer_id',$customer_id)->delete();
     }
-    $products = Favorite::with('product')->get();
+    $products = Favorite::where('customer_id',$customer_id)->with('product')->get();
     $msg="以下の商品をお気に入り登録しています";
     $param=['msg'=>$msg,'products'=>$products,'customer_id'=>$customer_id];
     return view('product.fav',$param);

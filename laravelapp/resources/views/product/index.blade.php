@@ -27,6 +27,24 @@
      <input type="submit" value="検索">
      </form>
 </br>
+@if(isset($seachs))
+<div align="center">
+  <p>検索結果</p>
+  <table width="380">
+    <tr><th>番号</th><th>商品名</th><th>金額</th></tr>
+  @foreach ($seachs as $seach)
+    <tr>
+    <td style="font-size : 20px">{{$seach->id}}</td>
+    <td style="font-size : 21px">
+      <a href="/shop/pro?id={{$seach->id}}">{{$seach->name}}</a></td>
+    <td style="font-size : 21px;">{{$seach->price}}</td>
+    </tr>
+  @endforeach
+  </table>
+</div>
+</br>
+</br>
+@endif
 <div align="center">
   <table width="380">
     <tr>
@@ -36,10 +54,10 @@
     </tr>
   @foreach ($items as $item)
     <tr>
-    <td style="font-size : 20px">{{$item->id}}</td>
-    <td style="font-size : 21px">
+    <td style="font-size : 18px">{{$item->id}}</td>
+    <td style="font-size : 19px">
       <a href="/shop/pro?id={{$item->id}}">{{$item->name}}</a></td>
-    <td style="font-size : 21px;">{{$item->price}}</td>
+    <td style="font-size : 18px;">{{$item->price}}</td>
     </tr>
   @endforeach
   </table>

@@ -7,7 +7,8 @@
 @endsection
 
 @section('content')
-
+  <li><a href="/shop/fav">お気に入り</a></li>
+  <li><a href="/shop/history">購入履歴</a></li>
 @if (NUll!==$products)
 <p>{{$msg}}</p>
 <table>

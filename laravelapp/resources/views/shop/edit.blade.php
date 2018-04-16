@@ -8,17 +8,17 @@
 @endsection
 
 @section('content')
-<p>入力してください</p>
-<p>※ログイン名は変更できません</p>
-@if (isset($msg))
-<p>{{$msg}}</p>
-@endif
-   <table>
-   <form action="/shop/edit" method="post">
+  @if (isset($msg))
+  <p>{{$msg}}</p>
+  @else
+  <p>入力してください</p>
+  <p>※ログイン名は変更できません</p>
+  @endif
+  <form action="/shop/edit" method="post">
    {{ csrf_field() }}
-   <input type="hidden" name="id" value="{{$form->id}}">
-   <table>
-     @php
+  <input type="hidden" name="id" value="{{$form->id}}">
+  <table>
+    @php
        if(count($errors->get('name'))>0){
          $color="color:red";
        }else{
@@ -50,11 +50,13 @@
         $color="color:black";
       }
     @endphp
-    <tr><th style={{$color}}>パスワード</th><td>: </th><td><input type="text" name="password"
+    <tr><th style={{$color}}>パスワード</th><td>: </th><td><input type="password" name="password"
     value="{{$form->password}}"></td></tr>
     @foreach ($errors->get('password') as $error)
       <tr align="left" style="font-size : 10px;"><th></th><th></th><th>※{{ $error }}</th></tr>
     @endforeach
+    <tr align="center" style="font-size : 10px;"><th>もう一度入力してください</th><th><th></th><th></th></tr>
+    <tr><th style={{$color}}>パスワード(確認用)</th><th>: </th><td><input type="password" name="password_confirmation"></td></tr>
     <tr><th></th><td></td><td><input type="submit"
     value="登録"></td></tr>
   </form>

@@ -7,7 +7,8 @@
 @endsection
 
 @section('content')
-
+  <li><a href="/shop/cart">カート</a></li>
+  <li><a href="/shop/history">購入履歴</a></li>
 @if (isset($msg))
   <p>{{$msg}}</p>
 @endif
