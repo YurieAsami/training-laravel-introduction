@@ -15,7 +15,7 @@ class CustomerController extends Controller
     return view('shop.login',['data'=>$items]);
   }
 
-  public function login()
+  public function login(Request $request)
   {
     $request->session('user')->forget('name');
     $request->session('user')->forget('id');
@@ -30,7 +30,7 @@ class CustomerController extends Controller
        $msg ='ログインしました。';
        $name = $logname->name;
        $request->session('user')->put('name',$name);
-       $request->session('user')->put('id',$logname->id);
+       $request->session('user')->put('id',$request->login);
        $sort =$request->sort;
        $items = Product::orderBy($sort,'asc')->Paginate(8);
        return view('product.index',['sort'=>$sort,'msg'=>$msg,'name'=>$name,'items'=>$items]);
@@ -50,25 +50,22 @@ class CustomerController extends Controller
 //会員登録（バリデーション失敗→redirect）
   public function create(RegisterRequest $request)
   {
-    if(count(Customer::where('login',$request->login)->get())==0){
-      $customer = new Customer;
-      $form = $request->all();
-      unset($form['_token']);
-      $customer->fill($form)->save();
-      $request->session('user')->put('name',$request->name);
-      $request->session('user')->put('id',$request->id);
-      $msg = '登録しました';
-      return view('shop.login',['msg'=>$msg,'list'=>'1']);
-    }else{
-      return view('shop.register');
-    }
-    return redirect('/shop/register');
+    $customer = new Customer;
+    $form = $request->all();
+    unset($form['_token']);
+    $customer->fill($form)->save();
+    $request->session('user')->put('name',$request->name);
+    $request->session('user')->put('id',$request->login);
+    $msg = '登録しました';
+    $name=$request->session('user')->get('name');
+    $items = Product::orderBy('id','asc')->Paginate(8);
+    return view('product.index',['sort'=>'id','msg'=>$msg,'name'=>$name,'items'=>$items]);
   }
 
   public function edit(Request $request)
   {
-    $customer = Customer::find($request->session('user')->get('id'));
-    return view('shop.edit', ['form' => $customer]);
+    $form = Customer::where('login',$request->session('user')->get('id'))->first();
+    return view('shop.edit', ['form' => $form]);
   }
 
   public function update(RegisterRequest $request)

@@ -5,11 +5,11 @@
 @endsection
 
 @section('content')
-
 @if (null!==(session()->get('id')))
   <p>{{$msg}}</p>
   <a href="/shop/list?sort=id">商品一覧へ</a>
 @elseif ((count($errors)>0) OR isset($msg))
+
 <p>{{$msg}}</p>
 <table>
 <form action="/shop/register" method="post">
@@ -47,6 +47,7 @@
   @foreach ($errors->get('login') as $error)
     <tr align="left" style="font-size : 10px;"><th></th><th></th><th>※{{ $error }}</th></tr>
   @endforeach
+
   @php
     if(count($errors->get('password'))>0){
       $color="color:red";
@@ -54,10 +55,13 @@
       $color="color:black";
     }
   @endphp
-  <tr><th style={{$color}}>パスワード</th><th>: </th><td><input type="text" name="password" value="{{old('password')}}"></td></tr>
+  <tr><th style={{$color}}>パスワード</th><th>: </th><td><input type="password" name="password"></td></tr>
   @foreach ($errors->get('password') as $error)
     <tr align="left" style="font-size : 10px;"><th></th><th></th><th>※{{ $error }}</th></tr>
   @endforeach
+  <tr align="center" style="font-size : 10px;"><th>もう一度入力してください</th><th><th></th><th></th></tr>
+  <tr><th style={{$color}}>パスワード(確認用)</th><th>: </th><td><input type="password" name="password_confirmation"></td></tr>
+
   <tr><th></th><th></th><td><input type="submit"
         value="登録"></td></tr>
 </form>

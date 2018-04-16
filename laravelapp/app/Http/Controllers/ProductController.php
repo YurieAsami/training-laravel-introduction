@@ -18,12 +18,22 @@ class ProductController extends Controller
     $name =$request->session('user')->get('name');
     if($sort=='priceup'){
       $items = Product::orderBy('price','desc')->Paginate(8);
+    }elseif($sort=='idup'){
+      $items = Product::orderBy('id','desc')->Paginate(8);
     }else{
       $items = Product::orderBy($sort,'asc')->Paginate(8);
     }
     $param = ['items'=>$items,'sort'=>$sort,'name'=>$name];
     return view('product.index',$param);
   }
+  public function seach(Request $request)
+  {
+    $items=Product::orderBy('id','asc')->where('name','LIKE','%'.$request->input.'%')->Paginate(8);
+    $name =$request->session('user')->get('name');
+    $param = ['items'=>$items,'sort'=>'id','name'=>$name];
+    return view('product.index',$param);
+  }
+
   //商品詳細のページ
   public function pro(Request $request)
   {

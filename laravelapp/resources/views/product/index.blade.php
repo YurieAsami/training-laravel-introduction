@@ -21,12 +21,17 @@
   ようこそ
   @endif
 </div>
+  <form action="/shop/find" method="post" align="right">
+     {{ csrf_field() }}
+     <input type="text" name="input">
+     <input type="submit" value="検索">
+     </form>
 </br>
 <div align="center">
   <table width="380">
     <tr>
-    <th><a href="/shop/list?sort=id">番号</a></th>
-    <th><a href="/shop/list?sort=name">商品名</a></th>
+    <th>番号<a href="/shop/list?sort=idup">▲<a href="/shop/list?sort=id">▼</a></th>
+    <th>商品名</th>
     <th>金額<a href="/shop/list?sort=priceup">▲</a><a href="/shop/list?sort=price">▼</a></th>
     </tr>
   @foreach ($items as $item)

@@ -10,6 +10,7 @@ Route::get('/', function () {
 Route::get('shop/login','CustomerController@login');
 Route::post('shop/login','CustomerController@logincheck');
 Route::post('shop/list', 'CustomerController@logincheck');
+Route::post('shop/find', 'ProductController@seach');
 
 Route::get('shop/logoutcheck','CustomerController@logoutcheck');
 Route::get('shop/logout','CustomerController@logout');
