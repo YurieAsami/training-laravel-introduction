@@ -9,13 +9,15 @@
         </button>
       </div>
       <div class="modal-body">
+        <form action="/test/index" method="post">
+          {{ csrf_field() }}
         <div class="form-group">
           <label for="inputUsername">Username</label>
-          <input type="text" class="form-control" id="inputUsername" placeholder="Enter Username">
+          <input type="text" class="form-control" id="inputUsername" placeholder="Enter Username" name="name">
         </div>
         <div class="form-group">
           <label for="inputPassword">Password</label>
-      <form>    <input type="password" class="form-control" id="inputPassword" placeholder="Password"></form>
+         <input type="password" class="form-control" id="inputPassword" placeholder="Password" name="password">
           <div class="text-right">
             <a href="#" class="text-secondary"><small>Forgot Password ?</small></a>
           </div>
@@ -28,7 +30,7 @@
       <div class="modal-footer justify-content-center">
         <div class="btn-group" role="group" aria-label="Login Action">
           <a href="/test/register" class="btn btn-outline-theme" role="button">I want to Sign Up</a>
-          <button type="submit" class="btn btn-theme">SIGN IN</button>
+          <button type="submit" class="btn btn-theme">SIGN IN</button></form>
         </div>
       </div>
     </div>

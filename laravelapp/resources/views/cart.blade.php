@@ -26,18 +26,7 @@
   </head>
   <body>
 
-@include('components.topheader',['nowpage'=>'Cart'])
-
-    <div class="breadcrumb-container">
-      <div class="container-fluid limited">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/test/index">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Shopping Cart</li>
-          </ol>
-        </nav>
-      </div>
-    </div>
+@include('components.topheader',['nowpage'=>'Shopping Cart'])
 
     <div class="container-fluid limited">
       <div class="row">
@@ -117,13 +106,15 @@
                   </td>
                   <td class="d-none d-sm-table-cell"><span class="text-theme">{{$subtotal}}</span></td>
                   <td>
-                  <div><input type="submit" value="削除"></div></form></td>
+                  <div><input class="btn btn-outline-theme" type="submit" value="削除"></div></form></td>
                 </tr>
 
               @endforeach
               </tbody>
             </table>
+            @if ($carts!==NULL)
             <p><a href="/test/cartalldrop">カートの中身を空にする</a></p>
+            @endif
           </div>
         </div>
       </div>
@@ -200,10 +191,10 @@
                       <button class="btn btn-outline-theme show-quickview"><i class="material-icons">zoom_in</i></button>
                       <form action="/test/cart" method="post">
                             {{ csrf_field() }}
-                      <button class="btn btn-theme" name="cart" value="{{$product->id}}">ADD TO CART</button>
+                      <button class="btn btn-theme" name="cart" value="{{$product->id}}">ADD TO CART</button></form>
                       <form action="/test/wishlist" method="post">
                             {{ csrf_field() }}
-                      <button class="btn btn-outline-theme" name="wish" value="{{$product->id}}"><i class="material-icons">favorite_border</i></button>
+                      <button class="btn btn-outline-theme" name="wish" value="{{$product->id}}"><i class="material-icons">favorite_border</i></button></form>
                     </div>
                   </div>
                   <div class="small-action d-block d-md-none">

@@ -26,18 +26,8 @@
   </head>
   <body>
 
-@include('components.topheader',['nowpage'=>'Cart'])
+@include('components.topheader',['page'=>'Shopping Cart'])
 
-    <div class="breadcrumb-container">
-      <div class="container-fluid limited">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/test/index">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Shopping Cart</li>
-          </ol>
-        </nav>
-      </div>
-    </div>
 
     <div class="container-fluid limited">
       <div class="row">
@@ -45,7 +35,7 @@
           @isset($msg)
             <p>{{$msg}}</p>
           @endisset
-          @if ($customer->id==NULL)
+          @if (is_NULL($customer))
             <div  align="center">
             <a href="/test/login" method="post"><h2><button type="button" class="btn btn-outline-theme" >
               ログインページはこちら</button></h2></a>

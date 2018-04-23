@@ -25,18 +25,8 @@
   </head>
   <body>
 
-@include('components.topheader',['nowpage'=>'FAQ'])
+@include('components.topheader',['page'=>'FAQ'])
 
-    <div class="breadcrumb-container">
-      <div class="container-fluid limited">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/test/index">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">FAQ</li>
-          </ol>
-        </nav>
-      </div>
-    </div>
 @php
   $questions[]=array('1'=>['q'=>'I see different prices with the same title. Why?','a'=>'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam unde dicta ab sapiente harum beatae nihil aspernatur nam eos perferendis. Iusto perspiciatis assumenda vitae aspernatur nam est fuga maiores sequi.'],'2'=>['q'=>'Why do I see different prices for the same product?','a'=>'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident blanditiis ipsa expedita, earum esse omnis delectus possimus fugit perferendis ex veritatis veniam consequuntur mollitia, facilis vel velit voluptatem eos ut!'],'3'=>['q'=>'Is it necessary to have an account to shop on Marketshop?','a'=>'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo, quisquam, corrupti. Perspiciatis maxime provident in vero dolore similique quam voluptatum eum reiciendis ex repellat a saepe, explicabo odit quae perferendis!'],'4'=>['q'=>'What do I need to know before getting an order gift wrapped?','a'=>'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab perferendis, similique a accusamus ipsum incidunt repellendus quis, soluta, minus molestiae illum eligendi id hic eum accusantium voluptatem quae facilis architecto.'],'5'=>['q'=>'What is Advantage?','a'=>'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, culpa rem in voluptate inventore repudiandae officia ad eveniet aut reiciendis corrupti, odit, velit officiis voluptatibus, incidunt minima omnis voluptas. Similique.']);
 @endphp

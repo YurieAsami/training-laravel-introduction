@@ -35,8 +35,8 @@ Route::get('test/password','ShoppingController@testpassword');
 Route::get('test/order','ShoppingController@testorder');
 Route::get('test/address','ShoppingController@testaddress');
 Route::get('test/about','ShoppingController@testabout');
-
-
+Route::get('test/logout','ShoppingController@logout');
+Route::post('test/logoutfinish','ShoppingController@logfinish');
 
 
 Route::get('shop/login','CustomerController@login');

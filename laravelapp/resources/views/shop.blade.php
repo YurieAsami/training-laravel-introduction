@@ -27,18 +27,7 @@
   </head>
   <body>
 
-@include('components.topheader',['nowpage'=>'Shop Grid'])
-
-        <div class="breadcrumb-container">
-          <div class="container-fluid limited">
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/test/index">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Shop Grid</li>
-              </ol>
-            </nav>
-          </div>
-        </div>
+@include('components.topheader',['page'=>'Shop Grid'])
 
     <div class="container-fluid limited">
       <div class="row">

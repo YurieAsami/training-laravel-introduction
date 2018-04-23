@@ -3,7 +3,7 @@
             <div class="modal-dialog modal-lg" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title font-weight-normal" id="quickviewModalLabel"><a href="/test/detail" class="text-dark">U.S. Polo Assn. Green Solid Slim Fit</a></h5>
+                  <h5 class="modal-title font-weight-normal" id="quickviewModalLabel"><a href="/test/detail" class="text-dark">{{$product->name}}</a></h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
@@ -28,18 +28,27 @@
                            <div>Price</div>
                            <div>
                              <ul class="list-inline mb-0">
-                               <li class="list-inline-item"><span class="price">$13.50</span></li>
-                               <li class="list-inline-item"><del class="small text-muted">$15.00</del></li>
-                               <li class="list-inline-item d-none d-sm-inline-block"><span class="badge badge-secondary">-10%</span></li>
+                               @if(isset($product->sale))
+                                 @php
+                                   $prices=($product->price)*($product->sale)/100;
+                                 @endphp
+                               <li class="list-inline-item"><span class="price">{{$prices}}円</span></li>
+                               <li class="list-inline-item"><del class="text-muted small">{{$product->price}}円</del></li>
+                               <li class="list-inline-item d-none d-sm-inline-block"><span class="badge badge-theme">{{$product->sale}}% OFF</span></li>
+                               @else
+                               <li class="list-inline-item"><span class="price">{{$product->price}}円</span></li>
+                               @endif
                              </ul>
                            </div>
                          </div>
+                         <form action="/test/cart" method="post">
+                           {{ csrf_field() }}
                          <div class="list-detail">
                            <div>Quantity</div>
                            <div>
                              <div class="input-group input-group-sm input-group-qty">
                                <div class="input-group-prepend"><button class="btn btn-light btn-down" type="button"><i class="material-icons">keyboard_arrow_down</i></button></div>
-                               <input type="text" class="form-control text-center border-light" aria-label="Quantity" value="1" data-min="1" data-max="10">
+                               <input type="text" class="form-control text-center border-light" aria-label="Quantity" value="1" data-min="1" data-max="10" name="quantity">
                                <div class="input-group-append"><button class="btn btn-light btn-up" type="button"><i class="material-icons">keyboard_arrow_up</i></button></div>
                              </div>
                            </div>
@@ -80,8 +89,10 @@
                         </div>
                         <div class="list-detail">
                           <div class="btn-group btn-group-sm w-100" role="group" aria-label="quickview action">
-                            <button class="btn btn-theme w-75"><i class="material-icons">add_circle</i> Add to Cart</button>
-                            <button class="btn btn-outline-theme w-25"><i class="material-icons">favorite</i></button>
+                            <button class="btn btn-theme w-75" type="submit" name="cart" value={{$product->id}}><i class="material-icons">add_circle</i> Add to Cart</button></form>
+                            <form action="/test/wishlist" method="post">
+                              {{ csrf_field() }}
+                            <button type="submit" class="btn btn-outline-theme w-25" name="wish" value={{$product->id}}><i class="material-icons">favorite</i></button></form>
                           </div>
                         </div>
                       </div>

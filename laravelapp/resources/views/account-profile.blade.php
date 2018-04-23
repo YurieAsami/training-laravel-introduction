@@ -12,7 +12,7 @@
     <link rel="apple-touch-icon" sizes="152x152" href="touch-icon-ipad.png">
     <link rel="apple-touch-icon" sizes="180x180" href="touch-icon-iphone-retina.png">
     <link rel="apple-touch-icon" sizes="167x167" href="touch-icon-ipad-retina.png">
-    <title>My Orders - Mimity</title>
+    <title>{{$page}} - Mimity</title>
 
     <!-- Required css -->
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
@@ -25,34 +25,28 @@
   </head>
   <body>
 
-@include('components.topheader',['nowpage'=>'Profile'])
+@include('components.topheader')
 
-    <div class="breadcrumb-container">
-      <div class="container-fluid limited">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/test/index">Home</a></li>
-            <li class="breadcrumb-item"><a href="/test/profile">My Account</a></li>
-            <li class="breadcrumb-item active" aria-current="page">My Profile</li>
-          </ol>
-        </nav>
-      </div>
-    </div>
+    @isset($msg)
+      <p>{{$msg}}</p>
+    @endisset
     @if ($customer==NULL)
       <div  align="center">
       <a href="/test/login" method="post"><h2><button type="button" class="btn btn-outline-theme" >
-          ログインページはこちら</button></h2></a>
+        ログインページはこちら</button></h2></a>
       <a href="/test/register" method="post"><h2><button type="button" class="btn btn-outline-theme">
-          新規登録はこちら</button></h2></a>
+        新規登録はこちら</button></h2></a>
       </div>
     <div class="container-fluid limited mb-5">
+    <div class="row">
+    @else
+    <div class="container-fluid limited mb-5">
       <div class="row">
-      @else
         <div class="col-lg-3 col-md-4 mb-4 mb-md-0">
           <div class="card user-card">
             <div class="card-body p-2 mb-3 mb-md-0 mb-xl-3">
               <div class="media">
-                <img class="rounded-circle" src="img/user.png" alt="John Thor">
+                <img class="rounded-circle" src="/img/user.png" alt="John Thor">
                 <div class="media-body">
                   <h5 class="user-name">{{$customer->name}}</h5>
                   <small class="card-text text-muted">Joined Dec 31, 2017{{$customer->join}}</small>
@@ -175,10 +169,10 @@
       </div>
     </div>
 
-@include('components.modal-menu')
-@include('components.cart',['carts'=>$carts,'cart'=>$cart])
-@include('components.modal-login')
-@include('components.footer')
+    @include('components.modal-menu')
+    @include('components.cart',['carts'=>$carts,'cart'=>$cart])
+    @include('components.modal-login')
+    @include('components.footer')
 
     <a href="#top" class="back-top text-center" id="back-top">
       <i class="material-icons">expand_less</i>

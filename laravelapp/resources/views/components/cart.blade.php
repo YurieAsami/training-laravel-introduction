@@ -18,12 +18,16 @@
           <div class="media-body">
             <div><a href="/test/detail" class="text-dark">{{$cart->product->name}}</a></div>
             <span class="text-secondary"><span class="mr-3">x{{$cart->count}}</span>{{$cart->product->price}}円</span>
-            <button class="close text-danger"><i class="material-icons">close</i></button>
+            <form action="/test/cartdrop" method="post">
+              {{ csrf_field() }}
+              <div><input name="id" type="hidden" value="{{$cart->product->id}}"></div>
+              <div><input name="name" type="hidden" value="{{$cart->product->name}}"></div>
+            <button class="close text-danger"><i class="material-icons">close</i></button></form>
           </div>
         </div>
         @endforeach
         @else
-          <div class="media">        
+          <div class="media">
           </div>
         @endif
         </div>

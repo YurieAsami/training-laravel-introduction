@@ -81,6 +81,7 @@
             <a href="#" class="nav-link dropdown-toggle no-caret" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">MEGA MENU</a>
             <div class="dropdown-menu dropdown-menu-mega animate">
               <form> <!-- added <form> tags to prevent dropdown closed when clicked inside dropdown-menu -->
+                {{ csrf_field() }}
                 <div class="row">
                   <div class="col-4 col-lg-3">
                     <h6 class="p-2 font-weight-bold border border-top-0 border-right-0 border-left-0">Top Categories</h6>
@@ -167,9 +168,9 @@
               <a class="dropdown-item" href="/test/about">About Us</a>
               <a class="dropdown-item" href="/test/compare">Compare</a>
               <a class="dropdown-item" href="/test/contact">Contact Us</a>
-              <a class="dropdown-item" href="/test/cart-empty">Empty Shopping Cart</a>
-              <a class="dropdown-item" href="/test/404">Error 404</a>
               <a class="dropdown-item" href="/test/faq">FAQ</a>
+              <a class="dropdown-item" href="/test/cart">Shopping Cart</a>
+              <!--<a class="dropdown-item" href="/test/404">Error 404</a>-->
               <a class="dropdown-item" href="/test/login">Login</a>
               <a class="dropdown-item" href="/test/register">Register</a>
               <div class="dropdown-submenu">
@@ -180,6 +181,7 @@
                   <a href="/test/address" class="dropdown-item">Addresses</a>
                   <a href="/test/wishlist" class="dropdown-item">Wishlist</a>
                   <a href="/test/password" class="dropdown-item">Change Password</a>
+                  <a href="/test/logout" class="dropdown-item">Logout</a>
                 </div>
               </div>
             </div>
@@ -198,3 +200,16 @@
   </div>
 </div>
     <!-- /Middle Header -->
+
+    <div class="breadcrumb-container">
+      <div class="container-fluid limited">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/test/index">Home</a></li>
+            @isset($page)
+            <li class="breadcrumb-item active" aria-current="page">{{$page}}</li>
+            @endisset
+          </ol>
+        </nav>
+      </div>
+    </div>

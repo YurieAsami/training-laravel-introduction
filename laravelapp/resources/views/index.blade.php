@@ -29,11 +29,10 @@
     @isset($msg)
     {{$msg}}　
     @endisset
-    ようこそ　
     @isset($name)
-    {{$name}}さん
+    ようこそ　{{$name}}さん
     @endisset
-@include('components.topheader',['nowpage'=>'HOME'])
+@include('components.topheader',['page'=>'HOME'])
 @include('components.home-slider')
 
     <div class="container-fluid limited mt-5">

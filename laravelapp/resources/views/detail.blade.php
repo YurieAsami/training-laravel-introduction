@@ -28,18 +28,7 @@
   </head>
   <body>
 
-@include('components.topheader',['nowpage'=>'Single Product'])
-
-    <div class="breadcrumb-container">
-      <div class="container-fluid limited">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/test/index">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Single Product</li>
-          </ol>
-        </nav>
-      </div>
-    </div>
+@include('components.topheader',['page'=>'Single Product'])
 
     <div class="container-fluid limited">
       <div class="row">
@@ -101,12 +90,14 @@
                   <span class="badge badge-success">In Stock</span>
                 </td>
               </tr>
+              <form action="/test/cart" method="post">
+                {{ csrf_field() }}
               <tr>
                 <td class="align-middle">Quantity</td>
                 <td>
                   <div class="input-group input-group-sm input-group-qty">
                     <div class="input-group-prepend"><button class="btn btn-light btn-down" type="button"><i class="material-icons">keyboard_arrow_down</i></button></div>
-                    <input type="text" class="form-control text-center border-light" aria-label="Quantity" value="1" data-min="1" data-max="10">
+                    <input type="text" class="form-control text-center border-light" aria-label="Quantity" value="1" data-min="1" data-max="10" name="quantity">
                     <div class="input-group-append"><button class="btn btn-light btn-up" type="button"><i class="material-icons">keyboard_arrow_up</i></button></div>
                   </div>
                 </td>
@@ -174,12 +165,15 @@
                 <td></td>
                 <td>
                   <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-theme">ADD TO CART</button>
+                    <button type="submit" class="btn btn-theme" name="cart" value={{$product->id}}>ADD TO CART</button></form>
                     <button type="button" class="btn btn-outline-theme" data-toggle="tooltip" data-placement="top" title="Add to Compare"><i class="material-icons">compare_arrows</i></button>
-                    <button type="button" class="btn btn-outline-theme" data-toggle="tooltip" data-placement="top" title="Add to Wishlist"><i class="material-icons">favorite_border</i></button>
+                    <form action="/test/wishlist" method="post">
+                      {{ csrf_field() }}
+                    <button type="submit" class="btn btn-outline-theme" data-toggle="tooltip" data-placement="top" title="Add to Wishlist" name="wish" value={{$product->id}}><i class="material-icons">favorite_border</i></button></form>
                   </div>
                 </td>
               </tr>
+
             </tbody>
           </table>
           <ul class="nav nav-tabs" role="tablist">
@@ -303,6 +297,8 @@
           <div class="swiper-container swiper-container-have-hover" id="newIn-slider">
             <div class="swiper-wrapper">
               @foreach ($products as $product)
+                <form action="/test/cart" method="post">
+                  {{ csrf_field() }}
               <div class="card card-product swiper-slide">
                 <a href="/test/detail"><img class="card-img-top" src="/img/product/pro{{$product->id}}.jpg" alt="Card image cap"></a>
                 <div class="card-body">
@@ -322,8 +318,10 @@
                   <div class="action">
                     <div class="btn-group btn-group-sm" role="group" aria-label="Action">
                       <button class="btn btn-outline-theme show-quickview"><i class="material-icons">zoom_in</i></button>
-                      <button class="btn btn-theme">ADD TO CART</button>
-                      <button class="btn btn-outline-theme"><i class="material-icons">favorite_border</i></button>
+                      <button type="submit" class="btn btn-theme" name="cart" value={{$product->id}}>ADD TO CART</button></form>
+                      <form action="/test/wish" method="post">
+                        {{ csrf_field() }}
+                      <button type="submit" class="btn btn-theme" name="wish" value={{$product->id}}><i class="material-icons">favorite_border</i></button></form>
                     </div>
                   </div>
                   <div class="small-action d-block d-md-none">
@@ -349,7 +347,9 @@
 @include('components.cart',['carts'=>$carts,'cart'=>$cart])
 
 @include('components.modal-login')
+
 @include('components.modal-quikview')
+
 @include('components.footer')
 
     <a href="#top" class="back-top text-center" id="back-top">
