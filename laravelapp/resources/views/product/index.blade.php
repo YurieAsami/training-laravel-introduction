@@ -26,7 +26,6 @@
      <input type="text" name="input">
      <input type="submit" value="検索">
      </form>
-</br>
 @if(isset($seachs))
 <div align="center">
   <p>検索結果</p>

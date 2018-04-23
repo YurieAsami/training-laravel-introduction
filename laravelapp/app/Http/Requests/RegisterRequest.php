@@ -20,8 +20,8 @@ class RegisterRequest extends FormRequest
      'name' =>'required|registeralpa|register|string',
      'address'=>'required',
      'login'=>'alpha_num|between:6,12|regex:/[a-zA-Z0-9-]+$/|loginname',
-     'password'=>'alpha_num|between:6,12|regex:/[a-zA-Z0-9-]+$/|confirmed',
-
+     'password'=>'required|alpha_num|between:6,12|regex:/[a-zA-Z0-9-]+$/|confirmed',
+     'email'=>'required|email'
     ];
   }
 
@@ -36,16 +36,18 @@ class RegisterRequest extends FormRequest
       'address.required'=>'住所は必ず入力してください',
 
       'login.required'=>'ログイン名は必ず入力してください',
-      'login.alpha_num'=>'ログイン名は半角英数字で入力してください',
-      'login.between'=>'ログイン名は６文字以上１２字以内で入力してください',
-      'login.regex'=>'ログイン名は半角英数字で入力してください',
+      'login.alpha_num'=>'半角英数字で入力してください',
+      'login.between'=>'６文字以上１２字以内で入力してください',
+      'login.regex'=>'半角英数字で入力してください',
       'login.loginname'=>'このログイン名はすでに使用されています',
 
       'password.required'=>'パスワードは必ず入力してください',
-      'password.between'=>'パスワードは６文字以上１２字以内で入力してください',
-      'password.alpha_num' =>'パスワードは半角英数字で入力してください',
-      'password.regex'=>'パスワードは半角英数字で入力してください',
+      'password.between'=>'６文字以上１２字以内で入力してください',
+      'password.alpha_num' =>'半角英数字で入力してください',
+      'password.regex'=>'半角英数字で入力してください',
       'password.confirmed'=>'パスワードが一致しません',
+      'email.required'=>'メールアドレスは必ず入力してください',
+      'email.email'=>'正しいメールアドレスを入力してください',
     ];
   }
 
