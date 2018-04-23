@@ -11,7 +11,7 @@ use App\Purchase_detail;
 use App\Cart;
 use App\Http\Requests\RegisterRequest;
 
-class ProductController extends Controller
+class ShoppingController extends Controller
 {
    public function testgrid(Request $request)
    {
@@ -214,16 +214,24 @@ class ProductController extends Controller
     $cart=count(Cart::where('customer_id',$id)->get());
     $other_products=Product::Paginate(8);
     $cart=Cart::where('customer_id',$id)->count();
-    if($cart==0)
-    {
-      return view('cart-empty',['other_products'=>$other_products,'pagename'=>$pagename,'page'=>'index','wish'=>$wish,'cart'=>$cart,'carts'=>$carts]);
+    if($cart==0 OR $id==NULL){
+      $msg="※カート情報がありません";
+      return view('cart-empty',['msg'=>$msg,'other_products'=>$other_products,'pagename'=>$pagename,'page'=>'index','wish'=>$wish,'cart'=>$cart,'carts'=>$carts]);
     }
      return view('cart',['other_products'=>$other_products,'carts'=>$carts,'pagename'=>$pagename,'page'=>'index','wish'=>$wish,'cart'=>$cart,'carts'=>$carts]);
   }
   public function testcartin(Request $request)
   {
     $id=$request->session('user')->get('id');
-    if(NULL!==$request->cart){
+    $wish=Favorite::where('customer_id',$id)->count();
+    $cart=Cart::where('customer_id',$id)->count();
+    $carts = Cart::where('customer_id',$id)->get();
+    $pagename='cart';
+    $other_products=Product::Paginate(8);
+    if ($id==NULL) {
+      $msg="※ユーザー情報がありません";
+      return view('cart-empty',['msg'=>$msg,'other_products'=>$other_products,'pagename'=>$pagename,'page'=>'cart','wish'=>$wish,'cart'=>$cart,'carts'=>$carts]);
+    }elseif(NULL!==$request->cart){
       $msg="この商品はすでに登録済みです";
       $pro=Cart::where('product_id',$request->cart)->where('customer_id',$id)->get();
       if(count($pro)==0){
@@ -235,11 +243,6 @@ class ProductController extends Controller
         $msg="カートに商品を入れました";
       }
     }
-      $carts = Cart::where('customer_id',$id)->get();
-      $pagename='cart';
-      $wish=Favorite::where('customer_id',$id)->count();
-      $cart=Cart::where('customer_id',$id)->count();
-      $other_products=Product::Paginate(8);
      return view('cart',['msg'=>$msg,'other_products'=>$other_products,'carts'=>$carts,'pagename'=>$pagename,'page'=>'cart','wish'=>$wish,'cart'=>$cart]);
   }
   public function testcartalldrop(Request $request)
@@ -309,6 +312,10 @@ class ProductController extends Controller
   public function testwishlist(Request $request)
   {
     $id=$request->session('user')->get('id');
+    if ($id==NULL) {
+      $msg="※ユーザー情報がありません";
+    }
+    $msg="";
     $products = Favorite::where('customer_id',$id)->Paginate(4);
     $customer = Customer::where('id',$id)->first();
     $pagename='single';
@@ -316,12 +323,21 @@ class ProductController extends Controller
     $cart=Cart::where('customer_id',$id)->count();
     $other_products=Product::Paginate(8);
     $carts=Cart::where('customer_id',$id)->get();
-     return view('account-wishlist',['products'=>$products,'pagename'=>$pagename,'page'=>'index','wish'=>$wish,'cart'=>$cart,'customer'=>$customer,'carts'=>$carts]);
+     return view('account-wishlist',['msg'=>$msg,'products'=>$products,'pagename'=>$pagename,'page'=>'index','wish'=>$wish,'cart'=>$cart,'customer'=>$customer,'carts'=>$carts]);
   }
   public function testwishin(Request $request)
   {
     $id=$request->session('user')->get('id');
-    if(NULL!==$request->wish){
+    $msg="以下の商品をお気に入り登録しています";
+    $products = Favorite::where('customer_id',$id)->get();
+    $customer = Customer::where('id',$id)->first();
+    $wish=Favorite::where('customer_id',$id)->count();
+    $cart=Cart::where('customer_id',$id)->count();
+    $carts=Cart::where('customer_id',$id)->get();
+    $other_products=Product::Paginate(8);
+    if ($id==NULL) {
+      $msg="※ユーザー情報がありません";
+    }elseif(NULL!==$request->wish){
       $pro=Favorite::where('product_id',$request->wish)->where('customer_id',$id)->get();
    //同じユーザーが同じ商品を重複して登録できないようにif分岐
       if(count($pro)==0){
@@ -332,14 +348,7 @@ class ProductController extends Controller
       $msg="商品をお気に入り登録しました";
       }
     }
-    $msg="以下の商品をお気に入り登録しています";
-    $products = Favorite::where('customer_id',$id)->get();
-    $customer = Customer::where('id',$id)->first();
-    $wish=Favorite::where('customer_id',$id)->count();
-    $cart=Cart::where('customer_id',$id)->count();
-    $carts=Cart::where('customer_id',$id)->get();
-    $other_products=Product::Paginate(8);
-       return view('account-wishlist',['msg'=>$msg,'other_products'=>$other_products,'products'=>$products,'wish'=>$wish,'cart'=>$cart,'carts'=>$carts,'customer'=>$customer]);
+    return view('account-wishlist',['msg'=>$msg,'other_products'=>$other_products,'products'=>$products,'wish'=>$wish,'cart'=>$cart,'carts'=>$carts,'customer'=>$customer]);
   }
   public function testprofile(Request $request)
   {
@@ -408,173 +417,4 @@ class ProductController extends Controller
     $other_products=Product::Paginate(8);
      return view('about',['product'=>$product,'products'=>$products,'pagename'=>$pagename,'page'=>'index','wish'=>$wish,'cart'=>$cart,'customer'=>$customer,'carts'=>$carts]);
   }
-
-
-
-
-
-
-
-
-  //商品一覧の表示
-  public function index(Request $request)
-  {
-    $sort =$request->sort;
-    $name =$request->session('user')->get('name');
-    if($sort=='priceup'){
-      $items = Product::orderBy('price','desc')->Paginate(8);
-    }elseif($sort=='idup'){
-      $items = Product::orderBy('id','desc')->Paginate(8);
-    }else{
-      $items = Product::orderBy($sort,'asc')->Paginate(8);
-    }
-    $param = ['items'=>$items,'sort'=>$sort,'name'=>$name];
-    return view('product.index',$param);
-  }
-  public function seach(Request $request)
-  {
-    $seachs=Product::orderBy('id','asc')->where('name','LIKE','%'.$request->input.'%')->get();
-    $items = Product::orderBy('id','asc')->Paginate(8);
-    $name =$request->session('user')->get('name');
-    $param = ['seachs'=>$seachs,'sort'=>'id','name'=>$name,'items'=>$items];
-    return view('product.index',$param);
-  }
-
-  //商品詳細のページ
-  public function pro(Request $request)
-  {
-    $item = Product::where('id',$request->id)->first();
-    return view('product.pro',['item'=>$item]);
-  }
-  //ショッピングカート内の表示
-  public function cartlist(Request $request)
-  {
-    $customer_id=$request->session('user')->get('id');
-    if(NULL!==$request->id){
-      $pro=Cart::where('product_id',$request->id)->where('customer_id',$customer_id)->get();
-     //同じユーザーが同じ商品を重複して登録できないようにif分岐
-      if(count($pro)==0){
-          $cart = new Cart;
-          $cart->customer_id=$customer_id;
-          $product->product_id=$request->id;
-          $cart->save();
-          $msg="カートに入れました";
-        }else{
-          $msg="以下の商品をお気に入り登録しています";
-        }
-    }
-    else{
-      $msg="以下の商品をお気に入り登録しています";
-    }
-    $products =Cart::where('customer_id',$customer_id)->with('product')->get();
-    $param=['msg'=>$msg,'products'=>$products,'customer_id'=>$customer_id];
-    return view('product.cart',$param);;
-  }
-//カート内の商品の削除
-  public function drop(Request $request)
-  {
-    $request->session('products')->forget('cart');
-    $products=NULL;
-    return view('product.cart',['products'=>$products]);
-  }
-//個々のカート内の商品の削除
-  public function prodrop(Request $request)
-  {
-    $product=$request->session('products')->get('cart');
-    //配列にキーを振りなおすことで削除された$num番目の商品のキーを＄numに合わせる
-    $products=array_merge($product);
-    $number=($request->input('number'));
-    $products=array_except($products,[$number]);
-    //削除し終わった配列をセッションに登録
-    $request->session('products')->put('cart',$products);
-    $products=$request->session('products')->get('cart');
-    $param=['msg'=>$request->input('name').'を削除しました','products'=>$products];
-    return view('product.cart',$param);
-  }
-//お気に入り登録
-  public function fav(Request $request)
-  {
-    $customer_id=$request->session('user')->get('id');
-    if(NULL!==$request->id){
-      $pro=Favorite::where('product_id',$request->id)->where('customer_id',$customer_id)->get();
-   //同じユーザーが同じ商品を重複して登録できないようにif分岐
-      if(count($pro)==0){
-        $favorite = new Favorite;
-        $favorite->customer_id=$customer_id;
-        $favorite->product_id=$request->id;
-        $favorite->save();
-        $msg="お気に入りに登録しました";
-      }else{
-        $msg="以下の商品をお気に入り登録しています";
-      }
-    }
-    else{
-      $msg="以下の商品をお気に入り登録しています";
-    }
-    $products = Favorite::where('customer_id',$customer_id)->with('product')->get();
-    $param=['msg'=>$msg,'products'=>$products,'customer_id'=>$customer_id];
-    return view('product.fav',$param);
-  }
-//お気に入り項目削除
-  public function favdrop(Request $request)
-  {
-    $customer_id=$request->session('user')->get('id');
-    if(isset($request->user)&&isset($request->product)){
-      $delete=Favorite::where('customer_id',$request->user)->where('product_id',$request->product)->delete();
-    }else{
-      $delete=Favorite::where('customer_id',$customer_id)->delete();
-    }
-    $products = Favorite::where('customer_id',$customer_id)->with('product')->get();
-    $msg="以下の商品をお気に入り登録しています";
-    $param=['msg'=>$msg,'products'=>$products,'customer_id'=>$customer_id];
-    return view('product.fav',$param);
-  }
-//購入確認画面
-  public function subpurchase(Request $request)
-  {
-    $products=$request->session('products')->get('cart');
-    return view('product.subpur',['products'=>$products]);
-  }
-//購入確定  purchasesに情報を登録、
-  public function purchase(Request $request)
-  {
-    $id=$request->session('user')->get('id');
-    $purchase= new Purchase;
-    $purchase->customer_id=$id;
-    $purchase->save();
-    //今回購入したデータのみ抽出
-    $item = Purchase::orderBy('id', 'desc')->where('customer_id',$id)->first();
-    //カートから商品一つ一つをdetailに登録
-    $purchase_detail = new Purchase_detail;
-    $products=$request->session('products')->get('cart');
-    foreach($products as $product){
-      $data=['purchase_id'=>$item->id,'product_id'=>$product[0],'count'=>$product[3]];
-      $purchase_detail->insert($data);
-    }
-    //購入確定画面として再度商品を表示する（purchase_detail＝セッションカートの中身）
-    $purchase_detail =Purchase_detail::where('purchase_id',$item->id)->where('updated_at',$item->updated_at)->get();
-    $name=$request->session('user')->get('name');
-    $address=Customer::find($id)->address;
-    $param=['product'=>$purchase_detail,'name'=>$name,'address'=>$address];
-    return view('product.purchase',$param);
-  }
-//購入完了後の偏移
-  public function exit(Request $request)
-  {
-    $request->session('products')->forget('cart');
-    $sort =$request->sort;
-    $name =$request->session('user')->get('name');
-    $items = Product::orderBy($sort,'asc')->Paginate(8);
-    $param = ['items'=>$items,'sort'=>$sort,'name'=>$name];
-    return view('product.index',$param);
-  }
-  public function history(Request $request)
-  {
-    $name =$request->session('user')->get('name');
-    $id =$request->session('user')->get('id');
-    $items =Purchase_detail::with('product')->get();
-    $itemm =Purchase::where('customer_id',$id)->Paginate(3);
-    return view('product.purchase_detail',['items'=>$items,'itemm'=>$itemm,'name'=>$name]);
-  }
-
 }

@@ -11,7 +11,7 @@ class Purchase_detail extends Model
   public function getData()
   {
     return '購入詳細' .'('.$this->purchase_id . '商品番号' .$this->product_id .
-     '数量' . $this->count.')';
+     '価格' . $this->product->price.')';
   }
 
   public function product()

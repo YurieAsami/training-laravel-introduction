@@ -42,6 +42,17 @@
     <div class="container-fluid limited">
       <div class="row">
         <div class="col text-center">
+          @isset($msg)
+            <p>{{$msg}}</p>
+          @endisset
+          @if ($customer->id==NULL)
+            <div  align="center">
+            <a href="/test/login" method="post"><h2><button type="button" class="btn btn-outline-theme" >
+              ログインページはこちら</button></h2></a>
+            <a href="/test/register" method="post"><h2><button type="button" class="btn btn-outline-theme">
+              新規登録はこちら</button></h2></a>
+            </div>
+          @endif
           <div><i class="material-icons md-5">shopping_cart</i></div>
           <h1 class="font-weight-normal">Your shopping cart is currently empty</h1>
           <p>Add products to it. Check out our wide range of products!</p>

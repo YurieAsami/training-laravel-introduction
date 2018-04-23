@@ -39,8 +39,19 @@
       </div>
     </div>
 
+  @isset($msg)
+    <p>{{$msg}}</p>
+  @endisset
+  @if ($customer==NULL)
+    <div  align="center">
+    <a href="/test/login" method="post"><h2><button type="button" class="btn btn-outline-theme" >
+        ログインページはこちら</button></h2></a>
+    <a href="/test/register" method="post"><h2><button type="button" class="btn btn-outline-theme">
+        新規登録はこちら</button></h2></a>
+    </div>
     <div class="container-fluid limited mb-5">
       <div class="row">
+        @else
         <div class="col-lg-3 col-md-4 mb-4 mb-md-0">
           <div class="card user-card">
             <div class="card-body p-2 mb-3 mb-md-0 mb-xl-3">
@@ -112,6 +123,7 @@
             </ul>
           </nav>
         </div>
+      @endif
       </div>
     </div>
 

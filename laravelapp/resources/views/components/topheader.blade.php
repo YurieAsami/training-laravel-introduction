@@ -180,13 +180,6 @@
                   <a href="/test/address" class="dropdown-item">Addresses</a>
                   <a href="/test/wishlist" class="dropdown-item">Wishlist</a>
                   <a href="/test/password" class="dropdown-item">Change Password</a>
-                  <div class="dropdown-submenu">
-                    <a href="#" class="dropdown-item d-flex justify-content-between">Submenu <i class="material-icons md-1 mt-1">chevron_right</i></a>
-                    <div class="dropdown-menu animate">
-                      <a href="#" class="dropdown-item">Submenu1</a>
-                      <a href="#" class="dropdown-item">Submenu2</a>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
