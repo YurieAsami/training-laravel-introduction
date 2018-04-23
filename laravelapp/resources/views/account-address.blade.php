@@ -65,71 +65,35 @@
           </div>
         </div>
         <div class="col-lg-9 col-md-8">
-          <div class="title"><span>Billing Address</span><button class="btn btn-sm btn-outline-theme float-right"><i class="material-icons">mode_edit</i> Edit</button></div>
+          <form action="/test/address" method="post">
+            {{ csrf_field() }}
+            <input type="hidden" name='id' value="{{$customer->id}}">
+            <input type="hidden" name='name' value="{{$customer->name}}">
+            <input type="hidden" name='login' value="{{$customer->login}}">
+            <input type="hidden" name='password' value="{{$customer->password}}">
+            <input type="hidden" name='password_confirmation' value="{{$customer->password_confirmation}}">
+            <div class="title"><span>Billing Address</span>
+              <button class="btn btn-sm btn-outline-theme float-right"><i class="material-icons">mode_edit</i> 編集</button></div>
           <table class="table mb-3 table-sm">
             <tbody>
               <tr>
+                <td>
+                  <div class="form-group mb-1 mb-md-3">
+                    <label for="inputZip" class="mb-0 mb-md-2">Zip/Postal Code *</label>
+                    <input type="text" class="form-control" id="inputZip" name="zip" value="{{$customer->zip}}">
+                  </div>
+                </td>
+              </tr>
+              <tr>
                 <td class="border-top-0">
-                  <strong>Address</strong>
-                  <div>{{$customer->address}}Lorem ipsum dolor sit amet, consectetur adipisicing.</div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <strong>Country</strong>
-                  <div>{{$customer->country}}</div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <strong>Region / State</strong>
-                  <div>{{$customer->region}}</div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <strong>City</strong>
-                  <div>{{$customer->city}}</div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <strong>ZIP Code</strong>
-                  <div>{{$customer->zip}}</div>
+                  <div class="form-group mb-1 mb-md-3">
+                    <label for="inputAddress" class="mb-0 mb-md-2">Address *</label>
+                    <input type="text" class="form-control" id="inputAddress" name="address" value="{{$customer->address}}">
+                  </div>
                 </td>
               </tr>
             </tbody>
           </table>
-          <div class="title"><span>Shipping Address</span></div>
-          <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="shippingAddr" checked="checked">
-            <label class="custom-control-label" for="shippingAddr">
-              <span role="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Same as Billing Address</span>
-            </label>
-          </div>
-          <form class="mt-2 collapse" id="collapseExample">
-            <div class="form-group mb-1 mb-md-3">
-              <label for="inputAddress" class="mb-0 mb-md-2">Address *</label>
-              <input type="text" class="form-control" id="inputAddress">
-            </div>
-            <div class="form-row">
-              <div class="form-group mb-1 mb-md-3 col-md-6">
-                <label for="inputCountry" class="mb-0 mb-md-2">Country *</label>
-                <input type="text" class="form-control" id="inputCountry">
-              </div>
-              <div class="form-group mb-1 mb-md-3 col-md-6">
-                <label for="inputZip" class="mb-0 mb-md-2">Zip/Postal Code *</label>
-                <input type="text" class="form-control" id="inputZip">
-              </div>
-              <div class="form-group mb-1 mb-md-3 col-md-6">
-                <label for="inputCity" class="mb-0 mb-md-2">City *</label>
-                <input type="text" class="form-control" id="inputCity">
-              </div>
-              <div class="form-group mb-1 mb-md-3 col-md-6">
-                <label for="inputRegion" class="mb-0 mb-md-2">Region *</label>
-                <input type="text" class="form-control" id="inputRegion">
-              </div>
-            </div>
             <button type="submit" class="btn btn-theme my-1"><i class="material-icons">save</i> Save</button>
           </form>
         </div>

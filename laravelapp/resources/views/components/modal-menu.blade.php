@@ -15,58 +15,32 @@
           <a href="/test/index" class="list-group-item list-group-item-action">HOME</a>
           <div class="list-group-collapse list-submenu">
             <a class="list-group-item list-group-item-action" href="#list-submenu-1" data-toggle="collapse" aria-expanded="false" aria-controls="list-submenu-1">
-              SHOP
+              お取り扱い商品
             </a>
             <div class="collapse" id="list-submenu-1" data-parent="#list-menu">
               <div class="list-group">
-                <a class="list-group-item list-group-item-action" href="/test/grid">Shop Grid</a>
-                <a class="list-group-item list-group-item-action" href="/test/list">Shop List</a>
-                <a class="list-group-item list-group-item-action" href="/test/cart">Shopping Cart</a>
-                <a class="list-group-item list-group-item-action" href="/test/checkout">Checkout</a>
-                <a class="list-group-item list-group-item-action" href="/test/detail">Single Product</a>
-              </div>
-            </div>
-          </div>
-          <div class="list-group-collapse list-submenu">
-            <a class="list-group-item list-group-item-action" href="#list-submenu-2" data-toggle="collapse" aria-expanded="false" aria-controls="list-submenu-2">
-              BLOG
-            </a>
-            <div class="collapse" id="list-submenu-2" data-parent="#list-menu">
-              <div class="list-group">
-                <a class="list-group-item list-group-item-action" href="/test/blog">Blog Grid</a>
-                <a class="list-group-item list-group-item-action" href="/test/blog-list">Blog List</a>
-                <a class="list-group-item list-group-item-action" href="/test/blog-detail">Blog Detail</a>
-              </div>
-            </div>
-          </div>
-          <div class="list-group-collapse list-submenu">
-            <a class="list-group-item list-group-item-action" href="#list-submenu-3" data-toggle="collapse" aria-expanded="false" aria-controls="list-submenu-3">
-              PAGES
-            </a>
-            <div class="collapse" id="list-submenu-3" data-parent="#list-menu">
-              <div class="list-group">
-                <a class="list-group-item list-group-item-action" href="/test/about">About Us</a>
-                <a class="list-group-item list-group-item-action" href="/test/compare">Compare</a>
-                <a class="list-group-item list-group-item-action" href="/test/contact">Contact Us</a>
-                <a class="list-group-item list-group-item-action" href="/test/cart-empty">Empty Shopping Cart</a>
-                <a class="list-group-item list-group-item-action" href="/test/404">Error 404</a>
-                <a class="list-group-item list-group-item-action" href="/test/faq">FAQ</a>
-                <a class="list-group-item list-group-item-action" href="/test/login">Login</a>
-                <a class="list-group-item list-group-item-action" href="/test/register">Register</a>
+                <a class="list-group-item list-group-item-action" href="/test/grid">商品一覧</a>
+                <a class="list-group-item list-group-item-action" href="/test/cart">ショッピングカート</a>
+                <a class="list-group-item list-group-item-action" href="/test/checkout">注文</a>
+                <a class="list-group-item list-group-item-action" href="/test/order">購入履歴</a>
               </div>
             </div>
           </div>
           <div class="list-group-collapse list-submenu">
             <a class="list-group-item list-group-item-action" href="#list-submenu-4" data-toggle="collapse" aria-expanded="false" aria-controls="list-submenu-4">
-              MY ACCOUNT
+              アカウント
             </a>
             <div class="collapse" id="list-submenu-4" data-parent="#list-menu">
               <div class="list-group">
-                <a class="list-group-item list-group-item-action" href="/test/profile">Profile</a>
-                <a class="list-group-item list-group-item-action" href="/test/order">Orders</a>
-                <a class="list-group-item list-group-item-action" href="/test/address">Addresses</a>
-                <a class="list-group-item list-group-item-action" href="/test/wishlist">Wishlist</a>
-                <a class="list-group-item list-group-item-action" href="/test/password">Change Password</a>
+                <a class="list-group-item list-group-item-action" href="/test/profile">プロフィール</a>
+                <a class="list-group-item list-group-item-action" href="/test/cart">ショッピングカート</a>
+                <a class="list-group-item list-group-item-action" href="/test/order">注文履歴</a>
+                <a class="list-group-item list-group-item-action" href="/test/wishlist">お気に入りリスト</a>
+                <a class="list-group-item list-group-item-action" href="/test/address">住所変更</a>
+                <a class="list-group-item list-group-item-action" href="/test/password">パスワード変更</a>
+                <a class="list-group-item list-group-item-action" href="/test/login">ログイン</a>
+                <a href="/test/logout" class="list-group-item list-group-item-action">ログアウト</a>
+                <a class="list-group-item list-group-item-action" href="/test/register">会員登録</a>
               </div>
             </div>
           </div>

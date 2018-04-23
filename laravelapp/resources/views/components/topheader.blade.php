@@ -9,29 +9,6 @@
           </nav>
           <nav class="nav ml-auto">
             <a class="nav-link d-none d-sm-block" href="/test/faq"><i class="material-icons">help_outline</i> Help</a>
-            <a class="nav-link d-none d-sm-block" href="/test/order"><i class="material-icons">list</i> Track Order</a>
-            <select name="lang" id="lang" hidden="hidden">
-              <option value="en">English</option>
-              <option value="fr">French</option>
-            </select>
-            <div class="nav-item dropdown dropdown-lang">
-              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"></a>
-              <div class="dropdown-menu animate" data-select="lang">
-                <button class="dropdown-item" type="button" data-value="en"><img src="/img/lang_en.svg" alt="English"> English</button>
-                <button class="dropdown-item" type="button" data-value="fr"><img src="/img/lang_fr.svg" alt="French"> French</button>
-              </div>
-            </div>
-            <select name="currency" id="currency" hidden="hidden">
-              <option value="usd">USD</option>
-              <option value="eur">EUR</option>
-            </select>
-            <div class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"></a>
-              <div class="dropdown-menu dropdown-menu-right animate" data-select="currency">
-                <button class="dropdown-item" type="button" data-value="usd">USD</button>
-                <button class="dropdown-item" type="button" data-value="eur">EUR</button>
-              </div>
-            </div>
             <a class="nav-link" href="#" data-toggle="modal" data-target="#loginModal"><i class="material-icons">person_outline</i> Sign In</a>
           </nav>
         </div>
@@ -59,30 +36,26 @@
         <a href="" class="text-dark" data-toggle="modal" data-target="#menuModal"><i class="material-icons md-2">menu</i></a>
       </div>
       <div class="col-4 col-md-auto d-flex align-items-center justify-content-center justify-content-md-start">
-        <a href="/test/index" class="logo">
-          <img src="/img/logo.svg" alt="Mimity" class="d-none d-md-block">
-          <img src="/img/logo-text.svg" alt="Mimity" class="d-block d-md-none">
-        </a>
+        <h3>豆販売　あさみ</h3>
       </div>
       <div class="col d-none d-md-block position-static">
         <nav class="navbar nav main-nav justify-content-center justify-content-md-start position-static p-0">
-          <a class="nav-link" href="/index">HOME</a>
+          <a class="nav-link" href="/index">ホーム</a>
           <div class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle no-caret" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">SHOP</a>
+            <a href="#" class="nav-link dropdown-toggle no-caret" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">お取り扱い商品</a>
             <div class="dropdown-menu animate">
-              <a class="dropdown-item" href="/test/grid">Shop Grid</a>
-              <a class="dropdown-item" href="/test/list">Shop List</a>
-              <a class="dropdown-item" href="/test/cart">Shopping Cart</a>
-              <a class="dropdown-item" href="/test/checkout">Checkout</a>
-              <a class="dropdown-item" href="/test/detail">Single Product</a>
+              <a class="dropdown-item" href="/test/grid">商品一覧</a>
+              <a class="dropdown-item" href="/test/cart">ショッピングカート</a>
+              <a class="dropdown-item" href="/test/checkout">注文</a>
+              <a class="dropdown-item" href="/test/order">購入履歴</a>
             </div>
           </div>
-          <div class="nav-item dropdown position-static">
+          <!-- <div class="nav-item dropdown position-static">
             <a href="#" class="nav-link dropdown-toggle no-caret" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">MEGA MENU</a>
             <div class="dropdown-menu dropdown-menu-mega animate">
               <form> <!-- added <form> tags to prevent dropdown closed when clicked inside dropdown-menu -->
                 {{ csrf_field() }}
-                <div class="row">
+              <!--<div class="row">
                   <div class="col-4 col-lg-3">
                     <h6 class="p-2 font-weight-bold border border-top-0 border-right-0 border-left-0">Top Categories</h6>
                     <div class="list-group list-group-no-border list-group-sm">
@@ -153,41 +126,24 @@
                 </div>
               </form>
             </div>
-          </div>
+          </div>-->
+
           <div class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle no-caret" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">BLOG</a>
+            <a href="#" class="nav-link dropdown-toggle no-caret" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">アカウント</a>
             <div class="dropdown-menu animate">
-              <a class="dropdown-item" href="/test/blog">Blog Grid</a>
-              <a class="dropdown-item" href="/test/blog-list">Blog List</a>
-              <a class="dropdown-item" href="/test/blog-detail">Blog Detail</a>
+              <a href="/test/profile" class="dropdown-item">プロフィール</a>
+              <a class="dropdown-item" href="/test/cart">ショッピングカート</a>
+              <a href="/test/order" class="dropdown-item">注文履歴</a>
+              <a href="/test/wishlist" class="dropdown-item">お気に入りリスト</a>
+              <a href="/test/address" class="dropdown-item">住所変更</a>
+              <a href="/test/password" class="dropdown-item">パスワード変更</a>
+              <a class="dropdown-item" href="/test/login">ログイン</a>
+              <a href="/test/logout" class="dropdown-item">ログアウト</a>
+              <a class="dropdown-item" href="/test/register">会員登録</a>
             </div>
           </div>
-          <div class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle no-caret" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">PAGES</a>
-            <div class="dropdown-menu animate">
-              <a class="dropdown-item" href="/test/about">About Us</a>
-              <a class="dropdown-item" href="/test/compare">Compare</a>
-              <a class="dropdown-item" href="/test/contact">Contact Us</a>
-              <a class="dropdown-item" href="/test/faq">FAQ</a>
-              <a class="dropdown-item" href="/test/cart">Shopping Cart</a>
-              <!--<a class="dropdown-item" href="/test/404">Error 404</a>-->
-              <a class="dropdown-item" href="/test/login">Login</a>
-              <a class="dropdown-item" href="/test/register">Register</a>
-              <div class="dropdown-submenu">
-                <a href="#" class="dropdown-item d-flex justify-content-between">My Account <i class="material-icons md-1 mt-1">chevron_right</i></a>
-                <div class="dropdown-menu animate">
-                  <a href="/test/profile" class="dropdown-item">Profile</a>
-                  <a href="/test/order" class="dropdown-item">Orders</a>
-                  <a href="/test/address" class="dropdown-item">Addresses</a>
-                  <a href="/test/wishlist" class="dropdown-item">Wishlist</a>
-                  <a href="/test/password" class="dropdown-item">Change Password</a>
-                  <a href="/test/logout" class="dropdown-item">Logout</a>
-                </div>
-              </div>
-            </div>
           </div>
         </nav>
-      </div>
       <div class="col-4 col-md-auto d-flex align-items-center justify-content-end pl-0">
         <nav class="nav nav-counter">
           <a href="#" class="nav-link toggle-search"><img src="/img/search.svg" alt="search"></a>
@@ -195,7 +151,6 @@
           <a href="/test/cart" class="nav-link counter" data-toggle="modal" data-target="#cartModal"><span>{{$cart}}</span><img src="/img/bag.svg" alt="bag"></a>
         </nav>
       </div>
-
     </div>
   </div>
 </div>

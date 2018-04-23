@@ -15,7 +15,7 @@ class ShoppingController extends Controller
 {
    public function testgrid(Request $request)
    {
-     $products = Product::Paginate(8);
+     $products = Product::Paginate(6);
      $star=7;
      $star_quantity=56;
      $pagename='豆類';
@@ -233,7 +233,7 @@ class ShoppingController extends Controller
     $carts = Cart::where('customer_id',$id)->get();
     if ($id==NULL) {
       $msg="※ユーザー情報がありません";
-      return view('cart-empty',['msg'=>$msg,'other_products'=>$other_products,'pagename'=>$pagename,'page'=>'cart','wish'=>$wish,'cart'=>NULL,'carts'=>NULL]);
+      return view('cart-empty',['customer'=>$customer,'msg'=>$msg,'other_products'=>$other_products,'pagename'=>$pagename,'page'=>'cart','wish'=>$wish,'cart'=>NULL,'carts'=>NULL]);
     }elseif(NULL!==$request->cart){
       $msg="この商品はすでに登録済みです";
       $pro=Cart::where('product_id',$request->cart)->where('customer_id',$id)->get();
@@ -410,15 +410,27 @@ class ShoppingController extends Controller
   public function testaddress(Request $request)
   {
     $id=$request->session('user')->get('id');
-    $product = Product::where('id','1')->first();
-    $products = Product::Paginate(4);
     $customer = Customer::where('id',$id)->first();
-    $pagename='single';
+    $pagename='my address';
     $wish=Favorite::where('customer_id',$id)->count();
     $cart=Cart::where('customer_id',$id)->count();
     $carts=Cart::where('customer_id',$id)->get();
-    $other_products=Product::Paginate(8);
-     return view('account-address',['product'=>$product,'products'=>$products,'pagename'=>$pagename,'page'=>'index','wish'=>$wish,'cart'=>$cart,'customer'=>$customer,'carts'=>$carts]);
+     return view('account-address',['pagename'=>$pagename,'page'=>'index','wish'=>$wish,'cart'=>$cart,'customer'=>$customer,'carts'=>$carts]);
+  }
+  public function testaddressedit(Request $request)
+  {
+    $customer = Customer::find($request->id);
+    $form = $request->all();
+    unset($form['_token']);
+    $customer->fill($form)->save();
+    $msg = '変更しました';
+    $id=$request->session('user')->get('id');
+    $customer = Customer::where('id',$id)->first();
+    $pagename='my address';
+    $wish=Favorite::where('customer_id',$id)->count();
+    $cart=Cart::where('customer_id',$id)->count();
+    $carts=Cart::where('customer_id',$id)->get();
+     return view('account-address',['msg'=>$msg,'pagename'=>$pagename,'page'=>'index','wish'=>$wish,'cart'=>$cart,'customer'=>$customer,'carts'=>$carts]);
   }
   public function testabout(Request $request)
   {

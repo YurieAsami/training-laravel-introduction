@@ -4,60 +4,23 @@
   <div class="container-fluid limited">
     <div class="row">
       <div class="col-6 col-lg-3">
-        <h6>Shop</h6>
         <div class="list-group list-group-flush">
           <a href="/test/contact" class="list-group-item list-group-item-action">Help / Support</a>
           <a href="/test/about" class="list-group-item list-group-item-action">About Us</a>
           <a href="/test/faq" class="list-group-item list-group-item-action">FAQ</a>
-          <a href="#" class="list-group-item list-group-item-action">Coupons</a>
         </div>
       </div>
-      <div class="col-6 col-lg-3">
-        <h6>Our Policies</h6>
+      <!--<div class="col-6 col-lg-3">
+        <h6>会社概要</h6>
         <div class="list-group list-group-flush">
           <a href="#" class="list-group-item list-group-item-action">Terms &amp; Conditions</a>
           <a href="#" class="list-group-item list-group-item-action">Privacy Policy</a>
           <a href="#" class="list-group-item list-group-item-action">Payment Method</a>
           <a href="#" class="list-group-item list-group-item-action">Shipping Method</a>
         </div>
-      </div>
-      <div class="col-sm-6 col-lg-3">
-        <h6>Download The App</h6>
-        <div>
-          <a href="#">
-            <div class="media">
-              <img src="/img/apple.svg" alt="Apple Logo" height="30">
-              <div class="media-body">
-                <small>Download on the</small>
-                <div>App Store</div>
-              </div>
-            </div>
-          </a>
-        </div>
-        <div>
-          <a href="#">
-            <div class="media">
-              <img src="/img/google-play.svg" alt="Google Play Logo" height="30">
-              <div class="media-body">
-                <small>Get it on</small>
-                <div>Google Play</div>
-              </div>
-            </div>
-          </a>
-        </div>
-        <div>
-          <a href="#">
-            <div class="media">
-              <img src="/img/windows.svg" alt="Windows Logo" height="30">
-              <div class="media-body">
-                <small>Get it from</small>
-                <div>Microsoft Store</div>
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
-      <div class="col-sm-6 col-lg-3">
+      </div>-->
+
+    <!--  <div class="col-sm-6 col-lg-3">
         <h6>Stay Connected</h6>
         <p>Subscribe to our Newsletter to receive early discount offers, latest news, sales and promo information.</p>
         <div class="input-group">
@@ -74,8 +37,20 @@
           <li><a href="#"><svg viewBox="0 0 24 24"><path d="M6.18,15.64A2.18,2.18 0 0,1 8.36,17.82C8.36,19 7.38,20 6.18,20C5,20 4,19 4,17.82A2.18,2.18 0 0,1 6.18,15.64M4,4.44A15.56,15.56 0 0,1 19.56,20H16.73A12.73,12.73 0 0,0 4,7.27V4.44M4,10.1A9.9,9.9 0 0,1 13.9,20H11.07A7.07,7.07 0 0,0 4,12.93V10.1Z" /></svg></a></li>
         </ul>
       </div>
+    </div>-->
+
+    <div class="col-6 col-lg-3">
+    <address>
+      <strong>豆販売サイトあさみ</strong><br>
+      新宿区西新宿<br>
+      <abbr title="Phone">P:</abbr> 03-1234-5678
+    </address>
+    <address>
+      <a href="y.asami@fosbury.co.jp">y.asami@fosbury.co.jp</a>
+    </address>
     </div>
   </div>
+</div>
 </div>
 <!-- /Footer -->
 <!-- Copyright -->

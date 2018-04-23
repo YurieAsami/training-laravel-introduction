@@ -29,10 +29,10 @@
 
 @include('components.topheader',['page'=>'Shop Grid'])
 
-    <div class="container-fluid limited">
+    <div class="container-fluid">
       <div class="row">
 
-  @include('components.filer-widget')
+  <!--include('components.filer-widget')-->
 
         <div class="col-lg-9 col-md-8">
           <div class="title"><span>{{$pagename}}</span></div>
@@ -57,7 +57,7 @@
           </div>
           <!-- /Sorting Bar -->
 
-          <div class="row compact">
+          <div class="row">
 
   @foreach ($products as $product)
             <div class="col-6 col-sm-4 col-md-6 col-lg-4 col-xl-3">

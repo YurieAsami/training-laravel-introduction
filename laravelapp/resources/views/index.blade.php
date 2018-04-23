@@ -32,17 +32,17 @@
     @isset($name)
     ようこそ　{{$name}}さん
     @endisset
-@include('components.topheader',['page'=>'HOME'])
+@include('components.topheader')
 @include('components.home-slider')
 
     <div class="container-fluid limited mt-5">
 
 @include('components.service-block')
-@include('components.categories')
-@include('components.flash-sale',['products'=>$products])
+<!--include('components.categories')
+    include('components.flash-sale',['products'=>$products])-->
 
       <!-- Top Brands -->
-      <div class="row mb-5">
+    <!--  <div class="row mb-5">
         <div class="col-12"><div class="title text-center"><span>Top Brands You'll Love</span></div></div>
         <div class="col-12">
           <div class="swiper-nav">
@@ -51,20 +51,20 @@
           </div>
           <div class="swiper-container swiper-container-have-hover" id="brand-slider">
             <div class="swiper-wrapper">
-              @php
+              php
                 $brands=array('1','2','3','4','5','1','2','3');
-              @endphp
-              @foreach ($brands as $brand)
+              endphp
+              foreach ($brands as $brand)
               <div class="card card-brand hover-style swiper-slide">
                 <div class="card-body">
-                  <a href="/test/grid"><img class="card-img-top" src="/img/brand/brand{{$brand}}.svg" alt="Example Brand"></a>
+                  <a href="/test/grid"><img class="card-img-top" src="/img/brand/brand{$brand}}.svg" alt="Example Brand"></a>
                 </div>
               </div>
-              @endforeach
+              endforeach
             </div>
           </div>
         </div>
-      </div>
+      </div>-->
       <!-- /Top Brands -->
 
       <!-- New In -->
@@ -97,18 +97,12 @@
                   <div class="action">
                     <div class="btn-group btn-group-sm" role="group" aria-label="Action">
                       <button class="btn btn-outline-theme show-quickview"><i class="material-icons">zoom_in</i></button>
-                      <button class="btn btn-theme">ADD TO CART</button>
-                      <button class="btn btn-outline-theme"><i class="material-icons">favorite_border</i></button>
-                    </div>
-                  </div>
-                  <div class="small-action d-block d-md-none">
-                    <div class="btn-group dropup">
-                      <span role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&#10247;</span>
-                      <div class="dropdown-menu dropdown-menu-right fadeIn">
-                        <a class="dropdown-item" href="#"><i class="material-icons">add_shopping_cart</i> BUY</a>
-                        <a class="dropdown-item" href="#"><i class="material-icons">favorite_border</i> Wishlist</a>
-                        <a class="dropdown-item" href="#"><i class="material-icons">compare_arrows</i> Compare</a>
-                      </div>
+                      <form action="/test/cart" method="post">
+                        {{ csrf_field() }}
+                      <button class="btn btn-theme" name="cart" vakue={{$product->id}}>ADD TO CART</button></form>
+                      <form action="/test/wishlist" method="post">
+                        {{ csrf_field() }}
+                      <button class="btn btn-outline-theme" name="wish" value={{$product->id}}><i class="material-icons">favorite_border</i></button></form>
                     </div>
                   </div>
                 </div>
@@ -145,12 +139,12 @@
         <!-- /Recent Reviews -->
 
         <!-- Explore Store -->
-        <div class="col-md-7 col-lg-9">
+      <!--  <div class="col-md-7 col-lg-9">
           <div class="title"><span>Explore Store</span></div>
           <div class="row compact">
-            @php
+            php
             $mencates=['0'=>['Clothing'=>'Polos & Tees','Casual Shirts','Formal Shirts','More >>'],'1'=>['Footwear'=>'Sports Shoes','Sneakers','Formal Shoes','More >>'],'2'=>'Accessories','3'=>'Bags'];
-            @endphp
+            endphp
             <div class="col-sm-6 col-md-6 col-lg-4 mb-3">
               <div class="card">
                 <img class="card-img-top" src="/img/product/men1.jpg" alt="Card image cap">
@@ -158,31 +152,31 @@
                   <h5 class="card-title mb-0">MEN</h5>
                 </div>
                 <div class="list-group list-group-flush list-group-collapse list-group-sm" id="list-group-men" data-children=".sub-men">
-                  @foreach ($mencates as $mencate)
-                    @if(is_array($mencate))
+                  foreach ($mencates as $mencate)
+                    if(is_array($mencate))
                     <div class="list-group-collapse sub-men">
-                    <a class="list-group-item list-group-item-action" href="#sub-men{{key($mencate)}}" data-toggle="collapse" aria-expanded="false" aria-controls="sub-men{{key($mencate)}}">{{key($mencate)}}</a>
-                    <div class="collapse" id="sub-men{{key($mencate)}}" data-parent="#list-group-men">
+                    <a class="list-group-item list-group-item-action" href="#sub-men{key($mencate)}}" data-toggle="collapse" aria-expanded="false" aria-controls="sub-men{key($mencate)}}">{key($mencate)}}</a>
+                    <div class="collapse" id="sub-men{key($mencate)}}" data-parent="#list-group-men">
                       <div class="list-group">
-                       @foreach ($mencate as $value)
-                        <a href="/test/grid" class="list-group-item list-group-item-action">{{$value}}</a>
-                       @endforeach
+                       foreach ($mencate as $value)
+                        <a href="/test/grid" class="list-group-item list-group-item-action">{$value}}</a>
+                       endforeach
                       </div>
                     </div>
                     </div>
-                    @else
-                  <a href="/test/grid" class="list-group-item list-group-item-action">{{$mencate}}</a>
-                    @endif
-                  @endforeach
+                    else
+                  <a href="/test/grid" class="list-group-item list-group-item-action">{$mencate}}</a>
+                    endif
+                  endforeach
                 </div>
                 <div class="card-body text-center p-1">
                   <a href="#" class="btn btn-block btn-theme btn-sm">SHOP ALL</a>
                 </div>
               </div>
             </div>
-            @php
+            php
             $womcates=['0'=>['Clothing'=>'Tops, Tees & Shirts','Dresses & Jumpsuits','Leggings & Jeggings','More >>'],'1'=>['Footwear'=>'Handbags','Sling Bags','Wallets','More >>'],'2'=>'Accessories','3'=>'Jewellery'];
-            @endphp
+            endphp
             <div class="col-sm-6 col-md-6 col-lg-4 mb-3">
               <div class="card">
                 <img class="card-img-top" src="/img/product/women1.jpg" alt="Card image cap">
@@ -190,31 +184,31 @@
                   <h5 class="card-title mb-0">WOMEN</h5>
                 </div>
                 <div class="list-group list-group-flush list-group-collapse list-group-sm" id="list-group-women" data-children=".sub-women">
-                  @foreach ($womcates as $womcate)
-                    @if(is_array($womcate))
+                  foreach ($womcates as $womcate)
+                   if(is_array($womcate))
                     <div class="list-group-collapse sub-women">
-                    <a class="list-group-item list-group-item-action" href="#sub-women{{key($womcate)}}" data-toggle="collapse" aria-expanded="false" aria-controls="sub-women{{key($womcate)}}">{{key($womcate)}}</a>
-                    <div class="collapse" id="sub-women{{key($womcate)}}" data-parent="#list-group-women">
+                    <a class="list-group-item list-group-item-action" href="#sub-women{key($womcate)}}" data-toggle="collapse" aria-expanded="false" aria-controls="sub-women{key($womcate)}}">{key($womcate)}}</a>
+                    <div class="collapse" id="sub-women{key($womcate)}}" data-parent="#list-group-women">
                       <div class="list-group">
-                       @foreach ($womcate as $value)
-                        <a href="/test/grid" class="list-group-item list-group-item-action">{{$value}}</a>
-                       @endforeach
+                       foreach ($womcate as $value)
+                        <a href="/test/grid" class="list-group-item list-group-item-action">{$value}}</a>
+                       endforeach
                       </div>
                     </div>
                     </div>
-                    @else
-                  <a href="/test/grid" class="list-group-item list-group-item-action">{{$womcate}}</a>
-                    @endif
-                  @endforeach
+                    else
+                  <a href="/test/grid" class="list-group-item list-group-item-action">{$womcate}}</a>
+                    endif
+                  endforeach
                 </div>
                 <div class="card-body text-center p-1">
                   <a href="#" class="btn btn-block btn-theme btn-sm">SHOP ALL</a>
                 </div>
               </div>
             </div>
-            @php
+            php
             $kidscates=array('Boys Clothing','Girls Clothing','Accessories','Toys')
-          @endphp
+          endphp
             <div class="col-sm-6 col-md-6 col-lg-4 mb-3 d-none d-lg-block">
               <div class="card">
                 <img class="card-img-top" src="/img/product/kids1.jpg" alt="Card image cap">
@@ -222,9 +216,9 @@
                   <h5 class="card-title mb-0">KIDS</h5>
                 </div>
                 <div class="list-group list-group-flush list-group-sm">
-                  @foreach ($kidscates as $kidscate)
-                  <a href="/test/grid" class="list-group-item list-group-item-action">{{$kidscate}}</a>
-                  @endforeach
+                  foreach ($kidscates as $kidscate)
+                  <a href="/test/grid" class="list-group-item list-group-item-action">{$kidscate}}</a>
+                  endforeach
                 </div>
                 <div class="card-body text-center p-1">
                   <a href="#" class="btn btn-block btn-theme btn-sm">SHOP ALL</a>
@@ -232,7 +226,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div>-->
         <!-- ./Explore Store -->
 
       </div>

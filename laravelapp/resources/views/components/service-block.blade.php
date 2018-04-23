@@ -1,8 +1,8 @@
 @php
-$items[]=array('title'=>'local_shipping','icon'=>'FREE SHIPPING &AMP; RETURN','message'=>'Get free shipping for all orders $99 or more');
-$items[]=array('title'=>'refresh','icon'=>'MONEY BACK GUARANTEE','message'=>'Get the item you ordered, or your money back');
-$items[]=array('title'=>'security','icon'=>'100% SECURE PAYMENT','message'=>'Your transaction are secure with SSL Encryption');
-$items[]=array('title'=>'phone','icon'=>'ONLINE SUPPORT 24/7','message'=>'Chat with experts or have us call you right away');
+$items[]=array('title'=>'local_shipping','icon'=>'送料','message'=>'3000円以上で送料無料');
+//$items[]=array('title'=>'refresh','icon'=>'MONEY BACK GUARANTEE','message'=>'Get the item you ordered, or your money back');
+//$items[]=array('title'=>'security','icon'=>'100% SECURE PAYMENT','message'=>'Your transaction are secure with SSL Encryption');
+$items[]=array('title'=>'phone','icon'=>'お問い合わせ','message'=>'電話・メールにてサポートを行っています');
 @endphp
 
 <!-- Service Block -->
