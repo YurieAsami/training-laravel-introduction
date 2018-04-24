@@ -61,9 +61,9 @@
             <div class="swiper-wrapper">
             @foreach ($other_products as $product)
               <div class="card card-product swiper-slide">
-                <a href="/test/detail"><img class="card-img-top" src="/img/product/pro{{$product->id}}.jpg" alt="Card image cap"></a>
+                <a href="/test/detail?id={{$product->id}}"><img class="card-img-top" src="/img/product/pro{{$product->id}}.jpg" alt="Card image cap"></a>
                 <div class="card-body">
-                  <div class="card-title"><a href="/test/detail" title="Burberry The Plymouth Duffle Coat">{{$product->name}}</a></div>
+                  <div class="card-title"><a href="/test/detail?id={{$product->id}}" title="Burberry The Plymouth Duffle Coat">{{$product->name}}</a></div>
                   <ul class="card-text list-inline pr-2">
                     @if(isset($product->sale))
                       @php
@@ -78,7 +78,7 @@
                   </ul>
                   <div class="action">
                     <div class="btn-group btn-group-sm" role="group" aria-label="Action">
-                      <button class="btn btn-outline-theme show-quickview"><i class="material-icons">zoom_in</i></button>
+                      <!--<button class="btn btn-outline-theme show-quickview"><i class="material-icons">zoom_in</i></button>-->
                       <form action="/test/cart" method="post">
                           {{ csrf_field() }}
                       <button class="btn btn-theme" name="cart" value="{{$product->id}}">ADD TO CART</button></form>
@@ -104,7 +104,59 @@
           </div>        </div>
       </div>
     </div>
-
+    <div class="row my-5">
+      <div class="col-12"><div class="title"><span>他の商品はこちら</span></div></div>
+      <div class="col-12">
+        <div class="swiper-nav">
+          <div class="swiper-nav-prev" id="newInPrev"><i class="material-icons">keyboard_arrow_left</i></div>
+          <div class="swiper-nav-next" id="newInNext"><i class="material-icons">keyboard_arrow_right</i></div>
+        </div>
+        <div class="swiper-container swiper-container-have-hover" id="newIn-slider">
+          <div class="swiper-wrapper">
+            @foreach ($other_products as $product)
+              <form action="/test/cart" method="post">
+                {{ csrf_field() }}
+            <div class="card card-product swiper-slide">
+              <a href="/test/detail?id={{$product->id}}"><img class="card-img-top" src="/img/product/pro{{$product->id}}.jpg" alt="Card image cap"></a>
+              <div class="card-body">
+                <div class="card-title"><a href="/test/detail?id={{$product->id}}" title="{{$product->name}}">{{$product->name}}</a></div>
+                <ul class="card-text list-inline">
+                  @if(isset($product->sale))
+                    @php
+                      $prices=($product->price)*($product->sale)/100;
+                    @endphp
+                  <li class="list-inline-item"><span class="price">{{$prices}}円</span></li>
+                  <li class="list-inline-item"><del class="text-muted small">{{$product->price}}円</del></li>
+                  <li class="list-inline-item d-none d-sm-inline-block"><span class="badge badge-theme">{{$product->sale}}% OFF</span></li>
+                  @else
+                  <li class="list-inline-item"><span class="price">{{$product->price}}円</span></li>
+                  @endif
+                </ul>
+                <div class="action">
+                  <div class="btn-group btn-group-sm" role="group" aria-label="Action">
+                    <button class="btn btn-outline-theme show-quickview"><i class="material-icons">zoom_in</i></button>
+                    <button type="submit" class="btn btn-theme" name="cart" value={{$product->id}}>ADD TO CART</button></form>
+                    <form action="/test/wish" method="post">
+                      {{ csrf_field() }}
+                    <button type="submit" class="btn btn-theme" name="wish" value={{$product->id}}><i class="material-icons">favorite_border</i></button></form>
+                  </div>
+                </div>
+                <div class="small-action d-block d-md-none">
+                  <div class="btn-group dropup">
+                    <span role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&#10247;</span>
+                    <div class="dropdown-menu dropdown-menu-right fadeIn">
+                      <a class="dropdown-item" href="#"><i class="material-icons">add_shopping_cart</i> BUY</a>
+                      <a class="dropdown-item" href="#"><i class="material-icons">favorite_border</i> Wishlist</a>
+                      <a class="dropdown-item" href="#"><i class="material-icons">compare_arrows</i> Compare</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          @endforeach
+          </div>
+        </div>        </div>
+    </div>
     @include('components.modal-menu')
     @include('components.cart',['carts'=>$carts,'cart'=>$cart])
     @include('components.modal-login')

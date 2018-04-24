@@ -56,7 +56,7 @@
               <a href="/test/profile" class="list-group-item list-group-item-action"><i class="material-icons">person</i>プロフィール</a>
               <a href="/test/order" class="list-group-item list-group-item-action"><i class="material-icons">shopping_cart</i>注文履歴</a>
               <a href="/test/address" class="list-group-item list-group-item-action"><i class="material-icons">location_on</i>住所変更</a>
-              <a href="/test/wishlist" class="list-group-item list-group-item-action"><i class="material-icons">favorite</i>お気に入りリスト<span class="badge badge-secondary badge-pill float-right mt-1">3</span></a>
+              <a href="/test/wishlist" class="list-group-item list-group-item-action"><i class="material-icons">favorite</i>お気に入りリスト<span class="badge badge-secondary badge-pill float-right mt-1">{{$wish}}</span></a>
               <a href="/test/password" class="list-group-item list-group-item-action active"><i class="material-icons">vpn_key</i>パスワード変更</a>
               <a href="ind" class="list-group-item list-group-item-action d-none d-md-block"><i class="material-icons">exit_to_app</i>ログアウト</a>
             </div>

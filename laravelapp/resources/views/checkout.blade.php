@@ -26,122 +26,26 @@
   <body>
 
 @include('components.topheader',['page'=>'Checkout'])
-
     <div class="container-fluid limited mb-5">
       <div class="row">
-        <div class="col-sm-6 col-lg-4 mb-3">
-          <div class="title"><span><span class="bg-dark text-white rounded-circle px-2">1</span> ADDRESS</span></div>
-          <div class="form-group mb-1 mb-md-3">
-            <label for="inputName" class="mb-0 mb-md-2">Name *</label>
-            <input type="text" class="form-control" id="inputName">
+        <div class="col-md-6 col-lg-12">
+          <div class="title"><span>お届け先</span></div>
+          <div>
+            <label for="inputName" class="mb-0 mb-md-2">Name: </label>
+            {{$customer->name}}
           </div>
-          <div class="form-group mb-1 mb-md-3">
-            <label for="inputAddress" class="mb-0 mb-md-2">Address Line 1 *</label>
-            <input type="text" class="form-control" id="inputAddress">
+          <div>
+            <label for="inputAddress" class="mb-0 mb-md-2">Address: </label>
+            {{$customer->zip}}
+            {{$customer->address}}
           </div>
-          <div class="form-group mb-1 mb-md-3">
-            <label for="inputAddress2" class="mb-0 mb-md-2">Address Line 2 (optional)</label>
-            <input type="text" class="form-control" id="inputAddress2">
+          <div>
+            <label for="inputEmail" class="mb-0 mb-md-2">Email Address: </label>
+            {{$customer->email}}
           </div>
-          <div class="form-row">
-            <div class="form-group mb-1 mb-md-3 col-md-6">
-              <label for="inputCountry" class="mb-0 mb-md-2">Country *</label>
-              <input type="text" class="form-control" id="inputCountry">
-            </div>
-            <div class="form-group mb-1 mb-md-3 col-md-6">
-              <label for="inputZip" class="mb-0 mb-md-2">Zip/Postal Code *</label>
-              <input type="text" class="form-control" id="inputZip">
-            </div>
-            <div class="form-group mb-1 mb-md-3 col-md-6">
-              <label for="inputCity" class="mb-0 mb-md-2">City *</label>
-              <input type="text" class="form-control" id="inputCity">
-            </div>
-            <div class="form-group mb-1 mb-md-3 col-md-6">
-              <label for="inputRegion" class="mb-0 mb-md-2">Region *</label>
-              <input type="text" class="form-control" id="inputRegion">
-            </div>
-            <div class="form-group mb-1 mb-md-3 col-md-6">
-              <label for="inputPhone" class="mb-0 mb-md-2">Phone Number *</label>
-              <input type="text" class="form-control" id="inputPhone">
-            </div>
-            <div class="form-group mb-1 mb-md-3 col-md-6">
-              <label for="inputEmail" class="mb-0 mb-md-2">Email Address *</label>
-              <input type="email" class="form-control" id="inputEmail">
-            </div>
           </div>
-        </div>
-        <div class="col-sm-6 col-lg-4 mb-3">
-          <div class="title"><span><span class="bg-dark text-white rounded-circle px-2">2</span> SHIPPING</span></div>
-          <div class="mb-4">
-            <div class="custom-control custom-radio">
-              <input type="radio" id="shippingOption1" name="shipping-option" class="custom-control-input" checked="checked">
-              <label class="custom-control-label" for="shippingOption1">Standard Delivery</label>
-              <span class="float-right font-weight-bold">FREE</span>
-            </div>
-            <div class="ml-4 mb-2 small">(3-7 business days)</div>
-            <div class="custom-control custom-radio">
-              <input type="radio" id="shippingOption2" name="shipping-option" class="custom-control-input">
-              <label class="custom-control-label" for="shippingOption2">Express Delivery</label>
-              <span class="float-right font-weight-bold">$10.00</span>
-            </div>
-            <div class="ml-4 mb-2 small">(2-4 business days)</div>
-            <div class="custom-control custom-radio">
-              <input type="radio" id="shippingOption3" name="shipping-option" class="custom-control-input">
-              <label class="custom-control-label" for="shippingOption3">Next Business day</label>
-              <span class="float-right font-weight-bold">$20.00</span>
-            </div>
-          </div>
-          <div class="title"><span><span class="bg-dark text-white rounded-circle px-2">3</span> PAYMENT METHOD</span></div>
-          <p class="mb-1">BILLING ADDRESS :</p>
-          <div class="custom-control custom-checkbox mb-3">
-            <input type="checkbox" class="custom-control-input" id="billingAddress" checked="checked">
-            <label class="custom-control-label" for="billingAddress">Same as shipping address</label>
-          </div>
-          <div class="custom-control custom-radio">
-            <input type="radio" id="paymentMethod1" name="payment-method" class="custom-control-input" checked="checked">
-            <label class="custom-control-label" for="paymentMethod1">Credit card</label>
-          </div>
-          <div class="custom-control custom-radio">
-            <input type="radio" id="paymentMethod2" name="payment-method" class="custom-control-input">
-            <label class="custom-control-label" for="paymentMethod2">Debit card</label>
-          </div>
-          <div class="custom-control custom-radio">
-            <input type="radio" id="paymentMethod3" name="payment-method" class="custom-control-input">
-            <label class="custom-control-label" for="paymentMethod3">Net banking</label>
-          </div>
-          <div class="bg-light p-3 rounded">
-            <div class="form-group mb-1">
-              <label class="mb-0" for="inputCard">Card Number</label>
-              <input type="text" class="form-control form-control-sm" id="inputCard">
-            </div>
-            <div class="form-group mb-1">
-              <label class="mb-0" for="inputFullname">Full name</label>
-              <input type="text" class="form-control form-control-sm" id="inputFullname">
-            </div>
-            <div class="form-row">
-              <div class="form-group mb-1 col-md-6">
-                <label class="mb-0" for="inputExpiry">Expiry date</label>
-                <input type="text" class="form-control form-control-sm" id="inputExpiry">
-              </div>
-              <div class="form-group mb-1 col-md-6">
-                <label class="mb-0" for="inputCvv">CVV code</label>
-                <input type="password" class="form-control form-control-sm" id="inputCvv">
-              </div>
-            </div>
-          </div>
-            <div class="mt-1">
-              <img src="/img/payment-1.png" alt="payment">
-              <img src="/img/payment-2.png" alt="payment">
-              <img src="/img/payment-3.png" alt="payment">
-              <img src="/img/payment-4.png" alt="payment">
-              <img src="/img/payment-5.png" alt="payment">
-            </div>
-        </div>
-        <div class="col-lg-4">
-          <div class="row">
-
             <div class="col-md-6 col-lg-12">
-              <div class="title"><span>ORDER SUMMARY</span></div>
+              <div class="title"><span>購入確認</span></div>
               @php
               $comtotal=0;
               $total=0;
@@ -151,70 +55,73 @@
                   @php
                     $compare=0;
                     $subtotal=0;
-                    $price=$product->price;
+                    $subtotals=0;
                   @endphp
                   <div class="media mb-2 border-bottom">
                     <div class="media-body">
-                      <a href="/test/detail">{{$product->name}}</a>
-                    <div class="small text-muted">Size: {{$product->size}} <span class="mx-2">|</span> Color: {{$product->color}}</div>
-                      @if(isset($product->sale))
+                      <a href="/test/detail">{{$product->product->name}}</a>
+                      @if(isset($product->product->sale))
                         @php
-                          $compare=($product->price)*($product->sale)/100;
-                          $prices=($product->price)-$compare;
-                          $subtotal=$prices*1;
-                          $subtotals=$price*1;
+                          $compare=($product->product->price)*($product->product->sale);
+                          $prices=($product->product->price)-$compare;
+                          $subtotals=$prices*($product->count);
+                          $subtotal=($product->product->price)*($product->count);
                           $comtotal+=$compare;
-                          $total+=$subtotals;
+                          $total+=$subtotal;
                         @endphp
                       <div class="small text-muted">Price: ${{$prices}}
                       @else
                         @php
-                          $subtotal=$price*1;
+                          $subtotal=($product->product->price)*($product->count);
                           $total+=$subtotal;
+                          $subtotals=+$subtotal;
                         @endphp
-                        <div class="small text-muted">Price: ${{$price}}
+                        <div class="small text-muted">金額: {{$product->product->price}}円
                       @endif
-                      <span class="mx-2">|</span> Qty: 1 <span class="mx-2">|</span> Subtotal: {{$subtotal}}</div>
+                      <span class="mx-2">|</span> 数量: {{$product->count}}<span class="mx-2">|</span> 小計: {{$subtotals}}</div>
                     </div>
                 </div>
                 @endforeach
               </div>
             </div>
-
+            @php
+            $totals=0;
+            $totals=$total-$comtotal;
+              if ($totals<3000) {
+                $totals=$totals+600;
+                $cost=600;
+              }else{
+                $cost=0;
+              }
+            @endphp
+            <hr>
             <div class="col-md-6 col-lg-12">
               <div class="d-flex mt-3">
-                <div>Bag Total</div>
+                <div>合計金額</div>
                 <div class="ml-auto font-weight-bold">${{$total}}</div>
               </div>
               <div class="d-flex">
-                <div>Bag Discount</div>
+                <div>割引</div>
                 <div class="ml-auto font-weight-bold">${{$comtotal}}</div>
               </div>
-              <hr class="my-1">
               <div class="d-flex">
-                <div>Coupon Discount</div>
-                <div class="ml-auto font-weight-bold">-</div>
-              </div>
-              <div class="d-flex">
-                <div>Shipping Cost</div>
-                <div class="ml-auto font-weight-bold">FREE</div>
+                <div>送料</div>
+                <div class="ml-auto font-weight-bold">{{$cost}}
+                </div>
               </div>
               <hr>
               <div class="d-flex">
-                <div class="font-weight-bold h6">Order Total</div>
-                @php
-                  $totals=0;
-                  $totals=$total-$comtotal;
-                @endphp
+                <div class="font-weight-bold h6">総計</div>
                 <div class="ml-auto text-theme h5">{{$totals}}</div>
               </div>
               <hr>
-              <div class="text-center"><button class="btn btn-theme">SUBMIT MY ORDER</button></div>
+              <form action="/test/purchase" method="post">
+                {{ csrf_field() }}
+              <div class="text-center"><button type="submit" class="btn btn-theme" name="total" value={{$totals}}>購入を確定する</button></div></form>
             </div>
           </div>
         </div>
-      </div>
-    </div>
+</div>
 
 @include('components.modal-menu')
 @include('components.cart',['carts'=>$carts,'cart'=>$cart])

@@ -69,14 +69,7 @@
           @isset($msg)
           <p>{{$msg}}</p>
           @endisset
-          <div class="row mb-3 border pt-2 px-3 rounded no-gutters">
-            <div class="mb-2 col-12 col-sm-6 text-center text-sm-left">
-              <span>Date</span>
-              <select name="sortbydate" class="custom-select ml-2 w-auto custom-select-sm">
-                <option value="newest">Newest</option>
-                <option value="oldest">Oldest</option>
-              </select>
-            </div>
+          <!--<div class="row mb-3 border pt-2 px-3 rounded no-gutters">
             <div class="mb-2 col-12 col-sm-6 text-center text-sm-right">
               <span>Availability</span>
               <select name="availability" class="custom-select ml-2 w-auto custom-select-sm">
@@ -85,13 +78,12 @@
                 <option value="out-stock">Out of Stock</option>
               </select>
             </div>
-          </div>
+          </div>-->
           <div class="table-responsive">
             <table class="table table-cart table-wishlist">
               <thead>
                 <tr>
                   <th scope="col" class="w-50">Item</th>
-                  <th scope="col" class="d-none d-sm-table-cell">Added</th>
                   <th scope="col" class="d-none d-sm-table-cell">Price</th>
                   <th scope="col" class="text-center">Action</th>
                 </tr>
@@ -113,15 +105,12 @@
                       <div class="media-body">
                         <a href="/test/detail" class="h6">{{$product->product->name}}</a>
                         <div class="mb-1">
-                          <span class="d-inline d-sm-none small">Price: <span class="text-theme">{{$price}}</span></span>
-                          <div class="small mt-2 d-none d-sm-block">Availability:</div>
-                          <span class="badge badge-success custom-badge arrowed-right">{{$stock}}</span>
+                          <div class="small mt-2 d-none d-sm-block">Availability:
+                          <span class="badge badge-success custom-badge arrowed-right">{{$stock}}</span></div>
                         </div>
-                        <div class="small d-block d-sm-none">Added: March 18, 2018</div>
                       </div>
                     </div>
                   </td>
-                  <td class="d-none d-sm-table-cell">March 18, 2018</td>
                   <td class="d-none d-sm-table-cell">
                     <ul class="card-text list-inline">
                       <li class="list-inline-item"><span class="text-theme">{{$price}}</span></li>
@@ -130,8 +119,10 @@
                   </td>
                   <td class="text-center">
                     <div class="btn-group" role="group" aria-label="Compare action">
-                      <button type="button" class="btn btn-sm btn-theme">BUY NOW</button>
-                      <button type="button" class="btn btn-sm btn-outline-theme"><i class="material-icons">close</i></button>
+                      <form action="/test/cart" method="post">{{ csrf_field() }}
+                      <button type="submit" class="btn btn-sm btn-theme" name="cart" value={{$product->product->id}}>カートへ</button></form>
+                      <form action="/test/wishdrop" method="post">{{ csrf_field() }}
+                      <button type="submit" class="btn btn-sm btn-outline-theme" name="wish" value={{$product->product->id}}><i class="material-icons">close</i></button></form>
                     </div>
                   </td>
                 </tr>
@@ -139,9 +130,14 @@
               </tbody>
             </table>
           </div>
-          <div class="text-center">
+          <nav aria-label="Product Listing Page" class="d-flex justify-content-center mt-3">
+            <ul class="pagination">
+              {{$products->links()}}
+            </ul>
+          </nav>
+          <!--<div class="text-center">
             <button class="btn btn-outline-theme"><i class="material-icons">shopping_cart</i> Add All to Cart</button>
-          </div>
+          </div>-->
         </div>
       @endif
       </div>

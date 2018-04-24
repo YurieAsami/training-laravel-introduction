@@ -62,9 +62,9 @@
   @foreach ($products as $product)
             <div class="col-6 col-sm-4 col-md-6 col-lg-4 col-xl-3">
               <div class="card card-product">
-                <a href="/test/detail"><img class="card-img-top" src="/img/product/pro{{$product->id}}.jpg" alt="Card image cap"></a>
+                <a href="/test/detail?id={{$product->id}}"><img class="card-img-top" src="/img/product/pro{{$product->id}}.jpg" alt="Card image cap"></a>
                 <div class="card-body">
-                  <div class="card-title"><a href="/test/detail" title={{$product->name}}>{{$product->name}}</a></div>
+                  <div class="card-title"><a href="/test/detail?id={{$product->id}}" title={{$product->name}}>{{$product->name}}</a></div>
                   <ul class="card-text list-inline">
                     @if(isset($product->sale))
                       @php

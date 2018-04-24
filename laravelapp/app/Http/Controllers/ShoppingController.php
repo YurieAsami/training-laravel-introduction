@@ -155,16 +155,17 @@ class ShoppingController extends Controller
   }
   public function testdetail(Request $request)
   {
-    $product = Product::where('id','1')->first();
+    $product = Product::where('id',$request->id)->first();
     $products = Product::Paginate(4);
     $star=7;
     $star_quantity=56;
     $pagename='single';
     $id=$request->session('user')->get('id');
+    $other_products = Product::Paginate(4);
     $wish=Favorite::where('customer_id',$id)->count();
     $cart=Cart::where('customer_id',$id)->count();
     $carts=Cart::where('customer_id',$id)->get();
-     return view('detail',['product'=>$product,'products'=>$products,'star'=>$star,'star_quantity'=>$star_quantity,'pagename'=>$pagename,'page'=>'index','wish'=>$wish,'cart'=>$cart,'carts'=>$carts]);
+     return view('detail',['other_products'=>$other_products,'product'=>$product,'products'=>$products,'star'=>$star,'star_quantity'=>$star_quantity,'pagename'=>$pagename,'page'=>'index','wish'=>$wish,'cart'=>$cart,'carts'=>$carts]);
   }
   public function testcontact(Request $request)
   {
@@ -194,19 +195,48 @@ class ShoppingController extends Controller
   }
   public function testcheckout(Request $request)
   {
-    $product = Product::where('id','1')->first();
-    $products = Product::Paginate(4);
-    $star=7;
-    $star_quantity=56;
-    $pagename='single';
     $id=$request->session('user')->get('id');
+    $customer = Customer::where('id',$id)->first();
+    $products = Cart::where('customer_id',$id)->get();
     $wish=Favorite::where('customer_id',$id)->count();
     $cart=Cart::where('customer_id',$id)->count();
     $carts=Cart::where('customer_id',$id)->get();
-     return view('checkout',['product'=>$product,'products'=>$products,'star'=>$star,'star_quantity'=>$star_quantity,'pagename'=>$pagename,'page'=>'index','wish'=>$wish,'cart'=>$cart,'carts'=>$carts]);
+     return view('checkout',['customer'=>$customer,'products'=>$products,'page'=>'index','wish'=>$wish,'cart'=>$cart,'carts'=>$carts]);
+  }
+  public function testpurchase(Request $request)
+  {
+
+    $id=$request->session('user')->get('id');
+    $customer = Customer::where('id',$id)->first();
+    $products = Cart::where('customer_id',$id)->get();
+    $wish=Favorite::where('customer_id',$id)->count();
+    if($products=NULL){
+      $msg="※カート情報がありません";
+      $cart=Cart::where('customer_id',$id)->count();
+      $carts=Cart::where('customer_id',$id)->get();
+      return view('cart-empty',['customer'=>$customer,'msg'=>$msg,'page'=>'cart','wish'=>$wish,'cart'=>'0','carts'=>NULL]);
+    }
+    $purchase = new Purchase;
+    $purchase->customer_id=$id;
+    $purchase->total=$request->total;
+    $purchase->save();
+    $pur = Purchase::orderBy('id','desc')->where('customer_id',$id)->first();
+    $carts=Cart::where('customer_id',$id)->get();
+    foreach ($carts as $value) {
+      $purchase_detail = new Purchase_detail;
+      $purchase_detail->purchase_id=$pur->id;
+      $purchase_detail->product_id=$value->product->id;
+      $purchase_detail->count=$value->count;
+      $purchase_detail->save();
+    }
+    $products = Purchase_detail::where('purchase_id',$pur->id)->get();
+    $delete=Cart::where('customer_id',$id)->delete();
+    $cart=Cart::where('customer_id',$id)->count();
+     return view('purchase',['pur'=>$pur,'customer'=>$customer,'products'=>$products,'page'=>'index','wish'=>$wish,'cart'=>$cart,'carts'=>$carts]);
   }
   public function testcart(Request $request)
   {
+    $other_products=Product::Paginate(4);
     $id=$request->session('user')->get('id');
     $customer = Customer::where('id',$id)->first();
     $carts = Cart::where('customer_id',$id)->Paginate(4);
@@ -224,7 +254,7 @@ class ShoppingController extends Controller
   public function testcartin(Request $request)
   {
     $pagename='cart';
-    $other_products=Product::Paginate(8);
+    $other_products=Product::Paginate(4);
     $id=$request->session('user')->get('id');
     $customer = Customer::where('id',$id)->first();
     $wish=Favorite::where('customer_id',$id)->count();
@@ -246,11 +276,6 @@ class ShoppingController extends Controller
         }else{
           $cart->count='1';
         }
-        if(isset($request->size)){
-          $cart->size=$request->size;
-        }else{
-          $cart->size='M';
-        }
         $cart->save();
         $msg="カートに商品を入れました";
       }
@@ -268,22 +293,9 @@ class ShoppingController extends Controller
     $pagename='cart';
     $wish=Favorite::where('customer_id',$id)->count();
     $cart=Cart::where('customer_id',$id)->count();
-    $other_products=Product::Paginate(8);
+    $other_products=Product::Paginate(4);
     $msg="カートを空にしました";
     return view('cart-empty',['customer'=>$customer,'pagename'=>$pagename,'wish'=>$wish,'msg'=>$msg,'other_products'=>$other_products,'cart'=>$cart,'carts'=>$carts]);
-  }
-  public function testcartdrop(Request $request)
-  {
-    $id=$request->session('user')->get('id');
-    $customer = Customer::where('id',$id)->first();
-    Cart::where('customer_id',$id)->where('product_id',$request->id)->delete();
-    $msg=$request->input('name').'を削除しました';
-    $pagename='cart';
-    $wish=Favorite::where('customer_id',$id)->count();
-    $cart=Cart::where('customer_id',$id)->count();
-    $other_products=Product::Paginate(8);
-    $carts=Cart::where('customer_id',$id)->get();
-    return view('cart',['customer'=>$customer,'pagename'=>$pagename,'wish'=>$wish,'msg'=>$msg,'other_products'=>$other_products,'cart'=>$cart,'carts'=>$carts]);
   }
   public function testblog(Request $request)
   {
@@ -295,7 +307,7 @@ class ShoppingController extends Controller
     $id=$request->session('user')->get('id');
     $wish=Favorite::where('customer_id',$id)->count();
     $cart=Cart::where('customer_id',$id)->count();
-    $other_products=Product::Paginate(8);
+    $other_products=Product::Paginate(4);
     $carts=Cart::where('customer_id',$id)->get();
      return view('blog',['product'=>$product,'blogs'=>$products,'star'=>$star,'star_quantity'=>$star_quantity,'pagename'=>$pagename,'page'=>'index','wish'=>$wish,'cart'=>$cart,'carts'=>$carts]);
   }
@@ -307,7 +319,7 @@ class ShoppingController extends Controller
     $pagename='single';
     $wish=Favorite::where('customer_id',$id)->count();
     $cart=Cart::where('customer_id',$id)->count();
-    $other_products=Product::Paginate(8);
+    $other_products=Product::Paginate(4);
     $carts=Cart::where('customer_id',$id)->get();
      return view('blog-detail',['blog'=>$product,'blogs'=>$products,'pagename'=>$pagename,'page'=>'index','wish'=>$wish,'cart'=>$cart,'carts'=>$carts]);
   }
@@ -321,7 +333,7 @@ class ShoppingController extends Controller
     $id=$request->session('user')->get('id');
     $wish=Favorite::where('customer_id',$id)->count();
     $cart=Cart::where('customer_id',$id)->count();
-    $other_products=Product::Paginate(8);
+    $other_products=Product::Paginate(4);
     $carts=Cart::where('customer_id',$id)->get();
      return view('blog-list',['product'=>$product,'blogs'=>$products,'star'=>$star,'star_quantity'=>$star_quantity,'pagename'=>$pagename,'page'=>'index','wish'=>$wish,'cart'=>$cart,'carts'=>$carts]);
   }
@@ -334,12 +346,11 @@ class ShoppingController extends Controller
     $msg="";
     $products = Favorite::where('customer_id',$id)->Paginate(4);
     $customer = Customer::where('id',$id)->first();
-    $pagename='single';
+    $pagename='wishlist';
     $wish=Favorite::where('customer_id',$id)->count();
     $cart=Cart::where('customer_id',$id)->count();
-    $other_products=Product::Paginate(8);
     $carts=Cart::where('customer_id',$id)->get();
-     return view('account-wishlist',['msg'=>$msg,'products'=>$products,'pagename'=>$pagename,'page'=>'index','wish'=>$wish,'cart'=>$cart,'customer'=>$customer,'carts'=>$carts]);
+    return view('account-wishlist',['msg'=>$msg,'products'=>$products,'page'=>'wishlist','wish'=>$wish,'cart'=>$cart,'customer'=>$customer,'carts'=>$carts]);
   }
   public function testwishin(Request $request)
   {
@@ -362,21 +373,29 @@ class ShoppingController extends Controller
       $wish=Favorite::where('customer_id',$id)->count();
       $cart=Cart::where('customer_id',$id)->count();
       $carts=Cart::where('customer_id',$id)->get();
-      $other_products=Product::Paginate(8);
+      $other_products=Product::Paginate(4);
     }
     return view('account-wishlist',['msg'=>$msg,'other_products'=>$other_products,'products'=>$products,'wish'=>$wish,'cart'=>$cart,'carts'=>$carts,'customer'=>$customer]);
+  }
+  public function testwishdrop(Request $request)
+  {
+    $id=$request->session('user')->get('id');
+    $customer = Customer::where('id',$id)->first();
+    Wish::where('customer_id',$id)->where('product_id',$request->wish)->delete();
+    $msg=$request->input('name').'を削除しました';
+    $wish=Favorite::where('customer_id',$id)->count();
+    $cart=Cart::where('customer_id',$id)->count();
+    $carts=Cart::where('customer_id',$id)->get();
+    return view('account-wishlist',['customer'=>$customer,'wish'=>$wish,'msg'=>$msg,'cart'=>$cart,'carts'=>$carts]);
   }
   public function testprofile(Request $request)
   {
     $id=$request->session('user')->get('id');
     $mounths=array('0','Jan','Feb','Mar','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec');
-    $product = Product::where('id','1')->first();
-    $products = Product::Paginate(4);
     $customer = Customer::where('id',$id)->first();
-    $pagename='single';
+    $pagename='profile';
     $wish=Favorite::where('customer_id',$id)->count();
     $cart=Cart::where('customer_id',$id)->count();
-    $other_products=Product::Paginate(8);
     $carts=Cart::where('customer_id',$id)->get();
      return view('account-profile',['mounths'=>$mounths,'product'=>$product,'products'=>$products,'pagename'=>$pagename,'page'=>'index','wish'=>$wish,'cart'=>$cart,'customer'=>$customer,'carts'=>$carts]);
   }
@@ -391,7 +410,7 @@ class ShoppingController extends Controller
     $wish=Favorite::where('customer_id',$id)->count();
     $cart=Cart::where('customer_id',$id)->count();
     $carts=Cart::where('customer_id',$id)->get();
-    $other_products=Product::Paginate(8);
+    $other_products=Product::Paginate(4);
      return view('account-order',['purchases'=>$purchases,'purcus'=>$purcus,'pagename'=>$pagename,'page'=>'index','wish'=>$wish,'cart'=>$cart,'customer'=>$customer,'purchases'=>$purchases,'carts'=>$carts]);
   }
   public function testpassword(Request $request)
@@ -404,7 +423,7 @@ class ShoppingController extends Controller
     $wish=Favorite::where('customer_id',$id)->count();
     $cart=Cart::where('customer_id',$id)->count();
     $carts=Cart::where('customer_id',$id)->get();
-    $other_products=Product::Paginate(8);
+    $other_products=Product::Paginate(4);
      return view('account-password',['product'=>$product,'products'=>$products,'pagename'=>$pagename,'page'=>'index','wish'=>$wish,'cart'=>$cart,'customer'=>$customer,'carts'=>$carts]);
   }
   public function testaddress(Request $request)
@@ -479,7 +498,7 @@ class ShoppingController extends Controller
     $wish=Favorite::where('customer_id',$id)->count();
     $cart=Cart::where('customer_id',$id)->count();
     $carts=Cart::where('customer_id',$id)->get();
-    $other_products=Product::Paginate(8);
+    $other_products=Product::Paginate(4);
      return view('about',['product'=>$product,'products'=>$products,'pagename'=>$pagename,'page'=>'index','wish'=>$wish,'cart'=>$cart,'customer'=>$customer,'carts'=>$carts]);
   }
   public function logout(Request $request)

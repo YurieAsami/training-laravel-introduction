@@ -61,11 +61,11 @@
             <div class="col-12">
               @foreach ($products as $product)
                 <div class="media hover-style media-list">
-                  <a href="/test/detail">
+                  <a href="/test/detail?id={{$product->id}}">
                     <div data-cover="/img/product/pro{{$product->id}}.jpg" data-xs-height="250px" data-sm-height="200px" data-md-height="200px" data-lg-height="200px" data-xl-height="200px"></div>
                   </a>
                   <div class="media-body">
-                    <a href="/test/detail" class="h5">{{$product->name}}</a>
+                    <a href="/test/detail?id={{$product->id}}" class="h5">{{$product->name}}</a>
 
                     <div class="rating">
                       @php
