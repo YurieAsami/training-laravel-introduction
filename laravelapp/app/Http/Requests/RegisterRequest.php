@@ -21,7 +21,8 @@ class RegisterRequest extends FormRequest
      'address'=>'required',
      'login'=>'alpha_num|between:6,12|regex:/[a-zA-Z0-9-]+$/|loginname',
      'password'=>'required|alpha_num|between:6,12|regex:/[a-zA-Z0-9-]+$/|confirmed',
-     'email'=>'required|email'
+     'email'=>'required|email',
+     'zip'=>'regex:/[0-9]{3}-[0-9]{4}$/',
     ];
   }
 
@@ -48,6 +49,7 @@ class RegisterRequest extends FormRequest
       'password.confirmed'=>'パスワードが一致しません',
       'email.required'=>'メールアドレスは必ず入力してください',
       'email.email'=>'正しいメールアドレスを入力してください',
+      'zip.regex'=>'ハイフンを入れて正しく入力してください'
     ];
   }
 

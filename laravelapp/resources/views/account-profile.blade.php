@@ -49,39 +49,48 @@
                 <img class="rounded-circle" src="/img/user.png" alt="John Thor">
                 <div class="media-body">
                   <h5 class="user-name">{{$customer->name}}</h5>
-                  <small class="card-text text-muted">Joined Dec 31, 2017{{$customer->join}}</small>
                   <div class="card-text small text-muted">Points: {{$customer->point}}</div>
                 </div>
               </div>
             </div>
             <div class="list-group list-group-flush">
-              <a href="/test/profile" class="list-group-item list-group-item-action active"><i class="material-icons">person</i> Profile</a>
-              <a href="/test/order" class="list-group-item list-group-item-action"><i class="material-icons">shopping_cart</i> Orders</a>
-              <a href="/test/address" class="list-group-item list-group-item-action"><i class="material-icons">location_on</i> Addresses</a>
-              <a href="/test/wishlist" class="list-group-item list-group-item-action"><i class="material-icons">favorite</i> Wishlist<span class="badge badge-secondary badge-pill float-right mt-1">{{$wish}}</span></a>
-              <a href="/test/password" class="list-group-item list-group-item-action"><i class="material-icons">vpn_key</i> Change Password</a>
-              <a href="ind" class="list-group-item list-group-item-action d-none d-md-block"><i class="material-icons">exit_to_app</i> Logout</a>
+              <a href="/test/profile" class="list-group-item list-group-item-action active"><i class="material-icons">person</i>プロフィール</a>
+              <a href="/test/order" class="list-group-item list-group-item-action"><i class="material-icons">shopping_cart</i> 注文履歴</a>
+              <a href="/test/address" class="list-group-item list-group-item-action"><i class="material-icons">location_on</i>住所変更</a>
+              <a href="/test/wishlist" class="list-group-item list-group-item-action"><i class="material-icons">favorite</i> お気に入りリスト<span class="badge badge-secondary badge-pill float-right mt-1">{{$wish}}</span></a>
+              <a href="/test/password" class="list-group-item list-group-item-action"><i class="material-icons">vpn_key</i> パスワード変更</a>
+              <a href="ind" class="list-group-item list-group-item-action d-none d-md-block"><i class="material-icons">exit_to_app</i> ログアウト</a>
             </div>
           </div>
         </div>
         <div class="col-lg-9 col-md-8">
-          <div class="title"><span>My Profile</span></div>
-          <form>
+          <div class="title"><span>登録内容変更</span></div>
+          <form action="/test/profile" method="post">
+            {{ csrf_field() }}
+            <input type="hidden" name='id' value="{{$customer->id}}">
+            <input type="hidden" name='login' value="{{$customer->login}}">
+            <input type="hidden" name='address' value="{{$customer->address}}">
+            <input type="hidden" name='zip' value="{{$customer->zip}}">
+            <input type="hidden" name='password' value="{{$customer->password}}">
+            <input type="hidden" name='password_confirmation' value="{{$customer->password_confirmation}}">
+
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="InputName">Name</label>
-                <input type="text" class="form-control" id="InputName" value="{{$customer->name}}" placeholder="Enter Name">
+                <label for="InputName">お名前</label>
+                <input type="text" class="form-control" id="InputName" name="name" value="{{$customer->name}}" placeholder="Enter Name">
+                @foreach ($errors->get('name') as $error)
+                  <li style="font-size : 12px;">{{ $error }}</li>
+                @endforeach
               </div>
               <div class="form-group col-md-6">
-                <label for="InputEmail">Email Address</label>
-                <input type="email" class="form-control" id="InputEmail" value="{{$customer->mail}}" placeholder="Enter Email">
+                <label for="InputEmail">メールアドレス</label>
+                <input type="email" class="form-control" id="InputEmail" name="email" value="{{$customer->email}}" placeholder="Enter Email">
+                @foreach ($errors->get('email') as $error)
+                  <li style="font-size : 12px;">{{ $error }}</li>
+                @endforeach
               </div>
-              <div class="form-group col-md-6">
-                <label for="InputPhone">Phone Number</label>
-                <input type="text" class="form-control" id="InputPhone" value="{{$customer->phone}}" placeholder="Phone Number">
-              </div>
-              <div class="form-group col-md-6">
-                <label class="d-block">Birthday</label>
+              <!--<div class="form-group col-md-6" name="birthday">
+                <label class="d-block">生年月日</label>
                 <select class="custom-select col-3" data-width="70px">
                   <option value="0">Year</option>
                   <option value="1990">1990</option>
@@ -145,8 +154,8 @@
                   <option value="31">31</option>
                 </select>
               </div>
-              <div class="form-group col-md-6">
-                <label class="d-block">Gender</label>
+              <div class="form-group col-md-6" name="gender">
+                <label class="d-block">性別</label>
                 <div class="custom-control custom-radio custom-control-inline">
                   <input type="radio" id="gender1" name="gender" class="custom-control-input" checked="checked">
                   <label class="custom-control-label" for="gender1">Male</label>
@@ -157,12 +166,12 @@
                 </div>
               </div>
               <div class="form-group col-md-6">
-                <label for="profilePicture">Profile Picture</label>
+                <label for="profilePicture">プロフィール画像</label>
                 <input type="file" id="profilePicture" class="d-block">
-              </div>
+              </div>-->
             </div>
             <hr class="mt-0 mb-3">
-            <button type="submit" class="btn btn-theme my-1"><i class="material-icons">save</i> Save</button>
+            <button type="submit" class="btn btn-theme my-1"><i class="material-icons">save</i> 変更</button>
           </form>
         </div>
       @endif

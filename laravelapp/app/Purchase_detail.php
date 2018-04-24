@@ -10,10 +10,9 @@ class Purchase_detail extends Model
 {
   public function getData()
   {
-    return '購入詳細' .'('.$this->purchase_id . '商品番号' .$this->product_id .
+    return '購入番号' .'('.$this->purchase_id . '商品番号' .$this->product_id .
      '価格' . $this->product->price.')';
   }
-
   public function product()
   {
     return $this->belongsTo('App\Product');

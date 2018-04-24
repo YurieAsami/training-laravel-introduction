@@ -26,10 +26,9 @@
   <body>
 
 @include('components.topheader')
-
-    @isset($msg)
-      <p>{{$msg}}</p>
-    @endisset
+@isset($msg)
+  {{$msg}}
+@endisset
     @if ($customer==NULL)
       <div  align="center">
       <a href="/test/login" method="post"><h2><button type="button" class="btn btn-outline-theme" >
@@ -49,55 +48,67 @@
                 <img class="rounded-circle" src="/img/user.png" alt="John Thor">
                 <div class="media-body">
                   <h5 class="user-name">{{$customer->name}}</h5>
-                  <small class="card-text text-muted">Joined Dec 31, 2017{{$customer->join}}</small>
                   <div class="card-text small text-muted">Points: {{$customer->point}}</div>
                 </div>
               </div>
             </div>
             <div class="list-group list-group-flush">
-              <a href="/test/profile" class="list-group-item list-group-item-action"><i class="material-icons">person</i> Profile</a>
-              <a href="/test/order" class="list-group-item list-group-item-action"><i class="material-icons">shopping_cart</i> Orders</a>
-              <a href="/test/address" class="list-group-item list-group-item-action"><i class="material-icons">location_on</i> Addresses</a>
-              <a href="/test/wishlist" class="list-group-item list-group-item-action"><i class="material-icons">favorite</i> Wishlist<span class="badge badge-secondary badge-pill float-right mt-1">3</span></a>
-              <a href="/test/password" class="list-group-item list-group-item-action active"><i class="material-icons">vpn_key</i> Change Password</a>
-              <a href="ind" class="list-group-item list-group-item-action d-none d-md-block"><i class="material-icons">exit_to_app</i> Logout</a>
+              <a href="/test/profile" class="list-group-item list-group-item-action"><i class="material-icons">person</i>プロフィール</a>
+              <a href="/test/order" class="list-group-item list-group-item-action"><i class="material-icons">shopping_cart</i>注文履歴</a>
+              <a href="/test/address" class="list-group-item list-group-item-action"><i class="material-icons">location_on</i>住所変更</a>
+              <a href="/test/wishlist" class="list-group-item list-group-item-action"><i class="material-icons">favorite</i>お気に入りリスト<span class="badge badge-secondary badge-pill float-right mt-1">3</span></a>
+              <a href="/test/password" class="list-group-item list-group-item-action active"><i class="material-icons">vpn_key</i>パスワード変更</a>
+              <a href="ind" class="list-group-item list-group-item-action d-none d-md-block"><i class="material-icons">exit_to_app</i>ログアウト</a>
             </div>
           </div>
         </div>
         <div class="col-lg-9 col-md-8">
-          <div class="title"><span>Change Password</span></div>
-          <form>
+          <div class="title"><span>パスワード変更</span></div>
+          @isset($msg)
+            {{$msg}}
+          @endisset
+          <form action="/test/password" method="post">
+            {{ csrf_field() }}
+            <input type="hidden" name='id' value="{{$customer->id}}">
+            <input type="hidden" name='name' value="{{$customer->name}}">
+            <input type="hidden" name='login' value="{{$customer->login}}">
+            <input type="hidden" name='address' value="{{$customer->address}}">
+            <input type="hidden" name='zip' value="{{$customer->zip}}">
+            <input type="hidden" name='email' value="{{$customer->email}}">
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="InputOldPassword">Old Password</label>
-                <input type="Password" class="form-control" id="InputOldPassword" placeholder="Enter Old Password">
+                <label for="InputOldPassword">旧パスワード</label>
+                <input type="Password" class="form-control" id="InputOldPassword" name="oldpassword">
               </div>
             </div>
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="InputNewPassword">New Password</label>
-                <input type="Password" class="form-control" id="InputNewPassword" placeholder="Enter New Password">
+                <label for="InputNewPassword">新パスワード</label>
+                <input type="Password" class="form-control" id="InputNewPassword" name="password">
+                @foreach ($errors->get('password') as $error)
+                  <li style="font-size : 12px;">{{ $error }}</li>
+                @endforeach
               </div>
               <div class="form-group col-md-6">
-                <label for="InputNewPassword2">Confirm Password</label>
-                <input type="Password" class="form-control" id="InputNewPassword2" placeholder="Enter New Password">
+                <label for="InputNewPassword2">もう一度新パスワードを入力してください</label>
+                <input type="Password" class="form-control" id="InputNewPassword2" name="password_confirmation">
               </div>
             </div>
-            <button type="submit" class="btn btn-theme my-1"><i class="material-icons">save</i> Save</button>
+            <button type="submit" class="btn btn-theme my-1"><i class="material-icons">save</i>変更</button>
           </form>
         </div>
-      @endif
       </div>
     </div>
+    @endif
+  </div>
+</div>
+
 
     @include('components.modal-menu')
     @include('components.cart',['carts'=>$carts,'cart'=>$cart])
     @include('components.modal-login')
     @include('components.footer')
 
-    <a href="#top" class="back-top text-center" id="back-top">
-      <i class="material-icons">expand_less</i>
-    </a>
     <!-- Required js -->
     <script src="/js/jquery.min.js"></script>
     <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>

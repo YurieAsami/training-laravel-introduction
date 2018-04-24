@@ -49,7 +49,6 @@
                 <img class="rounded-circle" src="/img/user.png" alt="John Thor">
                 <div class="media-body">
                   <h5 class="user-name">{{$customer->name}}</h5>
-                  <small class="card-text text-muted">Joined Dec 31, 2017{{$customer->join}}</small>
                   <div class="card-text small text-muted">Points: {{$customer->point}}</div>
                 </div>
               </div>
@@ -70,10 +69,10 @@
             <input type="hidden" name='id' value="{{$customer->id}}">
             <input type="hidden" name='name' value="{{$customer->name}}">
             <input type="hidden" name='login' value="{{$customer->login}}">
+            <input type="hidden" name='email' value="{{$customer->email}}">
             <input type="hidden" name='password' value="{{$customer->password}}">
             <input type="hidden" name='password_confirmation' value="{{$customer->password_confirmation}}">
-            <div class="title"><span>Billing Address</span>
-              <button class="btn btn-sm btn-outline-theme float-right"><i class="material-icons">mode_edit</i> 編集</button></div>
+            <div class="title"><span>Billing Address</span></div>
           <table class="table mb-3 table-sm">
             <tbody>
               <tr>
@@ -81,6 +80,9 @@
                   <div class="form-group mb-1 mb-md-3">
                     <label for="inputZip" class="mb-0 mb-md-2">Zip/Postal Code *</label>
                     <input type="text" class="form-control" id="inputZip" name="zip" value="{{$customer->zip}}">
+                    @foreach ($errors->get('zip') as $error)
+                      <li style="font-size : 12px;">{{ $error }}</li>
+                    @endforeach
                   </div>
                 </td>
               </tr>
@@ -89,12 +91,15 @@
                   <div class="form-group mb-1 mb-md-3">
                     <label for="inputAddress" class="mb-0 mb-md-2">Address *</label>
                     <input type="text" class="form-control" id="inputAddress" name="address" value="{{$customer->address}}">
+                    @foreach ($errors->get('address') as $error)
+                      <li style="font-size : 12px;">{{ $error }}</li>
+                    @endforeach
                   </div>
                 </td>
               </tr>
             </tbody>
           </table>
-            <button type="submit" class="btn btn-theme my-1"><i class="material-icons">save</i> Save</button>
+            <button type="submit" class="btn btn-theme my-1"><i class="material-icons">save</i> 編集完了</button>
           </form>
         </div>
       @endif
