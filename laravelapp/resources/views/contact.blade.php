@@ -12,7 +12,7 @@
     <link rel="apple-touch-icon" sizes="152x152" href="touch-icon-ipad.png">
     <link rel="apple-touch-icon" sizes="180x180" href="touch-icon-iphone-retina.png">
     <link rel="apple-touch-icon" sizes="167x167" href="touch-icon-ipad-retina.png">
-    <title>Contact Us - Mimity</title>
+    <title>Contact - Mimity</title>
 
     <!-- Required css -->
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
@@ -29,38 +29,38 @@
 
     <div class="container-fluid limited mb-5">
       <div class="row">
-        <div class="col-md-8 mb-3">
-          <div class="title"><span>Contact Us</span></div>
+        <!--<div class="col-md-8 mb-3">
+          <div class="title"><span>お問い合わせ</span></div>
           <form>
             <div class="form-group">
-              <label for="InputName">Your Name (*)</label>
+              <label for="InputName">お名前</label>
               <input type="text" class="form-control" id="InputName" placeholder="Enter name">
             </div>
             <div class="form-group">
-              <label for="InputEmail1">Email address (*)</label>
+              <label for="InputEmail1">メールアドレス</label>
               <input type="email" class="form-control" id="InputEmail1" placeholder="Enter email">
             </div>
             <div class="form-group">
-              <label for="InputSubject">Subject</label>
+              <label for="InputSubject">件名</label>
               <input type="text" class="form-control" id="InputSubject" placeholder="Enter name">
             </div>
             <div class="form-group">
-              <label for="InputMessage">Message (*)</label>
+              <label for="InputMessage">メッセージ</label>
               <textarea class="form-control" id="InputMessage" rows="3"></textarea>
             </div>
-            <button type="submit" class="btn btn-theme btn-sm">Submit</button>
+            <button type="submit" class="btn btn-theme btn-sm">送信</button>
           </form>
-        </div>
+        </div>-->
         <div class="col-md-4">
-          <div class="title"><span>Contact Info</span></div>
+          <div class="title"><span>企業情報</span></div>
           <ul class="list-group mb-4">
-            <li class="list-group-item pl-2 border-left-0 border-right-0 border-top-0">&raquo; 212 Lorem Ipsum. Dolor Sit, Amet</li>
-            <li class="list-group-item pl-2 border-left-0 border-right-0">&raquo; +123-456-789</li>
-            <li class="list-group-item pl-2 border-left-0 border-right-0">&raquo; cs@domain.tld</li>
+            <li class="list-group-item pl-2 border-left-0 border-right-0 border-top-0">&raquo; 新宿区西新宿</li>
+            <li class="list-group-item pl-2 border-left-0 border-right-0">&raquo; +03-1234-5678</li>
+            <li class="list-group-item pl-2 border-left-0 border-right-0">&raquo; y.asami@fosbury.co.jp</li>
           </ul>
-          <div class="title"><span>Our Location</span></div>
+          <div class="title"><span>アクセス</span></div>
           <div class="embed-responsive embed-responsive-4by3 rounded">
-            <iframe class="embed-responsive-item" src="http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=central%2Bpark&ie=UTF8&z=12&t=m&iwloc=near&output=embed"></iframe>
+            <iframe class="embed-responsive-item" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d5449.573103691578!2d139.68837585470655!3d35.693359376198266!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188cd4cfbaff57%3A0x12385d2a418fd33d!2z44CSMTYwLTAwMjMg5p2x5Lqs6YO95paw5a6_5Yy66KW_5paw5a6_!5e0!3m2!1sja!2sjp!4v1524619798668"></iframe>
           </div>
         </div>
       </div>

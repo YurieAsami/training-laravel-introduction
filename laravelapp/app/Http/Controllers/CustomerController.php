@@ -81,7 +81,7 @@ class CustomerController extends Controller
     $request->session('user')->put('name',$request->name);
     $request->session('user')->put('login',$request->login);
     $request->session('user')->put('id',$request->id);
-    $msg = '登録しました';
+    $msg = $input->name;
     $form = Customer::find($request->session('user')->get('id'));
     return view('shop.edit',['msg'=>$msg,'form'=>$form]);
   }

@@ -39,7 +39,7 @@
           <div class="swiper-container border rounded mb-2" id="detail-slider">
             <div class="swiper-wrapper">
               @for ($i=2; $i<=5; $i++)
-              <div class="swiper-slide"><img src="/img/product/pro{{$product->id}}-large-{{$i}}.jpg" class="w-100" data-width="1025" data-height="1400" alt="Product"></div>
+              <div class="swiper-slide"><img src="/img/product/pro{{$product->id}}.jpg" class="w-100" width="1025" height="1400" alt="Product"></div>
               @endfor
             </div>
             <a href="#zoom" class="btn-zoom"><i class="material-icons md-2">zoom_in</i></a>
@@ -47,7 +47,7 @@
           <div class="swiper-container detail-gallery mb-2" id="detail-gallery">
             <div class="swiper-wrapper">
               @for ($i=1; $i<=5; $i++)
-              <div class="swiper-slide"><a href="#"><img src="/img/product/pro{{$product->id}}-{{$i}}.jpg" alt="Product" class="img-thumbnail"></a></div>
+              <div class="swiper-slide"><a href="#"><img src="/img/product/pro{{$product->id}}.jpg" alt="Product" width="300" height="400" class="img-thumbnail"></a></div>
               @endfor
             </div>
             <div class="swiper-button-prev" id="detail-gallery-prev"><i class="material-icons md-3">keyboard_arrow_left</i></div>

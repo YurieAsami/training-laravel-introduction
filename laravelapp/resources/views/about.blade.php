@@ -25,18 +25,8 @@
   </head>
   <body>
 
-@include('components.topheader',['nowpage'=>'About'])
+@include('components.topheader',['page'=>'About Us'])
 
-    <div class="breadcrumb-container">
-      <div class="container-fluid limited">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/test/index">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">About Us</li>
-          </ol>
-        </nav>
-      </div>
-    </div>
 
     <div class="container-fluid limited mb-5">
       <div class="row">

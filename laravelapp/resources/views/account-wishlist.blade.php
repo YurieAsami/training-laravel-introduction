@@ -49,8 +49,7 @@
                 <img class="rounded-circle" src="/img/user.png" alt="John Thor">
                 <div class="media-body">
                   <h5 class="user-name">{{$customer->name}}</h5>
-                  <small class="card-text text-muted">Joined Dec 31, 2017{{$customer->join}}</small>
-                  <div class="card-text small text-muted">Points: {{$customer->point}}</div>
+
                 </div>
               </div>
             </div>
@@ -66,8 +65,8 @@
         </div>
         <div class="col-lg-9 col-md-8">
           <div class="title"><span>My Wishlist</span></div>
-          @isset($msg)
-          <p>{{$msg}}</p>
+          @isset($msgd)
+          <p>{{$msgd}}</p>
           @endisset
           <!--<div class="row mb-3 border pt-2 px-3 rounded no-gutters">
             <div class="mb-2 col-12 col-sm-6 text-center text-sm-right">
@@ -101,7 +100,7 @@
                 <tr>
                   <td>
                     <div class="media">
-                      <a href="/test/detail" class="mr-3 d-none d-md-block"><img src="/img/product/pro{{$product->product->id}}-small.jpg" class="img-fluid" alt="product"></a>
+                      <a href="/test/detail" class="mr-3 d-none d-md-block"><img src="/img/product/pro{{$product->product->id}}.jpg" width="100" height="100" class="img-fluid" alt="product"></a>
                       <div class="media-body">
                         <a href="/test/detail" class="h6">{{$product->product->name}}</a>
                         <div class="mb-1">

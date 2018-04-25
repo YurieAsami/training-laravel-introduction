@@ -49,7 +49,6 @@
                 <img class="rounded-circle" src="/img/user.png" alt="John Thor">
                 <div class="media-body">
                   <h5 class="user-name">{{$customer->name}}</h5>
-                  <div class="card-text small text-muted">Points: {{$customer->point}}</div>
                 </div>
               </div>
             </div>
@@ -65,15 +64,7 @@
         </div>
         <div class="col-lg-9 col-md-8">
           <div class="title"><span>My Orders</span></div>
-          <div class="row mb-3 border pt-2 px-3 rounded no-gutters">
-            <div class="mb-2 col-12 col-sm-6 text-center text-sm-left">
-              <span>Date</span>
-              <select name="sortbydate" class="custom-select ml-2 w-auto custom-select-sm">
-                <option value="oldest">Oldest</option>
-                <option value="newest">Newest</option>
-              </select>
-            </div>
-          </div>
+          
           <div class="table-responsive">
             <table class="table table-hover">
               <thead class="thead-light">
@@ -106,8 +97,9 @@
               </tbody>
             </table>
           </div>
+          <nav aria-label="Product Listing Page" class="d-flex justify-content-center mt-3">
             <ul class="pagination">
-
+              {{$purchases->links()}}
             </ul>
           </nav>
         </div>

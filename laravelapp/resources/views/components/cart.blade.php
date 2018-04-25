@@ -14,7 +14,7 @@
         @if($carts!==NULL)
         @foreach ($carts as $cart)
         <div class="media">
-          <a href="/test/detail" class="mr-2"><img class="img-fluid rounded" src="/img/product/polo1-small.jpg" width="70" alt="Generic placeholder image"></a>
+          <a href="/test/detail" class="mr-2"><img class="img-fluid rounded" src="/img/product/pro{{$cart->product->id}}.jpg" height="100" width="70" alt="Generic placeholder image"></a>
           <div class="media-body">
             <div><a href="/test/detail" class="text-dark">{{$cart->product->name}}</a></div>
             <span class="text-secondary"><span class="mr-3">x{{$cart->count}}</span>{{$cart->product->price}}円</span>

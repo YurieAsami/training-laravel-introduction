@@ -26,9 +26,7 @@
   <body class="body-pattern">
 
 @include('components.topheader',['nowpage'=>'Login'])
-@isset($msg)
-{{$msg}}  
-@endisset
+
     <div class="container-fluid limited mb-5">
       <div class="row justify-content-center mt-4">
         <div class="col-xs-12 col-sm-auto">
@@ -40,25 +38,29 @@
                 </div>
               </div>
               <h5 class="card-title text-center">Please Enter Your Information</h5>
+              <h6>
+                @isset($msg)
+                {{$msg}}
+                @endisset
+              </h6>
               <form action="/test/index" method="post">
                 {{ csrf_field() }}
                 <div class="form-group">
-                  <label for="InputUsername">Loginname</label>
-                  <input type="text" class="form-control" id="InputUsername" placeholder="Enter Loginname"
-                  name="name">
+                  <label for="InputUsername">ログインネーム</label>
+                  <input type="text" class="form-control" id="InputUsername" name="login">
                 </div>
                 <div class="form-group">
-                  <label for="InputPassword">Password</label>
-                  <input type="password" class="form-control" id="InputPassword" placeholder="Password" name="password">
+                  <label for="InputPassword">パスワード</label>
+                  <input type="password" class="form-control" id="InputPassword"  name="password">
                 </div>
                 <div class="custom-control custom-checkbox">
                   <input type="checkbox" class="custom-control-input" id="rememberMe" name="name">
-                  <label class="custom-control-label" for="rememberMe">Remember Me</label>
+                  <label class="custom-control-label" for="rememberMe">ログイン状態を保存する</label>
                 </div>
                 <button type="submit" class="btn btn-theme btn-sm btn-block my-3">Enter</button>
                 <div class="form-group mb-0">
-                  <a href="/test/register" class="text-secondary"><small><u>Register</u></small></a>
-                  <a href="#" class="float-right text-secondary"><small><u>Forgot Password ?</u></small></a>
+                  <a href="/test/register" class="text-secondary"><small><u>会員登録</u></small></a>
+                  <!--<a href="#" class="float-right text-secondary"><small><u>Forgot Password ?</u></small></a>-->
                 </div>
               </form>
             </div>

@@ -49,7 +49,7 @@
                 <img class="rounded-circle" src="/img/user.png" alt="John Thor">
                 <div class="media-body">
                   <h5 class="user-name">{{$customer->name}}</h5>
-                  <div class="card-text small text-muted">Points: {{$customer->point}}</div>
+
                 </div>
               </div>
             </div>
@@ -72,13 +72,13 @@
             <input type="hidden" name='email' value="{{$customer->email}}">
             <input type="hidden" name='password' value="{{$customer->password}}">
             <input type="hidden" name='password_confirmation' value="{{$customer->password_confirmation}}">
-            <div class="title"><span>Billing Address</span></div>
+            <div class="title"><span>登録住所変更</span></div>
           <table class="table mb-3 table-sm">
             <tbody>
               <tr>
                 <td>
                   <div class="form-group mb-1 mb-md-3">
-                    <label for="inputZip" class="mb-0 mb-md-2">Zip/Postal Code *</label>
+                    <label for="inputZip" class="mb-0 mb-md-2">郵便番号</label>
                     <input type="text" class="form-control" id="inputZip" name="zip" value="{{$customer->zip}}">
                     @foreach ($errors->get('zip') as $error)
                       <li style="font-size : 12px;">{{ $error }}</li>
@@ -89,7 +89,7 @@
               <tr>
                 <td class="border-top-0">
                   <div class="form-group mb-1 mb-md-3">
-                    <label for="inputAddress" class="mb-0 mb-md-2">Address *</label>
+                    <label for="inputAddress" class="mb-0 mb-md-2">住所</label>
                     <input type="text" class="form-control" id="inputAddress" name="address" value="{{$customer->address}}">
                     @foreach ($errors->get('address') as $error)
                       <li style="font-size : 12px;">{{ $error }}</li>
@@ -101,6 +101,9 @@
           </table>
             <button type="submit" class="btn btn-theme my-1"><i class="material-icons">save</i> 編集完了</button>
           </form>
+          @isset($msg)
+            <p>{{$msg}}</p>
+          @endisset
         </div>
       @endif
       </div>

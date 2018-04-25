@@ -5,9 +5,9 @@
     <div class="row">
       <div class="col-6 col-lg-3">
         <div class="list-group list-group-flush">
-          <a href="/test/contact" class="list-group-item list-group-item-action">Help / Support</a>
-          <a href="/test/about" class="list-group-item list-group-item-action">About Us</a>
-          <a href="/test/faq" class="list-group-item list-group-item-action">FAQ</a>
+          <a href="/test/contact" class="list-group-item list-group-item-action">Help / Support   Contact</a>
+          <!--<a href="/test/about" class="list-group-item list-group-item-action">About Us</a>
+          <a href="/test/faq" class="list-group-item list-group-item-action">FAQ</a>-->
         </div>
       </div>
       <!--<div class="col-6 col-lg-3">

@@ -69,7 +69,7 @@
                           $comtotal+=$compare;
                           $total+=$subtotal;
                         @endphp
-                      <div class="small text-muted">Price: ${{$prices}}
+                      <div class="small text-muted">Price: {{$prices}}円
                       @else
                         @php
                           $subtotal=($product->product->price)*($product->count);

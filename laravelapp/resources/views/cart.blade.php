@@ -73,10 +73,9 @@
                     <div><input name="name" type="hidden" value="{{$product->product->name}}"></div>
                   <td>
                     <div class="media">
-                      <a href="/test/detail?id={{$product->id}}" class="mr-3 d-none d-md-block"><img src="/img/product/polo1-small.jpg" class="img-fluid" alt="product"></a>
+                      <a href="/test/detail?id={{$product->id}}" class="mr-3 d-none d-md-block"><img src="/img/product/pro{{$product->product->id}}.jpg" width="100" height="100" class="img-fluid" alt="product"></a>
                       <div class="media-body">
                         <a href="/test/detail?id={{$product->id}}" class="h6">{{$product->product->name}}</a>
-                        <div class="small">Size: {{$product->product->size}} <span class="mx-2">|</span> Color: {{$product->product->color}}</div>
                         <div class="mb-1">
                           <span class="d-inline d-sm-none small">Price: <span class="text-theme">{{$price}}</span></span>
                           <span class="badge badge-success custom-badge arrowed-right">{{$stock}}</span>
@@ -110,8 +109,10 @@
 
               @endforeach
               </tbody>
+
             </table>
           </div>
+
         </div>
       </div>
       <div class="row justify-content-between">
@@ -149,6 +150,7 @@
           </div>
           <hr>
         </div>
+        <a href="/test/cartalldrop">カートを空にする</a>
         <div class="col-12 text-right">
           <div class="btn-group" role="group" aria-label="Basic example">
             <a href="/test/grid" class="d-none d-sm-inline-block btn btn-outline-theme">買い物を続ける</a>
@@ -191,9 +193,9 @@
                   <div class="btn-group btn-group-sm" role="group" aria-label="Action">
                     <!--<button class="btn btn-outline-theme show-quickview"><i class="material-icons">zoom_in</i></button>-->
                     <button type="submit" class="btn btn-theme" name="cart" value={{$product->id}}>ADD TO CART</button></form>
-                    <form action="/test/wish" method="post">
+                    <form action="/test/wishlist" method="post">
                       {{ csrf_field() }}
-                    <button type="submit" class="btn btn-theme" name="wish" value={{$product->id}}><i class="material-icons">favorite_border</i></button></form>
+                    <button type="submit" class="btn btn-outline-theme" name="wish" value={{$product->id}}><i class="material-icons">favorite_border</i></button></form>
                   </div>
                 </div>
                 <div class="small-action d-block d-md-none">
@@ -202,7 +204,6 @@
                     <div class="dropdown-menu dropdown-menu-right fadeIn">
                       <a class="dropdown-item" href="#"><i class="material-icons">add_shopping_cart</i> BUY</a>
                       <a class="dropdown-item" href="#"><i class="material-icons">favorite_border</i> Wishlist</a>
-                      <a class="dropdown-item" href="#"><i class="material-icons">compare_arrows</i> Compare</a>
                     </div>
                   </div>
                 </div>

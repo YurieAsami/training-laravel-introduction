@@ -103,7 +103,7 @@
                   </div>
                   <div class="action">
                     <div class="btn-group btn-group-sm" role="group" aria-label="Action">
-                      <button class="btn btn-outline-theme show-quickview"><i class="material-icons">zoom_in</i></button>
+
                       <form action="/test/cart" method="post">{{ csrf_field() }}
                         <button class="btn btn-theme" type="submit" name="cart" value="{{$product->id}}">ADD TO CART</button></form>
                       <form action="/test/wishlist" method="post">{{ csrf_field() }}
@@ -139,7 +139,7 @@
 @include('components.modal-menu')
 @include('components.cart',['carts'=>$carts,'cart'=>$cart])
 @include('components.modal-login')
-@include('components.modal-quikview')
+<!--include('components.modal-quikview')-->
 @include('components.footer')
 
     <a href="#top" class="back-top text-center" id="back-top">

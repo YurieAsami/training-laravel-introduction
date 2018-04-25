@@ -8,7 +8,7 @@
             <a class="nav-link" href="/test/grid"><i class="material-icons">notifications_none</i> Get Minimum 30-70% Off On Over 1,50,000 Styles!</a>
           </nav>
           <nav class="nav ml-auto">
-            <a class="nav-link d-none d-sm-block" href="/test/faq"><i class="material-icons">help_outline</i> Help</a>
+            <!--<a class="nav-link d-none d-sm-block" href="/test/faq"><i class="material-icons">help_outline</i> Help</a>-->
             <a class="nav-link" href="#" data-toggle="modal" data-target="#loginModal"><i class="material-icons">person_outline</i> Sign In</a>
           </nav>
         </div>
@@ -40,7 +40,7 @@
       </div>
       <div class="col d-none d-md-block position-static">
         <nav class="navbar nav main-nav justify-content-center justify-content-md-start position-static p-0">
-          <a class="nav-link" href="/index">ホーム</a>
+          <a class="nav-link" href="/test/index">ホーム</a>
           <div class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle no-caret" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">お取り扱い商品</a>
             <div class="dropdown-menu animate">

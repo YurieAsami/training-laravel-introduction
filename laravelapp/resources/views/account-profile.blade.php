@@ -28,7 +28,7 @@
 @include('components.topheader')
 
     @isset($msg)
-      <p>{{$msg}}</p>
+      <div>{{$msg}}</div>
     @endisset
     @if ($customer==NULL)
       <div  align="center">
@@ -49,7 +49,6 @@
                 <img class="rounded-circle" src="/img/user.png" alt="John Thor">
                 <div class="media-body">
                   <h5 class="user-name">{{$customer->name}}</h5>
-                  <div class="card-text small text-muted">Points: {{$customer->point}}</div>
                 </div>
               </div>
             </div>
@@ -173,6 +172,7 @@
             <hr class="mt-0 mb-3">
             <button type="submit" class="btn btn-theme my-1"><i class="material-icons">save</i> 変更</button>
           </form>
+
         </div>
       @endif
       </div>

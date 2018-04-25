@@ -127,11 +127,8 @@
           </div>
           <div class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle no-caret" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">PAGES</a>
-            <div class="dropdown-menu animate">
-              <a class="dropdown-item" href="about.html">About Us</a>
-              <a class="dropdown-item" href="compare.html">比較</a>
+            <div class="dropdown-menu animate">        
               <a class="dropdown-item" href="contact.html">お問い合わせ</a>
-              <a class="dropdown-item" href="cart-empty.html">Empty Shopping Cart</a>
               <a class="dropdown-item" href="faq.html">FAQ</a>
               <a class="dropdown-item" href="login.html">ログイン</a>
               <a class="dropdown-item" href="register.html">会員登録</a>
