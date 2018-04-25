@@ -10,6 +10,7 @@ use App\Purchase;
 use App\Purchase_detail;
 use App\Cart;
 use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\AddRequest;
 
 class ShoppingController extends Controller
 {
@@ -118,8 +119,8 @@ class ShoppingController extends Controller
     $carts=Cart::where('customer_id',$id)->get();
      return view('register',['page'=>'会員登録','wish'=>$wish,'cart'=>$cart,'carts'=>$carts]);
   }
-  public function testcreate(RegisterRequest $request)
-    {
+  public function testcreate(AddRequest $request)
+  {
       $customer = new Customer;
       $form = $request->all();
       unset($form['_token']);
@@ -162,7 +163,7 @@ class ShoppingController extends Controller
     $wish=Favorite::where('customer_id',$id)->count();
     $cart=Cart::where('customer_id',$id)->count();
     $carts=Cart::where('customer_id',$id)->get();
-     return view('detail',['other_products'=>$other_products,'product'=>$product,'products'=>$products,'star'=>$star,'star_quantity'=>$star_quantity,'pagename'=>$pagename,'page'=>'商品','wish'=>$wish,'cart'=>$cart,'carts'=>$carts]);
+     return view('detail',['other_products'=>$other_products,'product'=>$product,'products'=>$products,'star'=>$star,'star_quantity'=>$star_quantity,'page'=>'商品','wish'=>$wish,'cart'=>$cart,'carts'=>$carts]);
   }
   public function testcontact(Request $request)
   {
@@ -433,7 +434,7 @@ class ShoppingController extends Controller
     $carts=Cart::where('customer_id',$id)->get();
      return view('account-address',['page'=>'住所変更','wish'=>$wish,'cart'=>$cart,'customer'=>$customer,'carts'=>$carts]);
   }
-  public function testpassedit(RegisterRequest $request)
+  public function testpassedit(AddRequest $request)
   {
       $id=$request->session('user')->get('id');
       $customer = Customer::where('id',$id)->first();
@@ -442,7 +443,7 @@ class ShoppingController extends Controller
       $form = $request->all();
       unset($form['_token']);
       $customer->fill($form)->save();
-      $msg = '変更しました';
+      $msg = 'パスワードを変更しました';
     }else{
       $msg='パスワードが一致しないか、旧パスワードが間違っています';
     }
@@ -452,14 +453,14 @@ class ShoppingController extends Controller
       $carts=Cart::where('customer_id',$id)->get();
      return view('account-password',['msg'=>$msg,'page'=>'パスワード変更','wish'=>$wish,'cart'=>$cart,'customer'=>$customer,'carts'=>$carts]);
   }
-  public function testaddressedit(RegisterRequest $request)
+  public function testaddressedit(AddRequest $request)
   {
     if ($request->zip!==NULL && $request->address!==NULL){
       $customer=Customer::find($request->id);
       $forms = $request->all();
       unset($forms['_token']);
       $customer->fill($forms)->save();
-      $msg = '変更しました';
+      $msg = '住所を変更しました';
     }
     $id=$request->session('user')->get('id');
     $customer = Customer::where('id',$id)->first();
@@ -468,14 +469,14 @@ class ShoppingController extends Controller
     $carts=Cart::where('customer_id',$id)->get();
      return view('account-address',['msg'=>$msg,'page'=>'住所変更','wish'=>$wish,'cart'=>$cart,'customer'=>$customer,'carts'=>$carts]);
   }
-  public function testprofileedit(RegisterRequest $request)
+  public function testprofileedit(AddRequest $request)
   {
     $id=$request->session('user')->get('id');
     $customers = Customer::find($id);
     $form = $request->all();
     unset($form['_token']);
     $customers->fill($form)->save();
-    $msg = '変更しました';
+    $msg = 'お名前・メールアドレスを変更しました';
     $customer = Customer::where('id',$id)->first();
     $wish=Favorite::where('customer_id',$id)->count();
     $cart=Cart::where('customer_id',$id)->count();

@@ -28,7 +28,7 @@
   </head>
   <body>
 
-@include('components.topheader',['page'=>'Single Product'])
+@include('components.topheader',['page'=>$page])
 
     <div class="container-fluid limited">
       <div class="row">
@@ -39,10 +39,9 @@
           <div class="swiper-container border rounded mb-2" id="detail-slider">
             <div class="swiper-wrapper">
               @for ($i=2; $i<=5; $i++)
-              <div class="swiper-slide"><img src="/img/product/pro{{$product->id}}.jpg" class="w-100" width="1025" height="1400" alt="Product"></div>
+              <div class="swiper-slide"><img src="/img/product/pro{{$product->id}}.jpg" class="w-100"  alt="Product"></div>
               @endfor
             </div>
-            <a href="#zoom" class="btn-zoom"><i class="material-icons md-2">zoom_in</i></a>
           </div>
           <div class="swiper-container detail-gallery mb-2" id="detail-gallery">
             <div class="swiper-wrapper">
@@ -314,7 +313,7 @@
       <i class="material-icons">expand_less</i>
     </a>
     <!-- Photoswipe container-->
-    <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!--<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="pswp__bg"></div>
       <div class="pswp__scroll-wrap">
         <div class="pswp__container">
@@ -347,7 +346,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div>-->
 
     <!-- Required js -->
     <script src="/js/jquery.min.js"></script>

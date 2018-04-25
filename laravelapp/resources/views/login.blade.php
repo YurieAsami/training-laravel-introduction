@@ -46,7 +46,7 @@
               <form action="/test/index" method="post">
                 {{ csrf_field() }}
                 <div class="form-group">
-                  <label for="InputUsername">ログインネーム</label>
+                  <label for="InputUsername">ログイン名</label>
                   <input type="text" class="form-control" id="InputUsername" name="login">
                 </div>
                 <div class="form-group">

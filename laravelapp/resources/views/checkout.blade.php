@@ -98,21 +98,21 @@
             <div class="col-md-6 col-lg-12">
               <div class="d-flex mt-3">
                 <div>合計金額</div>
-                <div class="ml-auto font-weight-bold">${{$total}}</div>
+                <div class="ml-auto font-weight-bold">{{$total}}円</div>
               </div>
               <div class="d-flex">
                 <div>割引</div>
-                <div class="ml-auto font-weight-bold">${{$comtotal}}</div>
+                <div class="ml-auto font-weight-bold">{{$comtotal}}円</div>
               </div>
               <div class="d-flex">
                 <div>送料</div>
-                <div class="ml-auto font-weight-bold">{{$cost}}
+                <div class="ml-auto font-weight-bold">{{$cost}}円
                 </div>
               </div>
               <hr>
               <div class="d-flex">
                 <div class="font-weight-bold h6">総計</div>
-                <div class="ml-auto text-theme h5">{{$totals}}</div>
+                <div class="ml-auto text-theme h5">{{$totals}}円</div>
               </div>
               <hr>
               <form action="/test/purchase" method="post">

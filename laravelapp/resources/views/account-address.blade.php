@@ -63,16 +63,17 @@
             </div>
           </div>
         </div>
+    
         <div class="col-lg-9 col-md-8">
-          <form action="/test/address" method="post">
-            {{ csrf_field() }}
-            <input type="hidden" name='id' value="{{$customer->id}}">
-            <input type="hidden" name='name' value="{{$customer->name}}">
-            <input type="hidden" name='login' value="{{$customer->login}}">
-            <input type="hidden" name='email' value="{{$customer->email}}">
-            <input type="hidden" name='password' value="{{$customer->password}}">
-            <input type="hidden" name='password_confirmation' value="{{$customer->password_confirmation}}">
             <div class="title"><span>登録住所変更</span></div>
+            <form action="/test/address" method="post">
+              {{ csrf_field() }}
+              <input type="hidden" name='id' value="{{$customer->id}}">
+              <input type="hidden" name='name' value="{{$customer->name}}">
+              <input type="hidden" name='login' value="{{$customer->login}}">
+              <input type="hidden" name='email' value="{{$customer->email}}">
+              <input type="hidden" name='password' value="{{$customer->password}}">
+              <input type="hidden" name='password_confirmation' value="{{$customer->password_confirmation}}">
           <table class="table mb-3 table-sm">
             <tbody>
               <tr>

@@ -12,25 +12,17 @@
         <form action="/test/index" method="post">
           {{ csrf_field() }}
         <div class="form-group">
-          <label for="inputUsername">Username</label>
-          <input type="text" class="form-control" id="inputUsername" placeholder="Enter Username" name="name">
+          <label for="inputUsername">ログイン名</label>
+          <input type="text" class="form-control" id="inputUsername" placeholder="Enter Username" name="login">
         </div>
         <div class="form-group">
-          <label for="inputPassword">Password</label>
+          <label for="inputPassword">パスワード</label>
          <input type="password" class="form-control" id="inputPassword" placeholder="Password" name="password">
-          <div class="text-right">
-            <a href="#" class="text-secondary"><small>Forgot Password ?</small></a>
-          </div>
-        </div>
-        <div class="custom-control custom-checkbox mt-1">
-          <input type="checkbox" class="custom-control-input" id="checkRemember">
-          <label class="custom-control-label" for="checkRemember">Remember me</label>
         </div>
       </div>
       <div class="modal-footer justify-content-center">
         <div class="btn-group" role="group" aria-label="Login Action">
-          <a href="/test/register" class="btn btn-outline-theme" role="button">I want to Sign Up</a>
-          <button type="submit" class="btn btn-theme">SIGN IN</button></form>
+          <button type="submit" class="btn btn-theme">ログイン</button></form>
         </div>
       </div>
     </div>
