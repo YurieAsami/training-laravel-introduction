@@ -27,7 +27,7 @@
   </head>
   <body>
 
-@include('components.topheader',['page'=>'Shop Grid'])
+@include('components.topheader',['page'=>'Shop Grid','wish'=>$wish,'cart'=>$cart])
 
     <div class="container-fluid">
       <div class="row">
@@ -37,15 +37,13 @@
         <div class="col-lg-9 col-md-8">
           <div class="title"><span>{{$pagename}}</span></div>
 
-          <!-- Sorting Bar -->
+          <!-- Sorting Bar
           <div class="row mb-3 border pt-2 px-3 rounded no-gutters">
             <div class="mb-2 col-12 col-sm-8 text-center text-sm-left">
               <span>Sort by</span>
-              <select name="sortby" class="custom-select ml-2 w-auto custom-select-sm">
-                <option value="popularity">Popularity</option>
-                <option value="best-selling">Best Selling</option>
-                <option value="low">Low Price &rarr; High Price</option>
-                <option value="hight">High Price &rarr; High Price</option>
+              <select name="sortby" class="custom-select ml-2 w-auto custom-select-sm" onchange="dropsort()">
+                <option value="/test/grid?sort=priceup">価格が低い順</option>
+                <option value="/test/grid?sort=price">価格が高い順</option>
               </select>
             </div>
             <div class="mb-2 col-12 col-sm-4 text-center text-sm-right">
@@ -54,7 +52,7 @@
                 <a class="btn btn-outline-theme btn-sm" href="/test/list" role="button"><i class="material-icons">list</i></a>
               </div>
             </div>
-          </div>
+          </div>-->
           <!-- /Sorting Bar -->
 
           <div class="row">
@@ -77,11 +75,11 @@
                     <li class="list-inline-item"><span class="price">{{$product->price}}円</span></li>
                     @endif
                   </ul>
-                  <div class="attribute attribute-right rating">
-                    @php
+                  <!--<div class="attribute attribute-right rating">
+                    php
                       $sta=0;
                       $total=0;
-                      for($i = 0 ; $i <= $star ; $i++){
+                      for($i = 0 ; $i <= $ ; $i++){
                         if($i % 2 == 0 AND $i != 0){
                           echo '<i class="material-icons">star</i>';
                           $sta++;
@@ -99,8 +97,8 @@
                             $total++;
                         }
                       }
-                    @endphp
-                  </div>
+                    endphp
+                  </div>-->
                   <div class="action">
                     <div class="btn-group btn-group-sm" role="group" aria-label="Action">
 

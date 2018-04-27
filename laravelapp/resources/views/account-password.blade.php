@@ -48,7 +48,6 @@
                 <img class="rounded-circle" src="/img/user.png" alt="John Thor">
                 <div class="media-body">
                   <h5 class="user-name">{{$customer->name}}</h5>
-                  <div class="card-text small text-muted">Points: {{$customer->point}}</div>
                 </div>
               </div>
             </div>

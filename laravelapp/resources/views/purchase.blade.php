@@ -72,8 +72,9 @@
       </br>
       </table>
       </div>
+      <div align="center">
       <a href="/test/grid">ここから商品一覧へ</a>
-
+      </div>
   </div>
 </div>
 @include('components.modal-menu')

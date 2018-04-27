@@ -32,7 +32,7 @@
     @isset($name)
     ようこそ　{{$name}}さん
     @endisset
-@include('components.topheader')
+@include('components.topheader',['page'=>''])
 @include('components.home-slider')
 
     <div class="container-fluid limited mt-5">

@@ -32,20 +32,18 @@
     <div class="container-fluid limited">
       <div class="row">
 
-  @include('components.filer-widget')
+  <!--include('components.filer-widget')-->
 
         <div class="col-lg-9 col-md-8">
           <div class="title"><span>T-Shirts</span></div>
 
-          <!-- Sorting Bar -->
+          <!-- Sorting Bar
           <div class="row mb-3 border pt-2 px-3 rounded no-gutters">
             <div class="mb-2 col-12 col-sm-8 text-center text-sm-left">
               <span>Sort by</span>
               <select name="sortby" class="custom-select ml-2 w-auto custom-select-sm">
-                <option value="popularity">Popularity</option>
-                <option value="best-selling">Best Selling</option>
-                <option value="low">Low Price &rarr; High Price</option>
-                <option value="hight">High Price &rarr; High Price</option>
+                <option value="low">価格が低い順</option>
+                <option value="hight">価格が高い順</option>
               </select>
             </div>
             <div class="mb-2 col-12 col-sm-4 text-center text-sm-right">
@@ -54,7 +52,7 @@
                 <a class="btn btn-theme btn-sm" href="/test/list" role="button"><i class="material-icons">list</i></a>
               </div>
             </div>
-          </div>
+          </div>-->
           <!-- /Sorting Bar -->
 
           <div class="row">
@@ -67,8 +65,8 @@
                   <div class="media-body">
                     <a href="/test/detail?id={{$product->id}}" class="h5">{{$product->name}}</a>
 
-                    <div class="rating">
-                      @php
+                    <!--<div class="rating">
+                      php
                         $sta=0;
                         $total=0;
                       for($i = 0 ; $i <= $star ; $i++){
@@ -89,8 +87,8 @@
                             $total++;
                         }
                       }
-                      @endphp
-                    </div>
+                      endphp
+                    </div>-->
 
                     <ul class="card-text list-inline">
                       @if(isset($product->sale))
@@ -104,7 +102,7 @@
                       <li class="list-inline-item"><span class="price">{{$product->price}}円</span></li>
                       @endif
                     </ul>
-                    <p>{{$product->ex}}Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil eos esse rerum iusto, ut maxime!</p>
+                    <p>{{$product->ex}}</p>
                       <div class="btn-group btn-group-sm" role="group" aria-label="Action">
                         <button class="btn btn-theme">ADD TO CART</button>
                         <button class="btn btn-outline-theme show-quickview d-none d-md-inline-block" data-toggle="tooltip" data-placement="top" title="Quick View"><i class="material-icons">zoom_in</i></button>

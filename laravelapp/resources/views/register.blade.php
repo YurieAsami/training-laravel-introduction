@@ -85,7 +85,7 @@
                   </div>
                   <div class="form-group col-md-6">
                     <label for="InputPassword2" style="font-size : 12px;">もう一度パスワードを入力してください</label>
-                    <input type="password" class="form-control" id="InputPassword2" placeholder="Confirm Password" name="password_confirmation">
+                    <input type="password" class="form-control" id="InputPassword2" placeholder="Password" name="password_confirmation">
                   </div>
                   <div class="form-group col-md-6" >
                     @php

@@ -31,16 +31,16 @@
         <div class="col-md-6 col-lg-12">
           <div class="title"><span>お届け先</span></div>
           <div>
-            <label for="inputName" class="mb-0 mb-md-2">Name: </label>
+            <label for="inputName" class="mb-0 mb-md-2">氏名: </label>
             {{$customer->name}}
           </div>
           <div>
-            <label for="inputAddress" class="mb-0 mb-md-2">Address: </label>
+            <label for="inputAddress" class="mb-0 mb-md-2">住所: </label>
             {{$customer->zip}}
             {{$customer->address}}
           </div>
           <div>
-            <label for="inputEmail" class="mb-0 mb-md-2">Email Address: </label>
+            <label for="inputEmail" class="mb-0 mb-md-2">メールアドレス: </label>
             {{$customer->email}}
           </div>
           </div>

@@ -4,9 +4,7 @@
     <div class="row">
       <div class="col">
         <div class="d-flex justify-content-between">
-          <nav class="nav d-none d-lg-flex">
-            <a class="nav-link" href="/test/grid"><i class="material-icons">notifications_none</i> Get Minimum 30-70% Off On Over 1,50,000 Styles!</a>
-          </nav>
+
           <nav class="nav ml-auto">
             <!--<a class="nav-link d-none d-sm-block" href="/test/faq"><i class="material-icons">help_outline</i> Help</a>-->
             <a class="nav-link" href="#" data-toggle="modal" data-target="#loginModal"><i class="material-icons">person_outline</i> Sign In</a>
@@ -53,8 +51,8 @@
           <!-- <div class="nav-item dropdown position-static">
             <a href="#" class="nav-link dropdown-toggle no-caret" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">MEGA MENU</a>
             <div class="dropdown-menu dropdown-menu-mega animate">
-              <form> <!-- added <form> tags to prevent dropdown closed when clicked inside dropdown-menu -->
-                {{ csrf_field() }}
+              <form> <!-- added <form> tags to prevent dropdown closed when clicked inside dropdown-menu
+                { csrf_field() }}
               <!--<div class="row">
                   <div class="col-4 col-lg-3">
                     <h6 class="p-2 font-weight-bold border border-top-0 border-right-0 border-left-0">Top Categories</h6>

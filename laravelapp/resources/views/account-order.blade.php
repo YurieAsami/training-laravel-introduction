@@ -63,8 +63,8 @@
           </div>
         </div>
         <div class="col-lg-9 col-md-8">
-          <div class="title"><span>My Orders</span></div>
-          
+          <div class="title"><span>注文履歴</span></div>
+
           <div class="table-responsive">
             <table class="table table-hover">
               <thead class="thead-light">
